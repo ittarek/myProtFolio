@@ -2,7 +2,7 @@ import React from "react";
 import myImg from "../../assets/my-image.png";
 import "./Banner.css";
 import { Link } from "react-router-dom";
-import resume from "../../../public/myResume.pdf";
+import { useMotionValue, useTransform, motion } from "framer-motion";
 
 const Banner = () => {
   // var fileDownload = require("react-file-download");
@@ -13,8 +13,22 @@ const Banner = () => {
     );
   };
 
+  // farmar motion
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const rotateX = useTransform(y, [-100, 100], [30, -30]);
+  const rotateY = useTransform(x, [-100, 100], [-30, 30]);
+
+  const colors = [
+    { value: "#185bca" },
+    { value: "#272425" },
+    { value: "#617453" },
+    { value: "#f2c758" },
+    { value: "#ffffff" },
+  ];
+
   return (
-    <div className="mt-16">
+    <div className="mt-24">
       {" "}
       <div className="lg:mx-[200px] my-11 lg:flex gap-6 ">
         {/* About me */}
@@ -53,12 +67,22 @@ const Banner = () => {
           </button>
         </div>
         {/* image */}
-        <div className="mx-auto">
-          <img
+        <div style={{ perspective: 2000 }} className="sm-max-w-[100px]">
+          {/* <img
             src={myImg}
             className="mx-auto rounded-full"
             alt="image"
-          />
+          /> */}
+          <motion.div
+            style={{ x, y, rotateX, rotateY, z: 100 }}
+            drag
+            dragElastic={0.18}
+            dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
+            whileTap={{ cursor: "grabbing" }}
+            className="w-[426px] min-h-[500px] mt-11 rounded-[30px] border-[1px] border-red-400 px-[40px] py-[24px] cursor-grab relative"
+          >
+            <img src={myImg} alt="" draggable="false" />
+          </motion.div>
         </div>
       </div>
     </div>
