@@ -14,7 +14,7 @@ const Banner = () => {
   };
 
   return (
-    <div>
+    <div className="mt-16">
       {" "}
       <div className="lg:mx-[200px] my-11 lg:flex gap-6 ">
         {/* About me */}
