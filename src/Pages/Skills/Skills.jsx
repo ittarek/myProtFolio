@@ -44,12 +44,12 @@ const Skills = () => {
     },
   ];
   return (
-    <div>
+    <div className="mx-10">
       <h1 className="text-4xl text-white text-center"> My Skills</h1>
 
-     <div className="lg:grid lg:grid-cols-3 mx-10 my-5">
+     <div className="lg:grid lg:grid-cols-3 gap-5 my-5">
      {data.map((item) => (
-        <div className="card w-96 bg-neutral text-neutral-content my-5 hover:border hover:border-1 hover:border-red-800  hover:bg-sky-900 ">
+        <div className="card w-full bg-neutral text-neutral-content my-5 hover:border hover:border-1 hover:border-red-800  hover:bg-sky-900 ">
           <div className="card-body items-center text-center">
             <h2 className="card-title">{item.name}</h2>
             <p>{item.message}</p>

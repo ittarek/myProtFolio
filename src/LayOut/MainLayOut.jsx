@@ -5,7 +5,9 @@ import "../Pages/Home/Home.css";
 const MainLayOut = () => {
   return (
     <div>
-      <NavBar></NavBar>
+    <div className="">
+    <NavBar></NavBar>
+    </div>
       <div className="min-h-[calc(100vh-68px)]">
         <Outlet />
       </div>

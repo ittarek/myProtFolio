@@ -54,10 +54,10 @@ const Contact = () => {
               className="card  bg-transparent border border-1 border-purple-400  my-5 hover:border hover:border-1 hover:border-red-800  hover:bg-white "
             >
               <div className="card-body items-center text-center">
-                <h2 className="card-title text-black">{data.title}</h2>
-                <p className="text-black">{data.info1}</p>
-                <p className="text-black">{data.info2}</p>
-                <p className="text-black">{data.info3}</p>
+                <h2 className="card-title text-slate-400">{data.title}</h2>
+                <p className=" text-slate-400">{data.info1}</p>
+                <p className="text-slate-400">{data.info2}</p>
+                <p className="text-slate-400">{data.info3}</p>
                 {/* <div className="card-actions justify-end">
                        
                         <p className="text-center">{item.value}%</p>
@@ -68,17 +68,7 @@ const Contact = () => {
         </div>
 
         <div className="">
-          {/* <div className="form">
-            <form ref={form} onSubmit={sendEmail}>
-              <label className="text-white">Name</label>
-              <input type="text" name="user_name" /> <br />
-              <label className="text-white">Email</label>
-              <input type="email" className="my-6" name="user_email" /> <br />
-              <label className="text-white">Message</label>
-              <textarea name="message" />
-              <input type="submit" className="text-white" value="Send" />
-            </form>
-          </div> */}
+      
 
           <form ref={form} onSubmit={sendEmail}>
             <div className="form-control">
