@@ -3,9 +3,9 @@ import myImg from "../../assets/my-image.png";
 
 const About = () => {
   return (
-    <div className="lg:mx-[200px] my-11 lg:flex gap-6 ">
+    <div className="lg:mx-[200px] pt-24  lg:flex gap-6 ">
       {/* image */}
-      <div className="mx-auto">
+      <div className="mx-auto ">
         <img src={myImg} className="outline  mx-auto rounded-full" alt="image" />
       </div>
 

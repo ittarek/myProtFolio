@@ -7,20 +7,18 @@ import "./ProtFolio.css";
 import { Link } from "react-router-dom";
 const ProtFolio = () => {
   return (
-    <section className="mx-auto">
-      <h2 className="h2 my-6 text-white text-4xl w-100 text-center uppercase font-bold">
+    <section className="mx-11">
+      <h2 className="h2 my-6 text-black text-4xl w-100 text-center uppercase font-bold">
         My ProtFolio
       </h2>
       {/* ProtFolio-1 */}
       <section>
-        <div className="hero mx-auto ">
-          <div className="hero-content  lg:flex gap-32">
-            {/* <div class="h-32 scrollbar scrollbar-thumb-gray-900 scrollbar-track-gray-100">
-            <div class="h-64 bg-red-400">dsjksd</div>
-          </div> */}
+     
+          <div className="lg:flex  gap-11 justify-evenly mx-auto items-center ">
+           
 
-            <div className="w-64">
-              <h1 className="text-5xl text-white font-bold">
+            <div className="mx-auto">
+              <h1 className="text-5xl  text-black font-bold">
                 Chef Recipe Hunter
               </h1>
               <p className="py-6 text-slate-500 ">
@@ -42,7 +40,7 @@ const ProtFolio = () => {
                 </Link>
               </div>
             </div>
-            <div className="w-full">
+            <div className="w-full mt-5">
               <Link to="https://chef-recipe-hunter-f7cd2.web.app/">
                 {" "}
                 <img
@@ -52,14 +50,14 @@ const ProtFolio = () => {
               </Link>
             </div>
           </div>
-        </div>
+  
       </section>
       {/* ProtFolio-2 */}
       <section>
-        <div className="hero w-85 ">
-          <div className="hero-content  lg:flex gap-32 my-11">
-            <div className="w-64">
-              <h1 className="text-5xl text-white font-bold">Tech Toy</h1>
+
+          <div className="lg:flex  gap-11 justify-evenly mx-auto items-center my-24">
+            <div className="">
+              <h1 className="text-5xl text-black font-bold">Tech Toy</h1>
               <p className="py-6 text-slate-500">
                 "Good food is the foundation of genuine happiness. Every
                 ingredient, every technique, every ounce of passion makes a dish
@@ -79,26 +77,26 @@ const ProtFolio = () => {
                 </Link>
               </div>
             </div>
-            <Link to="https://tech-toys-67af5.web.app/">
+           <div className="w-full mt-5">
+           <Link to="https://tech-toys-67af5.web.app/">
               {" "}
               <img
                 src={protFolio2}
                 className="w-[450px] transition duration-500 ease-in-out transform hover:scale-110 scrollbar  rounded-lg shadow-2xl image"
               />
             </Link>
+           </div>
           </div>
-        </div>
+ 
       </section>
       {/* Language Learner protfolio-3  */}
       <section>
-        <div className="hero ">
-          <div className="hero-content  lg:flex gap-32 ">
-            {/* <div class="h-32 scrollbar scrollbar-thumb-gray-900 scrollbar-track-gray-100">
-            <div class="h-64 bg-red-400">dsjksd</div>
-          </div> */}
 
-            <div className="w-64">
-              <h1 className="text-5xl text-white font-bold">
+          <div className="lg:flex  gap-11 justify-evenly mx-auto items-center">
+          
+
+            <div className="">
+              <h1 className="text-5xl text-black font-bold">
                 Language Learner
               </h1>
               <p className="py-6 text-slate-500">
@@ -120,7 +118,8 @@ const ProtFolio = () => {
                 </Link>
               </div>
             </div>
-            <Link to="https://language-center-bedfd.web.app/">
+          <div className="w-full mt-5">
+          <Link to="https://language-center-bedfd.web.app/">
               {" "}
               <img
                 src={protFolio3}
@@ -128,7 +127,8 @@ const ProtFolio = () => {
               />
             </Link>
           </div>
-        </div>
+          </div>
+
       </section>
     </section>
   );
