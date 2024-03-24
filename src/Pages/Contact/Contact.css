@@ -1,0 +1,11 @@
+.round{
+    border-radius: 20px !important;
+    padding: 20px 10px;
+}
+.round:hover{
+    background: #10681fcc;
+    border-color: red;
+}
+.items-center{
+  line-height: 40px;
+}

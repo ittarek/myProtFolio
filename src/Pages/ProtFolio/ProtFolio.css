@@ -1,1 +1,13 @@
-/*  */
+.prot-image-1::before{
+    content: "";
+    color: transparent;
+}
+.prot-image-1{
+    /* background-image: url("../../assets/protfolio-image/language3.png"); */
+    background-size: cover;
+    transition: ease-in-out 5s;
+
+}
+.prot-image-1:hover{
+    background-position: bottom;
+}

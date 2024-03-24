@@ -1,10 +1,29 @@
+.my_name {
+
+
+  letter-spacing: 0.3rem;
+  z-index: 5;
+  color: transparent;
+  /* background-position: 0 0; */
+  animation: animated-text 20s linear infinite;
+
+  -webkit-text-stroke: 1px #939aff;
+  /* text-stroke: 1px rgba(16, 104, 31, 0.8); */
+
+  background: url(https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/e9d06cb6-2844-49ed-9bde-23d3364b9fa4);
+  background-clip: text;
+
+}
+
+@keyframes animated-text {
+  100% {
+    background-position: 200% 0;
+  }
+}
 
 @media screen and (max-width:600px) {
-  .logo-box{
-    width: 100%;
-    margin-left: 50px;
-    
-   
-
-  }
+  .logo-box {
+    /* width: 100%; */
+    margin: auto;
+ }
 }

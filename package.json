@@ -11,15 +11,21 @@
   },
   "dependencies": {
     "@emailjs/browser": "^3.11.0",
-    "framer-motion": "^10.12.18",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.15.0",
+    "@studio-freight/lenis": "^1.0.29",
+    "gsap": "^3.12.4",
     "hamburger-react": "^2.5.0",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
     "react": "^18.2.0",
     "react-burger-menu": "^3.0.9",
     "react-dom": "^18.2.0",
-    "react-file-download": "^0.3.5",
-    "react-icons": "^4.10.1",
+    "react-facebook": "^9.0.12",
+    "react-icons": "^4.12.0",
+    "react-lazy-load": "^4.0.1",
+    "react-parallax-tilt": "^1.7.175",
     "react-router-dom": "^6.14.0",
     "sort-by": "^1.2.0",
     "tailwind-scrollbar": "^3.0.4"
@@ -29,13 +35,12 @@
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react": "^4.0.0",
     "autoprefixer": "^10.4.14",
-    "daisyui": "^3.1.6",
     "eslint": "^8.38.0",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
     "postcss": "^8.4.24",
     "tailwindcss": "^3.3.2",
-    "vite": "^4.3.9"
+    "vite": "^5.0.10"
   }
 }

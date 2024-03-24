@@ -1,0 +1,185 @@
+/* Banner */
+
+.banner-img img {
+    height: 100%;
+    width: 500px;
+    object-fit: cover;
+    object-position: center;
+    position: relative;
+    right: -60%;
+    /* margin-top: -5%; */
+}
+
+.banner-box {
+    /* padding: 60px; */
+    position: relative;
+    z-index: 1;
+}
+
+.banner-box h1 {
+    position: absolute;
+    /* top: 5%; */
+    left: 0;
+    font-size: 339px;
+    line-height: 370px;
+    font-weight: 400;
+    text-transform: uppercase;
+    background-image: url(https://www.yudiz.com/codepen/interior-design/mask-img.jpg);
+
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    opacity: 0.6;
+    color: var(--white);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    font-family: "Righteous", cursive;
+    z-index: -1;
+}
+
+.banner-text {
+    margin: 100px 0 0;
+    padding: 135px 0 0 80px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    max-width: 80%;
+    overflow: hidden;
+}
+
+.banner-text h2 {
+    margin: 0 0 8px;
+    font-size: 104px;
+    line-height: 1.1;
+    font-weight: 400;
+    font-style: normal;
+
+    position: relative;
+    user-select: none;
+}
+
+.banner-text h3 {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+    color: rgb(255 255 255 / 72%);
+    position: relative;
+}
+
+
+@media screen and (max-width: 767px) {
+
+    /* common */
+    .container {
+        max-width: calc(100% - 12px);
+        height: 100%;
+    }
+
+    h2.title {
+        font-size: 52px;
+        top: -8px;
+    }
+
+    p {
+        margin-bottom: 16px;
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .paragraph p:first-child:first-letter {
+        font-size: 20px;
+        line-height: 32px;
+    }
+
+    /* button */
+    .common-btn {
+        padding: 10px 16px;
+        font-size: 12px;
+        line-height: 19px;
+    }
+
+    .common-btn::before {
+        top: 3px;
+        left: 3px;
+    }
+
+    .common-btn img {
+        width: 16px;
+    }
+
+    /* banner */
+    .banner {
+        /* height: 100dvh; */
+        min-height: 500px;
+    }
+
+    .banner-box {
+        padding: 0px;
+    }
+
+    .banner-box h1 {
+        top: 0;
+        font-size: 160px;
+        line-height: 1;
+        position: relative;
+    }
+
+    .banner-text {
+        padding: 64px 0 0 48px;
+        max-width: 100%;
+    }
+
+    .banner-text h2 {
+        font-size: 36px;
+    }
+
+    .banner-text h3 {
+        font-size: 14px;
+        line-height: 22px;
+    }
+
+    .banner-img {
+margin-left: -700px;
+     height: 100%;
+        
+    }
+
+     
+        .banner-img::before{
+
+        background-color: transparent;
+        }
+  
+
+   
+}
+
+/* for other  */
+@media screen and (max-width: 1399px) {
+
+    /* common */
+    .container {
+        max-width: 1140px;
+        height: 100%;
+    }
+}
+
+@media screen and (max-width: 1199px) {
+
+    /* common */
+    .container {
+        max-width: 960px;
+        height: 100%;
+    }}
+
+    /* responsive for tablet */
+        /* @media only screen and (max-width: 600px) {
+            .banner-img {
+                    margin-left: -700px;
+                    height: 100%;
+            
+                }
+        } */

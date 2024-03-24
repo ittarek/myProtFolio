@@ -1,8 +1,9 @@
+import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 import MainLayOut from "../LayOut/MainLayOut";
-import Home from "../Pages/Home/Home";
-import ProtFolio from "../Pages/Protfolio/Protfolio";
+const LazyHome = React.lazy(() => import("../Pages/Home/Home"));
 import About from "../Pages/About/About";
+import ProtFolio from "../Pages/ProtFolio/ProtFolio";
 
 export const router = createBrowserRouter([
   {
@@ -11,7 +12,11 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home></Home>,
+        element: (
+          <React.Suspense fallback="Loading...">
+            <LazyHome></LazyHome>
+          </React.Suspense>
+        ),
       },
       {
         path: "/myProtFolio",
@@ -19,8 +24,8 @@ export const router = createBrowserRouter([
       },
       {
         path: "/about",
-        element: <About></About>
-      }
+        element: <About></About>,
+      },
     ],
   },
 ]);
