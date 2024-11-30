@@ -2,28 +2,37 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { bubble as Menu } from "react-burger-menu";
 import { Divide as Hamburger } from "hamburger-react";
-import "./NabVar.css"
+import "./NabVar.css";
 
-
-import Container from './../Components/Container';
+import Container from "./../Components/Container";
 
 const NavBar = () => {
   const [isOpen, setOpen] = useState(false);
+
+  const handleStateChange = state => {
+    setOpen(state.isOpen);
+  };
   const handleDownload = () => {
     window.open(
-      "https://drive.google.com/file/d/14-DWcs9X_7NRBi-zJHcyCK_VLC3TadHC/view?usp=sharing"
+      "https://drive.google.com/file/d/1xcLKvss8MRnrdOrZ40a-FakkiYNo5vl7/view?usp=sharing"
     );
   };
 
   return (
     <Container>
-      <section className="flex justify-between items-center  relative z-10 bg-opacity-30  font-bold mt-5 ">
+      <section className=" flex justify-between items-center  relative z-10 font-bold pb-3">
         {/* dropdown menu */}
         <div className="lg:hidden dropdown">
-          <label className="text-white mt-2 lg:hidden">
+          <label className="text-white  mt-2 lg:hidden">
             <Hamburger size={20} toggled={isOpen} toggle={setOpen} />
           </label>
-          <Menu className="-ml-5  menu menu-sm">
+          <Menu
+            isOpen={isOpen}
+            onClick={handleStateChange}
+            customBurgerIcon={false}
+            className=" bg-slate-400 menu menu-sm  
+          "
+          >
             <ul className="text-white">
               <li>
                 <Link className="text-xl  my-3" to="/">
@@ -57,7 +66,7 @@ const NavBar = () => {
         </div>
 
         {/* lg menu */}
-        <div className="hidden w-full md:block md:w-auto logo-box">
+        <div className=" hidden w-full lg:block md:w-auto logo-box ">
           <ul className="menu menu-horizontal px-1 text-[#939aff] text-lg lg:flex justify-center items-center gap-5">
             <li>
               <Link
@@ -81,8 +90,6 @@ const NavBar = () => {
           </ul>
         </div>
       </section>
-
-    
     </Container>
   );
 };

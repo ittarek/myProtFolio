@@ -1,30 +1,20 @@
 import Banner from "../../Components/Bannar/Banner";
 import Contact from "../Contact/Contact";
 import Skills from "../Skills/Skills";
-import ChatBot from "./ChatBot";
 import { useSmoothScroll } from "../../Hooks/useSmoothScroll";
 import ProtFolio from "../ProtFolio/ProtFolio";
-import "./Home.css"
+import "./Home.css";
+import Certificate from "../certification/Certificate";
 const Home = () => {
-
- useSmoothScroll();
+  useSmoothScroll();
   return (
-    <div
-
-
-      className="bg-color bg-no-repeat bg-cover  relative -top-[159px] h-full"
-
-    >
+    <main className="-mt-[80px] h-full -mb-[30px]">
       <Banner />
-
       <Skills />
-
       <ProtFolio />
-
-      <ChatBot />
-
+      <Certificate/>
       <Contact />
-    </div>
+    </main>
   );
 };
 

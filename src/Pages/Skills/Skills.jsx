@@ -1,10 +1,14 @@
 import Tilt from "react-parallax-tilt";
-import React, { useEffect, useState } from "react";
-import { useProgress } from "../../Components/ProgressBar/Progress";
+import React, { useEffect, useRef } from "react";
+
 import LinearProgress from "@mui/material/LinearProgress";
 import Tooltip from "@mui/material/Tooltip";
-import Lenis from "@studio-freight/lenis";
+
 import Container from "../../Components/Container";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 const tools = [
   {
     id: 1,
@@ -101,7 +105,7 @@ const Skills = () => {
 
   return (
     <Container>
-      <main className="mx-auto flex flex-col w-full lg:max-w-[70rem] px-4 ">
+      <main className="mx-auto flex flex-col w-full lg:max-w-[70rem] ">
         <div className="flex space-x-3 md:space-x-10">
           <div className="flex flex-col items-center">
             <div className="relative" style={{ opacity: "0" }}>
@@ -121,24 +125,24 @@ const Skills = () => {
             </div>
             <div className=" h-full w-[3px] mt-7 rounded-md  bg-gradient-to-b from-[#abb4ff] via-[#797ef9] to-transparent"></div>
           </div>
-          <div className="">
-            <div className="pb-6 md:w-11/12">
-              <h2 className="text-[20px] md:text-2xl mb-7 font-medium text-white js-build-in-item build-in-slideX-left build-in-animate">
-                Skills
-              </h2>
-              <h3
-                className="text-[28px] md:text-[37px] max-md:leading-8 max-lg:leading-10 lg:text-5xl mb-7 font-medium text-white js-build-in-item build-in-slideX-left build-in-animate"
-                style={{ transitionDelay: "300ms" }}
-              >
-                <p className="">
-                  <span className="text-[#939aff]">
-                    {" "}
-                    I offer professional FRONT-END (MERN) development services.
-                  </span>
-                  With expertise in building robust web applications
-                </p>
-              </h3>
+
+          <div className=" md:w-11/12">
+            <h2 className="text-[20px] md:text-2xl  font-medium text-white js-build-in-item build-in-slideX-left build-in-animate">
+              Skills
+            </h2>
+            <div
+              className="text-[28px] md:text-[37px] max-md:leading-8 max-lg:leading-10 lg:text-5xl mb-7 font-medium text-white js-build-in-item build-in-slideX-left build-in-animate w-full"
+              style={{ transitionDelay: "300ms" }}
+            >
+              <span className="text-[#939aff] ">
+                I offer professional FRONT-END (MERN) development services.
+              </span>
+
+              <span className="">
+                With expertise in building robust web applications
+              </span>
             </div>
+         
           </div>
         </div>
 
@@ -184,9 +188,7 @@ const Skills = () => {
                               width: `${s.value}%`,
                             }}
                           >
-                            <span className="absolute -top-8 right-0 text-[#a497b4] ">
-                              {s.value}%
-                            </span>
+                            <span className="absolute -top-8 right-0 text-[#a497b4] "></span>
                           </span>
                         </span>
                       </Tooltip>
@@ -227,9 +229,7 @@ const Skills = () => {
                               transition: "width 0.5s ease", // Adding a smooth transition
                             }}
                           >
-                            <span className="absolute -top-7 right-0 text-[#a497b4]">
-                              {s.value}%
-                            </span>
+                            <span className="absolute -top-7 right-0 text-[#a497b4]"></span>
                           </span>
                         </span>
                       </Tooltip>

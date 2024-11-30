@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import myImg from "../../assets/myImage/my-image.png";
+// import myImg from "../../assets/myImage/ph.jpg";
+// import myImg from "../../assets/myImage/image2.jpg";
 import "./Banner.css";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -69,8 +71,8 @@ const Banner = () => {
   return (
   
       <Container>
-        <div className="overflow-hidden ">
-          <div className="banner-box mt-[200px]">
+      
+          <div className="overflow-hidden banner-box py-6">
             <h1 className="text-4xl lg:text-6xl  uppercase" id="headingBig">
               D
             </h1>
@@ -84,17 +86,17 @@ const Banner = () => {
             </div>
             <div
               id="bannerBigimg"
-              className="lg:row-start-1 lg:col-start-1 lg:col-span-6 banner-img mx-auto"
+              className="lg:row-start-1 lg:col-start-1 lg:col-span-6 banner-img mx-auto my-auto"
             >
               <img
                 src={myImg}
-                className="h-auto w-full my-image "
+                className="h-full w-full my-image "
                 alt="Image"
                 loading="lazy"
               />
             </div>
           </div>
-        </div>
+       
       </Container>
    
   );
