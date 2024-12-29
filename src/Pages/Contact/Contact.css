@@ -292,16 +292,14 @@
   transform: scale(1.5);
 }
 
-@media screen and (min-width:600px) {
+@media screen and (max-width:600px) {
   .container {
     padding: 50px;
-      width: 750px;
+    width: 100%;
   }
 
-  form {
-/* background: red; */
-    width: 900px;
-    /* padding: 10%; */
+  .form {
+    width: 100%;
   }
 
   .form .inputBx input {

@@ -1,15 +1,6 @@
 import "./Contact.css";
-import { useRef } from "react";
 import emailjs from "@emailjs/browser";
-import Tilt from "react-parallax-tilt";
-import Container from "../../Components/Container";
 import * as React from "react";
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import { Link } from "react-router-dom";
@@ -37,42 +28,11 @@ const sendEmail = e => {
     );
 };
 
-  // const sendEmail = e => {
-  //   e.preventDefault();
-  //   let form = e.target;
-
-  //   emailjs
-  //     .sendForm(
-  //       "service_nadywzt",
-  //       "template_5b7cawx",
-  //       form,
-  //       "gwdOICZ7xweH2po52"
-  //     )
-  //     .then(
-  //       result => {
-  //         console.log(result.text);
-  //       },
-  //       error => {
-  //         console.log(error.text);
-  //       }
-  //     );
-  // };
-
-  // function show_hide_password(target) {
-  //   var input = document.getElementById("password-input");
-  //   if (input.getAttribute("type") == "password") {
-  //     target.classList.add("view");
-  //     input.setAttribute("type", "text");
-  //   } else {
-  //     target.classList.remove("view");
-  //     input.setAttribute("type", "password");
-  //   }
-  //   return false;
-  // }
   return (
-    <section>
-      {/* Contact me */}
+  
+
       <section className="contact flex justify-center py-[100px]">
+              {/* Contact me */}
         <div className="box">
           <div className="square" style={{ "--i": 0 }}></div>
           <div className="square" style={{ "--i": 1 }}></div>
@@ -209,7 +169,7 @@ const sendEmail = e => {
           </div>
         </div>
       </section>
-    </section>
+ 
   );
 };
 

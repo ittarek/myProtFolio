@@ -1,6 +1,10 @@
 import ProtFolio1 from "../../../src/assets/protfolio-image/1assignment-1.png";
 import protFolio2 from "../../assets/protfolio-image/2assignment-2.png";
 import protFolio3 from "../../assets/protfolio-image/3assignment-3.png";
+import protFolioNews from "../../assets/protfolio-image/nextJs.jpg";
+import assignment3ss from "../../assets/protfolio-image/assignment3SS.jpg"
+import assignmetn1ss from "../../assets/protfolio-image/assignment1SS.jpg";
+import assignmetn2ss from "../../assets/protfolio-image/assignment2SS.jpg";
 import "./ProtFolio.css";
 import { Link } from "react-router-dom";
 import Tilt from "react-parallax-tilt";
@@ -28,13 +32,13 @@ const data = [
 
   {
     id: 2,
-    title: "Tech Toy",
+    title: "News Website",
     details:
       "A 'tech toy' typically refers to a gadget or electronic device designed for entertainment, education, or experimentation within the realm of technology. It can encompass a wide range of products, from educational coding toys for children to quirky electronic gadgets for adults. Tech toys often aim to combine fun and learning, fostering creativity and exploration in the world of technology.",
-    image: `${protFolio2}`,
-    live_link: "https://effortless-brioche-b5db7c.netlify.app/",
-    github_client: "https://github.com/ittarek/teach-toy-client",
-    github_server: "https://github.com/ittarek/teach-toy-client-server",
+    image: `${protFolioNews}`,
+    live_link: "https://news-app-one-fawn.vercel.app/",
+    github_client: "https://github.com/ittarek/boot-camp-next.js-task",
+    github_server: "",
   },
   {
     id: 3,
@@ -115,14 +119,18 @@ const ProtFolio = () => {
   return (
     <Container>
       <main className="">
-  
-
+        <section className="grid grid-cols-2 justify-center items-center gap-11">
+          <img className="" src={protFolioNews} alt="news type assignment" />
+          <img className="" src={assignment3ss} alt="recipe site" />
+          <img className="" src={assignmetn1ss} alt="toy site" />
+          <img className="" src={assignmetn2ss} alt="learning platform" />
+        </section>
         {/* <!-- smooth wrapper --> */}
         <div id="smooth-wrapper">
           {/* <!-- smooth content --> */}
           <div id="smooth-content">
             {/* <!-- marquee effect --> */}
-            <section className="marquee lg:space-y-[200px] space-y-[250px]">
+            <div className="marquee lg:space-y-[200px] space-y-[250px]">
               <div className="marquee-carousel marquee-carousel-1">
                 <div className="marquee-items">
                   {data.map(d => (
@@ -246,7 +254,7 @@ const ProtFolio = () => {
                   ))}
                 </div>
               </div>
-            </section>
+            </div>
           </div>
         </div>
       </main>

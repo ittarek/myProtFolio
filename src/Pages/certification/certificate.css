@@ -1,10 +1,9 @@
-
 .text {
     font-size: 80px;
     letter-spacing: -.01em;
     line-height: 100%;
     margin: 0;
-text-transform: uppercase;
+    text-transform: uppercase;
     width: 100%;
     color: rgb(182, 182, 182, 0.2);
     background: linear-gradient(to right, #b6b6b6, #b6b6b6) no-repeat;
@@ -27,7 +26,7 @@ text-transform: uppercase;
     position: absolute;
     width: 100%;
     height: 100%;
-background: linear-gradient(to right, #ffffff, #E0F7FA);
+    background: linear-gradient(to right, #ffffff, #E0F7FA);
     color: #0D0D0D;
 
     clip-path: polygon(0 50%, 100% 50%, 100% 50%, 0 50%);
@@ -47,11 +46,12 @@ a {
     text-decoration: none;
     color: inherit;
 }
-@media screen and (min-width:600px) {
-    .text{
-        font-size: 50\px;
+
+@media screen and (max-width:600px) {
+    .text {
+        font-size: 20px;
         margin-bottom: 10px;
-        
+
     }
-    
+
 }
