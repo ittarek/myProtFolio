@@ -14,7 +14,7 @@ const NavBar = () => {
   };
   const handleDownload = () => {
     window.open(
-      "https://drive.google.com/file/d/1xcLKvss8MRnrdOrZ40a-FakkiYNo5vl7/view?usp=sharing"
+      "https://drive.google.com/file/d/1Zmy2sCDBzHar1CCr2IrSdisN7jaem3iG/view?usp=sharing"
     );
   };
 
