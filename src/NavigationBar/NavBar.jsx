@@ -20,7 +20,7 @@ const NavBar = () => {
 
   return (
     <Container>
-      <section className=" flex justify-between items-center  relative z-10 font-bold pb-3">
+      <section className=" flex justify-between items-center  relative z-10 font-bold py-5">
         {/* dropdown menu */}
         <div className="lg:hidden dropdown">
           <label className="text-white  mt-2 lg:hidden">
