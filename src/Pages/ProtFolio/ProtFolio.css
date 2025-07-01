@@ -38,7 +38,7 @@ transition: background-position 3s ease-in-out;
 }
 
 .marquee-carousel.marquee-carousel-1 {
-    margin-right: -300px;
+    margin-right: -200px;
     margin-bottom: 11px;
 }
 
@@ -57,7 +57,7 @@ transition: background-position 3s ease-in-out;
 }
 
 .marquee-carousel.marquee-carousel-2 {
-    margin-left: -300px;
+    /* margin-left: 300px; */
 }
 
 .marquee-items {

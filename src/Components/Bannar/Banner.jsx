@@ -1,4 +1,7 @@
 import React, { useEffect } from "react";
+// import myImg from "../../assets/myImage/my-image-editing.png";
+// import myImg from '../../assets/myImage/1.png';
+// import myImg from '../../assets/myImage/IMG_20241022_170650_997.jpg';
 import myImg from "../../assets/myImage/my-image.png";
 // import myImg from "../../assets/myImage/ph.jpg";
 // import myImg from "../../assets/myImage/image2.jpg";
@@ -89,7 +92,9 @@ const Banner = () => {
               className="lg:row-start-1 lg:col-start-1 lg:col-span-6 banner-img mx-auto my-auto"
             >
               <img
-                src={myImg}
+                      src={myImg}
+                      width={500}
+                      height={100}
                 className="h-full w-full my-image "
                 alt="Image"
                 loading="lazy"
