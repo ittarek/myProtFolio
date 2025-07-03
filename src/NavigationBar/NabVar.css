@@ -7,7 +7,7 @@
   /* background-position: 0 0; */
   animation: animated-text 20s linear infinite;
 
-  -webkit-text-stroke: 1px #939aff;
+  -webkit-text-stroke: 1px #bfdbfe;
   /* text-stroke: 1px rgba(16, 104, 31, 0.8); */
 
   background: url("https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/e9d06cb6-2844-49ed-9bde-23d3364b9fa4"); 

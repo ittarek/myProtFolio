@@ -67,7 +67,7 @@ const NavBar = () => {
 
         {/* lg menu */}
         <div className=" hidden w-full lg:block md:w-auto logo-box ">
-          <ul className="menu menu-horizontal px-1 text-[#939aff] text-lg lg:flex justify-center items-center gap-5">
+          <ul className="menu menu-horizontal px-1 text-blue-200 text-lg lg:flex justify-center items-center gap-5">
             <li>
               <Link
                 className="focus:text-purple-100 active:text-red-700"

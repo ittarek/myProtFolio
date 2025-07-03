@@ -3,7 +3,7 @@ import { Link } from 'lucide-react';
 const prof_experience = [
   {
     id: 1,
-    title: 'Web developer Internshipe (Part Time)',
+    title: 'Web developer Internship (Part Time)',
     company: 'SaralTech',
     location: 'Remote, India',
     duration: 'Dec 2024 - Jun 2025',
@@ -28,14 +28,14 @@ const prof_experience = [
 export const Experiences = () => {
   return (
     <div className="text-white flex flex-col items-center justify-center p-4">
-      <h1 className="text-5xl lg:text-7xl font-bold bg-gradient-to-r from-white via-blue-200 to-purple-300 bg-clip-text text-transparent my-11">
+      <h1 className="text-5xl lg:text-7xl font-bold bg-gradient-to-r from-white via-blue-200 to-blue-400 bg-clip-text text-transparent my-11">
         Professional Experience
       </h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-11 ">
         {prof_experience.map(exp => (
           <div
-            className="bg-gray-700 border lg:w-[25vw] p-4 rounded-lg shadow-lg transition-transform duration-700 group-hover:scale-110"
+            className="bg-gray-700 border lg:w-[25vw] p-4 rounded-lg shadow-lg transition-transform duration-700 group-hover:scale-110 hover:shadow-2xl hover:bg-gray-800 cursor-pointer "
             key={exp.id}>
             {/* card header */}
             <div className="-space-y-1 mb-4">
@@ -53,7 +53,7 @@ export const Experiences = () => {
                     href={exp.cirtificate_link}
                     target="_blank"
                     className="flex items-center gap-2">
-                    <span className="text-green-200">Cirtificate</span>
+                    <span className="text-blue-300">Certificate</span>
                     <Link size={15} />
                   </a>
                 )}

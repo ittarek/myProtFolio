@@ -249,8 +249,8 @@ const ModernPortfolio = () => {
             <span className="text-blue-400 font-medium">Featured Work</span>
           </div>
 
-          <h1 className="text-5xl lg:text-7xl font-bold bg-gradient-to-r from-white via-blue-200 to-purple-300 bg-clip-text text-transparent mb-6">
-            My Portfolio
+          <h1 className="text-5xl lg:text-7xl font-bold bg-gradient-to-r from-white via-blue-200 to-blue-400 bg-clip-text text-transparent mb-6">
+            My Project
           </h1>
 
           <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
