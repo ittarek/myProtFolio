@@ -5,12 +5,14 @@ import { useSmoothScroll } from "../../Hooks/useSmoothScroll";
 import ProtFolio from "../ProtFolio/ProtFolio";
 import "./Home.css";
 import Certificate from "../certification/Certificate";
+import { Experiences } from "../../Components/Experiences/Experiences";
 const Home = () => {
   useSmoothScroll();
   return (
     <main className="-mt-[80px] h-full -mb-[30px]">
       <Banner />
-      <Skills />
+          <Skills />
+          <Experiences />
       <ProtFolio />
       <Certificate/>
       <Contact />
