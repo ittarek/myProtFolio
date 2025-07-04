@@ -9,9 +9,39 @@ import ProtFolio1 from '../../../src/assets/protfolio-image/1assignment-1.png';
 import protFolio2 from '../../assets/protfolio-image/2assignment-2.png';
 import protFolio3 from '../../assets/protfolio-image/3assignment-3.png';
 import protFolioNews from '../../assets/protfolio-image/nextJs.jpg';
+import saralTech from '../../assets/protfolio-image/saralTech.png';
+import travent from '../../assets/protfolio-image/travent.png';
+import { Link } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
-
+const liveProject = [
+  {
+    id: 1,
+    title: 'SaralTech',
+    subtitle: 'Interactive Venture builder Platform',
+    description:
+      'A comprehensive Saral Teach Vengure Builer platform with interactive Sections, progress tracking, and gamified user experiences. Built with modern web technologies by Nextjs for optimal user engagement.',
+    image: saralTech,
+    tags: ['Next.js', 'Own Auth', 'Tailwind CSS', 'Banckend By Next.js'],
+    live_link: 'https://incubation.saralgroups.com/',
+    github_client: '',
+    github_server: '',
+    featured: false,
+  },
+  {
+    id: 2,
+    title: 'Travent Booking Site',
+    subtitle: 'Travent is UAE based travel booking site',
+    description:
+      'A modern hotels and firm aggregation platform built with React.js, featuring real-time updates, responsive design, and optimized performance for seamless Hotels consumption.',
+    image: travent,
+    tags: ['React', 'TailwindCss', 'Cloudfare', 'Reatc Hook', 'Larable'],
+    live_link: 'https://travent.me/',
+    github_client: 'https://github.com/Travent-Etran/travent-frontend/tree/dev/tariq',
+    github_server: '',
+    featured: true,
+  },
+];
 const projectData = [
   {
     id: 1,
@@ -87,13 +117,13 @@ const ActionButton = ({
   const variants = {
     primary: disabled
       ? 'bg-gray-400 text-gray-200 cursor-not-allowed'
-      : 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg hover:shadow-xl focus:ring-blue-500',
+      : 'bg-gradient-to-r from-blue-600 to-slate-800 hover:from-blue-700 hover:to-slate-700 text-white shadow-lg hover:shadow-xl focus:ring-blue-500',
     secondary: disabled
       ? 'bg-gray-400 text-gray-200 cursor-not-allowed'
-      : 'bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 hover:border-white/30 focus:ring-white/50',
+      : 'bg-gradient-to-r from-slate-800 to-slate-600 hover:from-blue-700 hover:to-teal-700 text-white shadow-lg hover:shadow-xl focus:ring-emerald-500',
     accent: disabled
       ? 'bg-gray-400 text-gray-200 cursor-not-allowed'
-      : 'bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white shadow-lg hover:shadow-xl focus:ring-emerald-500',
+      : 'bg-gradient-to-r from-slate-800 to-blue-600 hover:from-blue-700 hover:to-teal-700 text-white shadow-lg hover:shadow-xl focus:ring-emerald-500',
   };
 
   return (
@@ -155,7 +185,7 @@ const ProjectCard = ({ project, index }) => {
             <h3 className="text-2xl font-bold text-white mb-1 group-hover:text-blue-300 transition-colors">
               {project.title}
             </h3>
-            <p className="text-blue-300 font-medium">{project.subtitle}</p>
+            <p className="text-white font-medium">{project.subtitle}</p>
           </div>
         </div>
 
@@ -274,6 +304,28 @@ const ModernPortfolio = () => {
             </div>
           ))}
         </div>
+        {/* live project Grid */}
+
+        <div className="flex justify-center items-center my-11 pb-11">
+          <div>
+            <h1 className=" text-5xl lg:text-7xl font-bold bg-gradient-to-r from-white via-blue-200 to-blue-400 bg-clip-text text-transparent text-center ">
+              Live Projects
+            </h1>
+            <p className="text-xl text-gray-400 max-w-2xl mx-auto text-center mt-3 leading-relaxed">
+              Explore my Live projects showcasing modern web development, innovative
+              solutions, and creative problem-solving.
+            </p>
+          </div>
+        </div>
+        <div className="portfolio-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-fr">
+          {liveProject.map((project, index) => (
+            <div
+              key={project.id}
+              className={`portfolio-card ${project.featured ? 'featured-float' : ''}`}>
+              <ProjectCard project={project} index={index} />
+            </div>
+          ))}
+        </div>
 
         {/* Stats Section */}
         <div className="mt-24 pt-16 border-t border-gray-800">
@@ -307,8 +359,10 @@ const ModernPortfolio = () => {
               Let's create something amazing together. Get in touch to discuss your next
               project.
             </p>
-            <button className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
-              <span>Get In Touch</span>
+            <button className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-800 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+              <a target='_blank' href="https://www.linkedin.com/in/md-tariqul-islam-ab42b61a1/">
+                <span>Get In Touch</span>
+              </a>
               <ArrowRight size={20} />
             </button>
           </div>
