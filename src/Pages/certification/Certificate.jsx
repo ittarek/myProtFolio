@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import  { useEffect, useRef } from "react";
 import "./certificate.css";
 import Container from "../../Components/Container";
 import gsap from "gsap";
@@ -29,6 +29,9 @@ const Certificate = () => {
   return (
     <Container>
       <div className="certificate my-16" ref={containerRef}>
+        <h1 className="text-5xl lg:text-7xl font-bold bg-gradient-to-r from-white via-blue-200 to-blue-400 bg-clip-text text-transparent text-center mb-6">
+          All Cradintional
+        </h1>
         <h1 className="text">
           higher secondary certificate<span>LSD Collage</span>
         </h1>
@@ -41,11 +44,7 @@ const Certificate = () => {
         <h1 className="text">
           Electrical & Electronics
           <span>
-            <a
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href="#" target="_blank" rel="noopener noreferrer">
               Bkttc & Usef
             </a>
           </span>
@@ -53,11 +52,7 @@ const Certificate = () => {
         <h1 className="text">
           Team Lead
           <span>
-            <a
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href="#" target="_blank" rel="noopener noreferrer">
               LET'S CONNECT
             </a>
           </span>

@@ -29,7 +29,7 @@ const sendEmail = e => {
 };
 
   return (
-    <section className="contact flex justify-center py-[100px]">
+    <section className="contact  flex justify-center py-[50px]">
       {/* Contact me */}
       <div className="box">
         <div className="square" style={{ '--i': 0 }}></div>
@@ -38,11 +38,11 @@ const sendEmail = e => {
         <div className="square" style={{ '--i': 3 }}></div>
         <div className="square" style={{ '--i': 4 }}></div>
         <div className="square" style={{ '--i': 5 }}></div>
-        <div className="container ">
+        <div className="container w-full ">
           <h2 className="text-white text-center text-3xl my-6">Contact to Direct</h2>
-          <form onSubmit={sendEmail} className="form w-full">
+          <form onSubmit={sendEmail} className="form  w-full">
             {/* name */}
-            <div className="inputBx name  ">
+            <div className="inputBx name   ">
               <input id="name-input" type="text" name="name" required="required" />
 
               <span className="label-text text-white">Full Name</span>

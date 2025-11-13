@@ -1,5 +1,5 @@
 import Tilt from 'react-parallax-tilt';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import LinearProgress from '@mui/material/LinearProgress';
 import Tooltip from '@mui/material/Tooltip';
@@ -101,6 +101,24 @@ const data = [
   },
 ];
 const Skills = () => {
+  const [perspective, setPerspective] = useState(getPerspective());
+
+  function getPerspective() {
+    const width = window.innerWidth;
+
+    if (width >= 1280) return 3000; // large screen
+    if (width >= 768) return 2500; // tablet / medium
+    return 18000; //mobile
+  }
+
+  useEffect(() => {
+    const handleResize = () => {
+      setPerspective(getPerspective());
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   return (
     <Container>
       <main className="mx-auto flex flex-col w-full lg:max-w-[70rem] ">
@@ -142,7 +160,7 @@ const Skills = () => {
         {/* Skill set */}
         <Tilt
           className="parallax-effect-glare-scale transition duration-500 "
-          perspective={3000}
+          perspective={perspective}
           glareEnable={true}
           glareMaxOpacity={0.4}
           scale={1.0}
