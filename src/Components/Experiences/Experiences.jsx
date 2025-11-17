@@ -56,7 +56,7 @@ export const Experiences = () => {
                 {exp.company} , {exp.location}
               </p>
 
-                <p>{exp.duration}</p>
+              <p>{exp.duration}</p>
 
               <div>
                 {' '}
@@ -116,6 +116,9 @@ export const Experiences = () => {
                   className="w-full max-h-64 object-contain border-2 border-blue-400 rounded-lg bg-gray-800 p-2"
                   src={exp.image}
                   alt={exp.company}
+                  width="400"
+                  height="400"
+                  loading="lazy"
                 />
               </div>
             </div>

@@ -7,7 +7,14 @@ const About = () => {
     <div className="lg:mx-[200px] pt-24  lg:flex gap-6 ">
       {/* image */}
       <div className="mx-auto ">
-        <img src={myImg} className="outline  mx-auto rounded-full" alt="image" />
+        <img
+          src={myImg}
+          className="outline  mx-auto rounded-full"
+          alt="image"
+          width="400"
+          height="400"
+          loading="lazy"
+        />
       </div>
 
       {/* About me */}
@@ -54,7 +61,8 @@ const About = () => {
           grid, and CSS media query system  Swiper.js carousel and slider  Web expertise
           to create and website and web applications <br />
           ===============Language================= <br />
-          Javascript(es6), HTML5,CSS3, Bootsrap5, Tailwind, React.js, Next.js Express.js node.js
+          Javascript(es6), HTML5,CSS3, Bootsrap5, Tailwind, React.js, Next.js Express.js
+          node.js
         </p>
       </div>
     </div>

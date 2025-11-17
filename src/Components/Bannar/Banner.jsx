@@ -1,7 +1,4 @@
 import React, { useEffect } from 'react';
-// import myImg from "../../assets/myImage/my-image.png";
-// import myImg from "../../assets/myImage/myImageAi1.jpg";
-// import myImg from "../../assets/myImage/myImageAi2.png";
 import myImg from '../../assets/myImage/myImageAi3.jpg';
 import './Banner.css';
 import gsap from 'gsap';
@@ -81,11 +78,13 @@ const Banner = () => {
           id="bannerBigimg"
           className="lg:row-start-1 lg:col-start-1 lg:col-span-6 banner-img mx-auto my-auto">
           <img
-            src={myImg}
-            width={500}
-            height={100}
-            className="h-full w-full my-image rounded-md "
-            alt="Image"
+            src={myImg} // WebP image
+            width={1200} // original width
+            height={800} // original height
+            srcSet={`${myImg} 600w, ${myImg} 1200w`}
+            sizes="(max-width: 640px) 100vw, 50vw"
+            className="h-auto w-full my-image rounded-md"
+            alt="Tariqul Islam Portfolio"
             loading="lazy"
           />
         </div>

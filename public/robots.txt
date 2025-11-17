@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://tareq.netlify.app/sitemap.xml
