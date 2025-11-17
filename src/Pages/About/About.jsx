@@ -54,7 +54,7 @@ const About = () => {
           grid, and CSS media query system  Swiper.js carousel and slider  Web expertise
           to create and website and web applications <br />
           ===============Language================= <br />
-          Javascript(es6), HTML5,CSS3, Bootsrap5, Tailwind, React.js Express.js node.js
+          Javascript(es6), HTML5,CSS3, Bootsrap5, Tailwind, React.js, Next.js Express.js node.js
         </p>
       </div>
     </div>
