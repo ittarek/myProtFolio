@@ -22,7 +22,7 @@ const liveProject = [
     description:
       'A comprehensive Saral Teach Vengure Builer platform with interactive Sections, progress tracking, and gamified user experiences. Built with modern web technologies by Nextjs for optimal user engagement.',
     image: saralTech,
-    tags: ['Next.js', 'Own Auth', 'Tailwind CSS', 'Banckend By Next.js'],
+    tags: ['Next.js', 'Own Auth', 'Tailwind CSS', 'Backend By Next.js'],
     live_link: 'https://incubation.saralgroups.com/',
     github_client: '',
     github_server: '',
@@ -159,7 +159,7 @@ const ProjectCard = ({ project, index }) => {
 
       {/* Featured Badge */}
       {project.featured && (
-        <div className="absolute top-4 right-4 z-10">
+        <div className="absolute  right-0 -mt-2 -mr-2 z-50">
           <div className="flex items-center gap-1 px-3 py-1 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full text-sm font-semibold text-gray-900">
             <Sparkles size={14} />
             Featured
@@ -175,7 +175,7 @@ const ProjectCard = ({ project, index }) => {
             {project.tags.map((tag, idx) => (
               <span
                 key={idx}
-                className="px-3 py-1 text-xs font-medium bg-white/20 backdrop-blur-sm rounded-full text-white border border-white/10">
+                className="px-3 py-1 text-md  bg-gray-200 backdrop-blur-sm rounded-full text-blue-500 font-bold border border-white/10">
                 {tag}
               </span>
             ))}
