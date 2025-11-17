@@ -16,6 +16,7 @@ const prof_experience = [
     cirtificate_link:
       'https://drive.google.com/file/d/1-zB7JRFzsK2BVssNwqooOJBgrNhnSZfQ/view?usp=sharing',
     image: salaTech,
+    websiteLink: 'https://incubation.saralgroups.com/userTypeSelection',
   },
   {
     id: 2,
@@ -27,6 +28,8 @@ const prof_experience = [
       'Developed and maintained web applications using React , improving user experience and performance using TailwindCss. Collaborated with cross-functional teams to design and implement new features, resulting in a 20% increase in user engagement. Mainly focused on front-end development, ensuring responsive design and cross-browser compatibility.',
     technologies: ['React', 'TailwindCss', 'JavaScript', 'CSS'],
     image: travent,
+      websiteLink: 'https://travent.me/',
+    old_websiteLink: 'https://www.travent.ae/',
   },
 ];
 
@@ -52,8 +55,11 @@ export const Experiences = () => {
               <p className="text-blue-300 font-medium">
                 {exp.company} , {exp.location}
               </p>
-              <div className="flex items-center gap-11">
+
                 <p>{exp.duration}</p>
+
+              <div>
+                {' '}
                 {exp.cirtificate_link && (
                   <a
                     href={exp.cirtificate_link}
@@ -62,6 +68,39 @@ export const Experiences = () => {
                     <span className="text-blue-300">Certificate</span>
                     <Link size={15} />
                   </a>
+                )}
+                {exp.company === 'SaralTech' ? (
+                  exp.websiteLink && (
+                    <a
+                      href={exp.websiteLink}
+                      target="_blank"
+                      className="flex items-center gap-2">
+                      <span className="text-blue-300">Live link</span>
+                      <Link size={15} />
+                    </a>
+                  )
+                ) : (
+                  <div className="flex flex-col ">
+                    <a
+                      href={exp.websiteLink}
+                      target="_blank"
+                      className="flex items-center gap-2 text-blue-300 hover:text-blue-400">
+                      <span className="font-medium">Live Link (New Version)</span>
+                      <Link size={15} />
+                    </a>
+
+                    <a
+                      href={exp.old_websiteLink}
+                      target="_blank"
+                      className="flex items-center gap-2 text-gray-300 hover:text-gray-400">
+                      <span className="font-medium">Old Version (Alternative Link)</span>
+                      <Link size={15} />
+                    </a>
+
+                    <p className="text-xs text-gray-400 mt-1 italic">
+                      *Note: New version may not be accessible for hold the project.
+                    </p>
+                  </div>
                 )}
               </div>
             </div>
