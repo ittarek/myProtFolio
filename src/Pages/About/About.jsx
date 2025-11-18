@@ -1,5 +1,3 @@
-import React from 'react';
-// import myImg from "../../assets/myImage/ph.jpg";
 import myImg from '../../assets/myImage/myImageAI1.jpg';
 
 const About = () => {
@@ -18,12 +16,12 @@ const About = () => {
       </div>
 
       {/* About me */}
-      <div className=" mx-auto">
-        <h1 className="h1 text-center text-4xl uppercase font-bold mx-auto ">
+      <div className=" mx-auto text-white mt-8 lg:mt-0 lg:leading-10">
+        <h1 className="h1 text-4xl uppercase font-bold mx-auto ">
           {' '}
           I'm Md Tarequl Islam
         </h1>
-        <h2 className="h2 text-center text-2xl my-4 uppercase mx-auto">
+        <h2 className="h2  text-2xl my-4 uppercase mx-auto">
           Front-end developer with react.js and next.js
         </h2>
         <p className=" lg:w-[500px] leading-10 mx-4">

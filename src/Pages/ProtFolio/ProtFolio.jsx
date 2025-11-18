@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ExternalLink, Github, Eye, ArrowRight, Sparkles } from 'lucide-react';
@@ -11,7 +11,6 @@ import protFolio3 from '../../assets/protfolio-image/3assignment-3.png';
 import protFolioNews from '../../assets/protfolio-image/nextJs.jpg';
 import saralTech from '../../assets/protfolio-image/saralTech.png';
 import travent from '../../assets/protfolio-image/travent.png';
-import { Link } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
 const liveProject = [
@@ -271,7 +270,7 @@ const ModernPortfolio = () => {
 
   return (
     <Container>
-      <main className="py-20">
+      <main className="py-20 bg-black">
         {/* Header Section */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-600/10 to-purple-600/10 rounded-full border border-blue-500/20 mb-6">
@@ -353,7 +352,7 @@ const ModernPortfolio = () => {
         <div className="mt-24 text-center">
           <div className="bg-gradient-to-r from-blue-600/10 to-purple-600/10 rounded-3xl border border-blue-500/20 p-12">
             <h2 className="text-3xl font-bold text-white mb-4">
-              Ready to Work Together?
+              Ready to Work Me?
             </h2>
             <p className="text-gray-400 mb-8 max-w-md mx-auto">
               Let's create something amazing together. Get in touch to discuss your next
