@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { FaceBookIcon } from './FooterIcons/FaceBookIcon';
 import { GithubIcon } from './FooterIcons/GithubIcon';
+import { LinkedIn } from './FooterIcons/LinkedIn';
 
 export const Footer = () => {
   const handleDownload = () => {
@@ -42,10 +43,17 @@ export const Footer = () => {
           <div className="mt-8 flex justify-center space-x-6">
             <a
               target="_blank"
+              href="https://www.linkedin.com/in/md-tariqul-islam-ab42b61a1/"
+              className="text-gray-400 hover:text-gray-400">
+              <span className="sr-only">Linkedin</span>
+<LinkedIn/>
+            </a>
+            <a
+              target="_blank"
               href="https://www.facebook.com/md.tariqul.islam.428023/"
               className="text-gray-400 hover:text-gray-400">
               <span className="sr-only">Facebook</span>
-              <FaceBookIcon />
+           <FaceBookIcon/>
             </a>
 
             <a
