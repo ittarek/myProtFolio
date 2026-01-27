@@ -52,7 +52,7 @@ const Banner = () => {
 
   return (
     <Container>
-      <div className="overflow-hidden banner-box py-6">
+      <div className="overflow-hidden banner-box py-[25vh]">
         {/* banner text  */}
         <div>
           <h1
