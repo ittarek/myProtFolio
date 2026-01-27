@@ -1,202 +1,32 @@
-/* ==================== Banner Section ==================== */
+/* ==================== Banner Custom Styles ==================== */
 
-/* Banner Image Container */
-.banner-img {
-  position: relative;
-}
-
-.banner-img img {
-  height: 100%;
-  width: 500px;
-  max-width: 100%;
-  object-fit: cover;
-  object-position: center;
-  position: relative;
-  right: -60%;
-  will-change: transform;
-}
-
-/* Banner Box */
-.banner-box {
-  position: relative;
-  z-index: 1;
-  min-height: 450px;
-}
-
-/* Large "D" Heading with Image Mask */
-.banner-box h1 {
-  position: absolute;
-  left: 0;
-  font-size: clamp(160px, 25vw, 339px);
-  line-height: 1.1;
-  font-weight: 400;
-  text-transform: uppercase;
+/* Large "D" Heading with Image Mask - Cannot be done with Tailwind alone */
+.banner-mask-text {
   background-image: url(https://www.yudiz.com/codepen/interior-design/mask-img.jpg);
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
-  opacity: 0.6;
-  color: var(--white);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  display: inline-block;
-  font-family: "Righteous", cursive;
-  z-index: -1;
-  will-change: transform;
-}
-
-/* Banner Text Container */
-.banner-text {
-  margin-top: 100px;
-  padding: 135px 0 0 80px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  max-width: 80%;
-  overflow: hidden;
-}
-
-.banner-text h2 {
-  margin: 0 0 8px;
-  font-size: clamp(36px, 8vw, 104px);
-  line-height: 1.1;
-  font-weight: 400;
-  font-style: normal;
-  position: relative;
-  user-select: none;
-  will-change: transform, opacity;
-}
-
-.banner-text h3 {
-  font-style: normal;
-  font-weight: 400;
-  font-size: clamp(14px, 1.5vw, 18px);
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.72);
-  position: relative;
-  will-change: transform, opacity;
-}
-
-/* ==================== Responsive Design ==================== */
-
-/* Large Desktop */
-@media screen and (max-width: 1399px) {
-  .container {
-    max-width: 1140px;
-  }
-}
-
-/* Medium Desktop */
-@media screen and (max-width: 1199px) {
-  .container {
-    max-width: 960px;
-  }
-  
-  .banner-text {
-    padding: 100px 0 0 60px;
-  }
-}
-
-/* Tablet */
-@media screen and (max-width: 991px) {
-  .banner-text {
-    padding: 80px 0 0 40px;
-    max-width: 90%;
-  }
-  
-  .banner-img img {
-    width: 400px;
-    right: -40%;
-  }
-}
-
-/* Mobile */
-@media screen and (max-width: 767px) {
-  .container {
-    max-width: calc(100% - 24px);
-    padding: 0 12px;
-  }
-
-  .banner-box {
-    min-height: 500px;
-    padding: 0;
-  }
-
-  .banner-box h1 {
-    position: relative;
-    top: 0;
-    font-size: 160px;
-  }
-
-  .banner-text {
-    margin-top: 64px;
-    padding: 64px 0 0 24px;
-    max-width: 100%;
-  }
-
-  .banner-text h2 {
-    font-size: 36px;
-    margin-bottom: 12px;
-  }
-
-  .banner-text h3 {
-    font-size: 14px;
-    line-height: 1.6;
-  }
-
-  .banner-img {
-    margin-left: -700px;
-    height: 100%;
-  }
-
-  .banner-img img {
-    width: 100%;
-    max-width: 400px;
-  }
-}
-
-/* Small Mobile */
-@media screen and (max-width: 480px) {
-  .banner-box h1 {
-    font-size: 120px;
-  }
-
-  .banner-text {
-    padding: 48px 0 0 16px;
-  }
-
-  .banner-text h2 {
-    font-size: 28px;
-  }
-
-  .banner-text h3 {
-    font-size: 12px;
-  }
-
-  .banner-img {
-    margin-left: -500px;
-  }
-}
-
-/* ==================== Performance Optimizations ==================== */
-
-/* GPU Acceleration for Animations */
-.banner-box h1,
-.banner-text h2,
-.banner-text h3,
-.banner-img img {
+  font-family: 'Righteous', cursive;
   transform: translateZ(0);
   backface-visibility: hidden;
 }
 
-/* Reduce Motion for Accessibility */
+/* Performance Optimizations for GSAP Animations */
+.banner-mask-text,
+[class*='banner'] img {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Accessibility - Reduce Motion */
 @media (prefers-reduced-motion: reduce) {
-  .banner-box h1,
-  .banner-text h2,
-  .banner-text h3,
-  .banner-img img {
+  .banner-mask-text,
+  [class*='banner'] img,
+  [class*='banner'] h2,
+  [class*='banner'] h3 {
     animation: none !important;
     transition: none !important;
   }

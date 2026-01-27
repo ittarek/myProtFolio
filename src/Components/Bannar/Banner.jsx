@@ -15,7 +15,6 @@ const Banner = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Timeline for better performance and control
       const tl = gsap.timeline({ defaults: { ease: 'power2.inOut' } });
 
       // Image animation
@@ -47,43 +46,65 @@ const Banner = () => {
       });
     });
 
-    return () => ctx.revert(); // Cleanup
+    return () => ctx.revert();
   }, []);
 
   return (
     <Container>
-      <div className="overflow-hidden banner-box py-[25vh] bg-red-500">
-        {/* banner text  */}
-        <div>
-          <h1
-            ref={headingBigRef}
-            className="text-4xl lg:text-6xl uppercase"
-            aria-label="Design">
-            D
-          </h1>
-          <div className="banner-text">
-            <h2 ref={headingSmallRef} className="text-sm lg:text-xl text-white">
-              Design a Space <br /> You Love.
-            </h2>
-            <h3 ref={headingTextRef} className="text-sm lg:text-lg">
-              Let's bring your creative <br /> imagination to reality.
-            </h3>
+      <div className="relative overflow-hidden py-12 md:py-20 lg:py-24 min-h-[500px] lg:min-h-[700px]">
+        {/* Banner Content Wrapper */}
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-center">
+          {/* Text Section */}
+          <div className="relative lg:col-span-6 xl:col-span-5">
+            {/* Large "D" Background Text with Image Mask */}
+            <h1
+              ref={headingBigRef}
+              className="banner-mask-text absolute left-0 top-0 -z-10 select-none pointer-events-none
+                         text-[160px] sm:text-[200px] md:text-[250px] lg:text-[280px] xl:text-[339px]
+                         leading-none font-normal uppercase opacity-60"
+              aria-label="Design">
+              D
+            </h1>
+
+            {/* Main Text Content */}
+            <div className="relative pt-24 sm:pt-32 md:pt-40 lg:pt-44 pl-4 sm:pl-12 md:pl-16 lg:pl-20 max-w-[80%] overflow-hidden">
+              <h2
+                ref={headingSmallRef}
+                className="relative mb-2 select-none
+                           text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl
+                           leading-tight font-normal text-white">
+                Design a Space <br /> You Love.
+              </h2>
+
+              <h3
+                ref={headingTextRef}
+                className="relative text-sm sm:text-base md:text-lg lg:text-xl
+                           leading-relaxed font-normal text-white/70">
+                Let's bring your creative <br /> imagination to reality.
+              </h3>
+            </div>
           </div>
-        </div>
-        {/* banner image */}
-        <div
-          ref={bannerImgRef}
-          className="lg:row-start-1 lg:col-start-1 lg:col-span-6 banner-img h-[450px] mx-auto my-auto">
-          <img
-            src={myImg}
-            width={1200}
-            height={800}
-            srcSet={`${myImg} 600w, ${myImg} 1200w`}
-            sizes="(max-width: 640px) 100vw, 50vw"
-            className="h-auto w-full my-image rounded-md"
-            alt="Tariqul Islam Portfolio"
-            loading="eager"
-          />
+
+          {/* Image Section */}
+          <div className="relative lg:col-span-6 xl:col-span-7 flex justify-center lg:justify-end">
+            <div
+              ref={bannerImgRef}
+              className="relative w-full max-w-[350px] sm:max-w-[450px] md:max-w-[550px] lg:max-w-[600px] xl:max-w-[700px]
+                         h-[350px] sm:h-[450px] md:h-[500px] lg:h-[550px] xl:h-[600px]
+                         -ml-[150px] sm:-ml-[200px] md:-ml-[300px] lg:ml-0">
+              <img
+                src={myImg}
+                width={1200}
+                height={800}
+                srcSet={`${myImg} 600w, ${myImg} 1200w`}
+                sizes="(max-width: 640px) 350px, (max-width: 768px) 450px, (max-width: 1024px) 550px, 700px"
+                className="w-full h-full object-cover object-center rounded-lg shadow-2xl
+                           transform translate-z-0 will-change-transform"
+                alt="Tariqul Islam Portfolio"
+                loading="eager"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </Container>
