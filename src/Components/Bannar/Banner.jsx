@@ -1,91 +1,88 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import myImg from '../../assets/myImage/myImageAi3.jpg';
 import './Banner.css';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Container from '../Container';
 
+gsap.registerPlugin(ScrollTrigger);
+
 const Banner = () => {
-  gsap.registerPlugin(ScrollTrigger);
+  const bannerImgRef = useRef(null);
+  const headingBigRef = useRef(null);
+  const headingSmallRef = useRef(null);
+  const headingTextRef = useRef(null);
 
   useEffect(() => {
-    gsap.to('#bannerBigimg', {
-      duration: 2,
-      yPercent: 150,
-      ease: 'power2.inOut',
-      yoyo: true,
-      repeat: 1,
-      repeatRefresh: true,
+    const ctx = gsap.context(() => {
+      // Timeline for better performance and control
+      const tl = gsap.timeline({ defaults: { ease: 'power2.inOut' } });
+
+      // Image animation
+      tl.to(bannerImgRef.current, {
+        duration: 2,
+        yPercent: 150,
+        yoyo: true,
+        repeat: 1,
+      });
+
+      // Heading Big animation
+      tl.to(
+        headingBigRef.current,
+        {
+          duration: 1.5,
+          scale: 2,
+          transformOrigin: 'top left',
+          yoyo: true,
+          repeat: 1,
+        },
+        0.8
+      );
+
+      // Heading Small and Text animations
+      [headingSmallRef.current, headingTextRef.current].forEach(el => {
+        tl.to(el, { duration: 0.1, opacity: 0 }, 1.2)
+          .to(el, { duration: 0.1, left: '-100vw' }, 2)
+          .to(el, { duration: 1.8, left: 0, opacity: 1 }, 3.6);
+      });
     });
 
-    gsap.to('#headingBig', {
-      duration: 1.5,
-      scale: 2,
-      delay: 0.8,
-      transformOrigin: 'top left',
-      ease: 'power2.inOut',
-      yoyo: true,
-      repeat: 1,
-      repeatRefresh: true,
-    });
-
-    gsap.to('#headingSmall', {
-      delay: 1.2,
-      opacity: 0,
-    });
-    gsap.to('#headingSmall', {
-      delay: 2,
-      left: '-100vw',
-    });
-    gsap.to('#headingSmall', {
-      delay: 3.6,
-      duration: 1.8,
-      left: 0,
-      opacity: 1,
-    });
-
-    gsap.to('#headingText', {
-      delay: 1.2,
-      opacity: 0,
-    });
-    gsap.to('#headingText', {
-      delay: 2,
-      left: '-100vw',
-    });
-    gsap.to('#headingText', {
-      delay: 3.6,
-      duration: 1.8,
-      left: 0,
-      opacity: 1,
-    });
+    return () => ctx.revert(); // Cleanup
   }, []);
 
   return (
     <Container>
       <div className="overflow-hidden banner-box py-6">
-        <h1 className="text-4xl lg:text-6xl  uppercase" id="headingBig">
-          D
-        </h1>
-        <div className="banner-text">
-          <h2 className="text-sm lg:text-xl text-white " id="headingSmall">
-            Design a Space <br /> You Love.
-          </h2>
-          <h3 className="text-sm lg:text-lg" id="headingText">
-            Let’s bring your creative <br /> imagination to reality.
-          </h3>
+        {/* banner text  */}
+        <div>
+          <h1
+            ref={headingBigRef}
+            className="text-4xl lg:text-6xl uppercase"
+            aria-label="Design">
+            D
+          </h1>
+          <div className="banner-text">
+            <h2 ref={headingSmallRef} className="text-sm lg:text-xl text-white">
+              Design a Space <br /> You Love.
+            </h2>
+            <h3 ref={headingTextRef} className="text-sm lg:text-lg">
+              Let's bring your creative <br /> imagination to reality.
+            </h3>
+          </div>
         </div>
+        {/* banner image */}
         <div
-          id="bannerBigimg"
-          className="lg:row-start-1 lg:col-start-1 lg:col-span-6 banner-img mx-auto my-auto">
+          ref={bannerImgRef}
+          className="lg:row-start-1 lg:col-start-1 lg:col-span-6 banner-img h-[450px] mx-auto my-auto">
           <img
-            src={myImg} // WebP image
-            width={1200} // original width
-            height={800} // original height
+            src={myImg}
+            width={1200}
+            height={800}
             srcSet={`${myImg} 600w, ${myImg} 1200w`}
             sizes="(max-width: 640px) 100vw, 50vw"
             className="h-auto w-full my-image rounded-md"
             alt="Tariqul Islam Portfolio"
-            loading="lazy"
+            loading="eager"
           />
         </div>
       </div>
