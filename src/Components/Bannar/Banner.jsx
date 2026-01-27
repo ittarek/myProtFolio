@@ -59,7 +59,7 @@ const Banner = () => {
             {/* Large "D" Background Text with Image Mask */}
             <h1
               ref={headingBigRef}
-              className="banner-mask-text absolute left-0 top-0 -z-10 select-none pointer-events-none
+              className="banner-mask-text absolute left-0 lg:left-0 top-0 -z-10 select-none pointer-events-none
                          text-[160px] sm:text-[200px] md:text-[250px] lg:text-[280px] xl:text-[339px]
                          leading-none font-normal uppercase opacity-60"
               aria-label="Design">
@@ -67,7 +67,11 @@ const Banner = () => {
             </h1>
 
             {/* Main Text Content */}
-            <div className="relative pt-24 sm:pt-32 md:pt-40 lg:pt-44 pl-4 sm:pl-12 md:pl-16 lg:pl-20 max-w-[80%] overflow-hidden">
+            <div
+              className="relative pt-24 sm:pt-32 md:pt-40 lg:pt-44 
+                            px-4 sm:px-8 md:px-12 lg:pl-20 lg:pr-0
+                            max-w-full lg:max-w-[80%] overflow-hidden
+                            text-center lg:text-left">
               <h2
                 ref={headingSmallRef}
                 className="relative mb-2 select-none
@@ -89,15 +93,18 @@ const Banner = () => {
           <div className="relative lg:col-span-6 xl:col-span-7 flex justify-center lg:justify-end">
             <div
               ref={bannerImgRef}
-              className="relative w-full max-w-[350px] sm:max-w-[450px] md:max-w-[550px] lg:max-w-[600px] xl:max-w-[700px]
-                         h-[350px] sm:h-[450px] md:h-[500px] lg:h-[550px] xl:h-[600px]
-                         -ml-[150px] sm:-ml-[200px] md:-ml-[300px] lg:ml-0">
+              className="relative w-full 
+                         max-w-[300px] sm:max-w-[400px] md:max-w-[500px] 
+                         lg:max-w-[600px] xl:max-w-[700px]
+                         h-[300px] sm:h-[400px] md:h-[500px] 
+                         lg:h-[550px] xl:h-[600px]
+                         mx-auto lg:mx-0">
               <img
                 src={myImg}
                 width={1200}
                 height={800}
                 srcSet={`${myImg} 600w, ${myImg} 1200w`}
-                sizes="(max-width: 640px) 350px, (max-width: 768px) 450px, (max-width: 1024px) 550px, 700px"
+                sizes="(max-width: 640px) 300px, (max-width: 768px) 400px, (max-width: 1024px) 500px, 700px"
                 className="w-full h-full object-cover object-center rounded-lg shadow-2xl
                            transform translate-z-0 will-change-transform"
                 alt="Tariqul Islam Portfolio"
