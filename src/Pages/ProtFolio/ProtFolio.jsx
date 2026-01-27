@@ -1,4 +1,4 @@
-import  { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ExternalLink, Github, Eye, ArrowRight, Sparkles } from 'lucide-react';
@@ -89,7 +89,7 @@ const projectData = [
       'An engaging e-commerce platform for tech toys and gadgets, featuring product catalogs, user authentication, and seamless shopping experience with modern UI/UX.',
     image: protFolio2,
     tags: ['React', 'Node.js', 'MongoDB', 'Stripe'],
-    live_link: 'https://effortless-brioche-b5db7c.netlify.app/',
+    live_link: 'https://tech-toy.netlify.app/',
     github_client: 'https://github.com/ittarek/teach-toy-client',
     github_server: 'https://github.com/ittarek/teach-toy-client-server',
     featured: false,
@@ -351,15 +351,15 @@ const ModernPortfolio = () => {
         {/* CTA Section */}
         <div className="mt-24 text-center">
           <div className="bg-gradient-to-r from-blue-600/10 to-purple-600/10 rounded-3xl border border-blue-500/20 p-12">
-            <h2 className="text-3xl font-bold text-white mb-4">
-              Ready to Work Me?
-            </h2>
+            <h2 className="text-3xl font-bold text-white mb-4">Ready to Work Me?</h2>
             <p className="text-gray-400 mb-8 max-w-md mx-auto">
               Let's create something amazing together. Get in touch to discuss your next
               project.
             </p>
             <button className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-800 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
-              <a target='_blank' href="https://www.linkedin.com/in/md-tariqul-islam-ab42b61a1/">
+              <a
+                target="_blank"
+                href="https://www.linkedin.com/in/md-tariqul-islam-ab42b61a1/">
                 <span>Get In Touch</span>
               </a>
               <ArrowRight size={20} />
