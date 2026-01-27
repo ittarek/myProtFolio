@@ -1,14 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
-:root{
-    background-color: black;
+
+:root {
+  background-color: black;
 }
-        
-        .active {
-          color: #fff;
-          padding: 1rem;
-          border-radius: 100%;
-        }
-      
+*,
+:root,
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.active {
+  color: #fff;
+  padding: 1rem;
+  border-radius: 100%;
+}

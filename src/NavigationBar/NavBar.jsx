@@ -61,7 +61,7 @@ const NavBar = () => {
         {/* my name */}
         <div className="  ">
           <Link to="/" className="font-bold text-2xl my_name">
-            Md Tareq
+   Tareq
           </Link>
         </div>
 
