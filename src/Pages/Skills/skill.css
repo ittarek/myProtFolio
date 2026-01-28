@@ -1,8 +1,0 @@
-.progress-bar:hover {
-    opacity: 0;
-    transform: translateX(-100px);
-    will-change: transform;
-    transition: ease-in-out 3s;
-
-}
-
