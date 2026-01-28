@@ -1,246 +1,359 @@
+import React, { useEffect, useState } from 'react';
 import Tilt from 'react-parallax-tilt';
-import React, { useEffect, useRef, useState } from 'react';
-
-import LinearProgress from '@mui/material/LinearProgress';
-import Tooltip from '@mui/material/Tooltip';
-
 import Container from '../../Components/Container';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
-const tools = [
+
+// Skills Data
+const TOOLS_SKILLS = [
   {
     id: 1,
     name: 'Figma',
     value: 80,
-    message: 'Expert',
+    message: 'Expert in UI/UX design and prototyping',
+    icon: '🎨',
   },
   {
     id: 2,
     name: 'Photoshop',
     value: 50,
-    message: 'Comfortable',
+    message: 'Comfortable with image editing',
+    icon: '🖼️',
   },
   {
     id: 3,
     name: 'Vercel',
     value: 90,
-    message: 'Expert',
+    message: 'Expert in deployment and hosting',
+    icon: '▲',
   },
   {
     id: 4,
     name: 'Netlify',
     value: 90,
-    message: 'Expert',
+    message: 'Expert in CI/CD pipelines',
+    icon: '🌐',
   },
   {
     id: 5,
-    name: 'FireBase',
+    name: 'Firebase',
     value: 90,
-    message: 'Expert',
+    message: 'Expert in backend services',
+    icon: '🔥',
   },
   {
     id: 6,
-    name: 'Redux Dev Tool',
+    name: 'Redux DevTools',
     value: 60,
-    message: 'Comfortable',
+    message: 'Comfortable with state debugging',
+    icon: '🔧',
   },
   {
     id: 7,
-    name: 'Chrome Dev Tool',
+    name: 'Chrome DevTools',
     value: 90,
-    message: 'Expert',
+    message: 'Expert in browser debugging',
+    icon: '🔍',
   },
   {
     id: 8,
     name: 'RapidAPI',
     value: 50,
-    message: 'Familiar',
+    message: 'Familiar with API integration',
+    icon: '⚡',
   },
 ];
-const data = [
-  { id: 1, name: 'HTML5', value: 100, message: 'Html is my love side' },
-  { id: 2, name: 'CSS3', value: 100, message: 'Css is my love side' },
+
+const DEVELOPMENT_SKILLS = [
+  {
+    id: 1,
+    name: 'HTML5',
+    value: 100,
+    message: 'Expert - Semantic HTML mastery',
+    category: 'core',
+  },
+  {
+    id: 2,
+    name: 'CSS3',
+    value: 100,
+    message: 'Expert - Modern CSS & animations',
+    category: 'core',
+  },
   {
     id: 3,
-    name: 'BootStrap',
+    name: 'Bootstrap',
     value: 100,
-    message: 'BootsTrap is my love side',
+    message: 'Expert - Rapid UI development',
+    category: 'framework',
   },
-  { id: 4, name: 'TailWind', value: 100, message: 'TailWind is my love side' },
+  {
+    id: 4,
+    name: 'Tailwind CSS',
+    value: 100,
+    message: 'Expert - Utility-first approach',
+    category: 'framework',
+  },
   {
     id: 5,
     name: 'JavaScript',
     value: 90,
-    message: 'JavaScript is my love side',
+    message: 'Expert - ES6+ & async programming',
+    category: 'core',
   },
-  { id: 6, name: 'React.js', value: 90, message: 'React is my love side' },
-  { id: 7, name: 'Express.js', value: 50, message: 'Express is my love side' },
-  { id: 8, name: 'MongoDB', value: 50, message: 'Express is my love side' },
   {
-    id: 9,
+    id: 6,
+    name: 'React.js',
+    value: 90,
+    message: 'Expert - Component architecture & hooks',
+    category: 'library',
+  },
+  {
+    id: 7,
     name: 'Next.js',
     value: 50,
-
-    message: 'Next is my running Learning Things',
+    message: 'Learning - SSR & SSG patterns',
+    category: 'framework',
+  },
+  {
+    id: 8,
+    name: 'TypeScript',
+    value: 40,
+    message: 'Learning - Type-safe development',
+    category: 'language',
+  },
+  {
+    id: 9,
+    name: 'Redux',
+    value: 70,
+    message: 'Comfortable - State management',
+    category: 'library',
   },
   {
     id: 10,
-    name: 'Redux',
-    value: 70,
-
-    message: 'Redux is my running Learning Things',
+    name: 'Express.js',
+    value: 50,
+    message: 'Comfortable - REST API development',
+    category: 'backend',
   },
   {
     id: 11,
-    name: 'Typescript',
-    value: 40,
-
-    message: 'Typescript is my running Learning Things',
+    name: 'MongoDB',
+    value: 50,
+    message: 'Comfortable - NoSQL databases',
+    category: 'backend',
   },
 ];
+
 const Skills = () => {
   const [perspective, setPerspective] = useState(getPerspective());
+  const [hoveredSkill, setHoveredSkill] = useState(null);
 
   function getPerspective() {
     const width = window.innerWidth;
-
-    if (width >= 1280) return 3000; // large screen
-    if (width >= 768) return 2500; // tablet / medium
-    return 18000; //mobile
+    if (width >= 1280) return 3000;
+    if (width >= 768) return 2500;
+    return 18000;
   }
 
   useEffect(() => {
-    const handleResize = () => {
-      setPerspective(getPerspective());
-    };
-
+    const handleResize = () => setPerspective(getPerspective());
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-  return (
-    <Container>
-      <main className="mx-auto flex flex-col w-full lg:max-w-[70rem] ">
-        <div className="flex space-x-3 md:space-x-10">
-          <div className="flex flex-col items-center">
-            <div className="relative" style={{ opacity: '0' }}>
-              <svg
-                aria-hidden="true"
-                height="24"
-                viewBox="0 0 24 24"
-                version="1.1"
-                width="24"
-                fill="currentColor"
-                data-view-component="true"
-                className="text-white ">
-                <path d="M2.828 4.328C5.26 1.896 9.5 1.881 11.935 4.317c.024.024.046.05.067.076 1.391-1.078 2.993-1.886 4.777-1.89a6.22 6.22 0 0 1 4.424 1.825c.559.56 1.023 1.165 1.34 1.922.318.756.47 1.617.468 2.663 0 2.972-2.047 5.808-4.269 8.074-2.098 2.14-4.507 3.924-5.974 5.009l-.311.23a.752.752 0 0 1-.897 0l-.312-.23c-1.466-1.085-3.875-2.869-5.973-5.009-2.22-2.263-4.264-5.095-4.27-8.063a6.216 6.216 0 0 1 1.823-4.596Zm8.033 1.042c-1.846-1.834-5.124-1.823-6.969.022a4.712 4.712 0 0 0-1.382 3.52c0 2.332 1.65 4.79 3.839 7.022 1.947 1.986 4.184 3.66 5.66 4.752a78.214 78.214 0 0 0 2.159-1.645l-2.14-1.974a.752.752 0 0 1 1.02-1.106l2.295 2.118c.616-.52 1.242-1.08 1.85-1.672l-2.16-1.992a.753.753 0 0 1 1.021-1.106l2.188 2.02a18.963 18.963 0 0 0 1.528-1.877l-.585-.586-1.651-1.652c-1.078-1.074-2.837-1.055-3.935.043-.379.38-.76.758-1.132 1.126-1.14 1.124-2.96 1.077-4.07-.043-.489-.495-.98-.988-1.475-1.482a.752.752 0 0 1-.04-1.019c.234-.276.483-.576.745-.893.928-1.12 2.023-2.442 3.234-3.576Zm9.725 6.77c.579-1.08.92-2.167.92-3.228.002-.899-.128-1.552-.35-2.08-.22-.526-.551-.974-1.017-1.44a4.71 4.71 0 0 0-3.356-1.384c-1.66.004-3.25.951-4.77 2.346-1.18 1.084-2.233 2.353-3.188 3.506l-.351.423c.331.332.663.664.993.998a1.375 1.375 0 0 0 1.943.03c.37-.365.748-.74 1.125-1.118 1.662-1.663 4.373-1.726 6.06-.045.56.558 1.12 1.12 1.658 1.658Z"></path>
-              </svg>
-              <span className="absolute top-0 left-0 w-full h-full home-campaign-glowing-icon-glow-2 z-3"></span>
+
+  // Animate skill bars on scroll
+  useEffect(() => {
+    const skills = document.querySelectorAll('.skill-bar');
+
+    skills.forEach((skill, index) => {
+      gsap.fromTo(
+        skill,
+        { width: '0%' },
+        {
+          width: skill.dataset.value + '%',
+          duration: 1.5,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: skill,
+            start: 'top 80%',
+            toggleActions: 'play none none reverse',
+          },
+          delay: index * 0.1,
+        }
+      );
+    });
+  }, []);
+
+  const SkillCard = ({ skill, showIcon = false }) => {
+    const [showTooltip, setShowTooltip] = useState(false);
+
+    return (
+      <div
+        className="skill-item group"
+        onMouseEnter={() => setShowTooltip(true)}
+        onMouseLeave={() => setShowTooltip(false)}>
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-2">
+            {showIcon && (
+              <span className="text-xl transform group-hover:scale-125 transition-transform duration-300">
+                {skill.icon}
+              </span>
+            )}
+            <p className="text-sm md:text-base font-semibold uppercase text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-200 to-blue-400">
+              {skill.name}
+            </p>
+          </div>
+          <span className="text-xs md:text-sm text-blue-300 font-medium px-2 py-1 bg-blue-500/10 rounded-md">
+            {skill.value}%
+          </span>
+        </div>
+
+        {/* Custom Progress Bar Container */}
+        <div className="relative">
+          {/* Background Track */}
+          <div className="w-full h-3 bg-white/5 rounded-full overflow-hidden backdrop-blur-sm border border-white/10">
+            {/* Animated Progress Bar */}
+            <div
+              className="skill-bar h-full bg-gradient-to-r from-[#10681fcc] via-[#e4a9fe] to-[#580957] rounded-full relative
+                         group-hover:shadow-lg group-hover:shadow-purple-500/50 transition-all duration-300"
+              data-value={skill.value}
+              style={{ width: '0%' }}>
+              {/* Pulse Indicator */}
+              <span className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-white rounded-full animate-pulse"></span>
+
+              {/* Shimmer Effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer"></div>
             </div>
-            <div className=" h-full w-[3px] mt-7 rounded-md  bg-gradient-to-b from-[#abb4ff] via-[#797ef9] to-transparent"></div>
           </div>
 
-          <div className=" md:w-11/12">
-            <h2 className="text-[20px] md:text-2xl  font-medium text-white js-build-in-item build-in-slideX-left build-in-animate">
-              Skills
-            </h2>
-            <div
-              className="text-[28px] md:text-[37px] max-md:leading-8 max-lg:leading-10 lg:text-5xl mb-7 font-medium text-white js-build-in-item build-in-slideX-left build-in-animate w-full"
-              style={{ transitionDelay: '300ms' }}>
-              <span className="text-blue-200 ">
-                I offer professional FRONT-END (MERN) development services.
-              </span>
-
-              <span className="">With expertise in building robust web applications</span>
+          {/* Tooltip */}
+          {showTooltip && (
+            <div className="absolute -top-12 left-1/2 -translate-x-1/2 z-50 animate-fade-in">
+              <div className="bg-gray-900/95 backdrop-blur-md text-white text-xs px-3 py-2 rounded-lg shadow-xl border border-white/10 whitespace-nowrap">
+                {skill.message}
+                {/* Arrow */}
+                <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-gray-900/95 border-r border-b border-white/10 rotate-45"></div>
+              </div>
             </div>
+          )}
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <Container>
+      <main className="mx-auto flex flex-col w-full lg:max-w-[70rem] py-12 md:py-20">
+        {/* Header Section */}
+        <div className="flex space-x-3 md:space-x-10 mb-12">
+          <div className="flex flex-col items-center">
+            {/* Icon */}
+            <div className="relative group">
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full blur-xl opacity-50 group-hover:opacity-75 transition-opacity"></div>
+              <div className="relative bg-gradient-to-br from-purple-600 to-blue-600 p-3 rounded-full">
+                <svg
+                  height="24"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  fill="white"
+                  className="animate-pulse">
+                  <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5zm0 18c-4.41 0-8-3.59-8-8V8.5l8-4.5 8 4.5V12c0 4.41-3.59 8-8 8z" />
+                  <path d="M10.5 13.5l-2.25-2.25L7 12.5l3.5 3.5 6-6L15.25 8.75z" />
+                </svg>
+              </div>
+            </div>
+
+            {/* Vertical Line */}
+            <div className="h-full w-[3px] mt-7 rounded-full bg-gradient-to-b from-[#abb4ff] via-[#797ef9] to-transparent"></div>
+          </div>
+
+          <div className="md:w-11/12">
+            <h2 className="text-xl md:text-2xl font-medium text-blue-400 mb-4">
+              Technical Expertise
+            </h2>
+            <h3 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400">
+                Professional MERN Stack
+              </span>
+              <br />
+              <span className="text-white/90">Development Services</span>
+            </h3>
+            <p className="text-base md:text-lg text-gray-400 max-w-2xl">
+              With expertise in building robust, scalable web applications using modern
+              technologies and best practices
+            </p>
           </div>
         </div>
 
-        {/* Skill set */}
+        {/* Skills Cards */}
         <Tilt
-          className="parallax-effect-glare-scale transition duration-500 "
+          className="parallax-effect transition-all duration-500 hover:scale-[1.01]"
           perspective={perspective}
           glareEnable={true}
-          glareMaxOpacity={0.4}
+          glareMaxOpacity={0.3}
+          glareColor="#ffffff"
+          glareBorderRadius="12px"
           scale={1.0}
           gyroscope={true}>
-          <div className="z-[1] relative  h-full border-[#30363d] border-[0.5px] rounded-xl shadow-xl md:flex  justify-between p-5">
-            <div className=" flex flex-col justify-between w-full gap-10 lg:flex-row">
-              {/* Tools Skill */}
-              <div className="w-full">
-                {' '}
-                <div className="py-6 font-titleFont flex flex-col gap-4 text-[#a497b4]">
-                  <h2 className="text-3xl font-bold md:text-4xl">
-                    Tools &amp; Design Skill
-                  </h2>
+          <div className="relative border border-white/10 rounded-2xl bg-gradient-to-br from-slate-900/50 via-slate-800/30 to-slate-900/50 backdrop-blur-sm p-6 md:p-8 lg:p-10 shadow-2xl">
+            {/* Background Gradient Effect */}
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-blue-500/5 rounded-2xl pointer-events-none"></div>
+
+            <div className="relative z-10 flex flex-col lg:flex-row gap-10 lg:gap-16">
+              {/* Tools & Design Skills */}
+              <div className="w-full lg:w-1/2">
+                <div className="mb-8">
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="text-3xl">🛠️</span>
+                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
+                      Tools & Design
+                    </h2>
+                  </div>
+                  <p className="text-sm text-gray-400 ml-12">
+                    Design and development tools I use daily
+                  </p>
                 </div>
+
                 <div className="flex flex-col gap-6">
-                  {tools.map(s => (
-                    <div key={s.id} className="overflow-x-hidden">
-                      <p className="text-sm uppercase font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-200 to-blue-400">
-                        {s.name}
-                      </p>
-                      <LinearProgress
-                        variant="buffer"
-                        value={s.value}
-                        valueBuffer={s.value}></LinearProgress>
-                      <Tooltip title={s.message}>
-                        <span className="inline-flex w-full h-2 mt-2 rounded-md ">
-                          <span
-                            className="h-full progress-bar  bg-gradient-to-r from-[#10681fcc] via-[#e4a9fe] to-[#580957] rounded-md relative "
-                            style={{
-                              width: `${s.value}%`,
-                            }}>
-                            <span className="absolute -top-8 right-0 text-[#a497b4] "></span>
-                          </span>
-                        </span>
-                      </Tooltip>
-                    </div>
+                  {TOOLS_SKILLS.map(skill => (
+                    <SkillCard key={skill.id} skill={skill} showIcon={true} />
                   ))}
                 </div>
               </div>
-              {/* end tool */}
 
-              <div className="w-full">
-                <div className="py-6 font-titleFont flex flex-col gap-4 text-[#a497b4]">
-                  <h2 className="text-3xl font-bold md:text-4xl">
-                    Development &amp; Coding Skill
-                  </h2>
+              {/* Development & Coding Skills */}
+              <div className="w-full lg:w-1/2">
+                <div className="mb-8">
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="text-3xl">💻</span>
+                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
+                      Development & Coding
+                    </h2>
+                  </div>
+                  <p className="text-sm text-gray-400 ml-12">
+                    Languages and frameworks I specialize in
+                  </p>
                 </div>
 
                 <div className="flex flex-col gap-6">
-                  {data.map(s => (
-                    <div key={s.id} className="overflow-x-hidden">
-                      <p className="text-sm uppercase font-extrabold text-transparent bg-clip-text bg-gradient-to-r  from-white via-blue-200 to-blue-400">
-                        {s.name}
-                      </p>
-                      <LinearProgress
-                        variant="buffer"
-                        value={s.value}
-                        valueBuffer={s.value}></LinearProgress>
-                      <Tooltip title={s.message}>
-                        <span className="inline-flex w-full h-2 mt-2 rounded-md bgOpacity">
-                          <span
-                            className="h-full bg-gradient-to-r from-[#10681fcc] via-[#e4a9fe] to-[#580957] rounded-md relative"
-                            style={{
-                              width: `${s.value}%`,
-                              transition: 'width 0.5s ease', // Adding a smooth transition
-                            }}>
-                            <span className="absolute -top-7 right-0 text-[#a497b4]"></span>
-                          </span>
-                        </span>
-                      </Tooltip>
-                    </div>
+                  {DEVELOPMENT_SKILLS.map(skill => (
+                    <SkillCard key={skill.id} skill={skill} />
                   ))}
                 </div>
               </div>
             </div>
+
+            {/* Decorative Elements */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl -z-10"></div>
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl -z-10"></div>
           </div>
         </Tilt>
-        {/* Skill set end*/}
-        <div className="h-[100px]">
-          <div className="ml-3 h-[100px] mt-[-20px] w-[3px] rounded-md bg-gradient-to-b from-transparent via-[#ea6045] to-[#ffa28b]"></div>
+
+        {/* Bottom Divider */}
+        <div className="h-[100px] mt-12">
+          <div className="ml-3 h-full w-[3px] rounded-full bg-gradient-to-b from-transparent via-[#ea6045] to-[#ffa28b]"></div>
         </div>
       </main>
     </Container>
