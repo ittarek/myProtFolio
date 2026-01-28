@@ -51,7 +51,7 @@ const Banner = () => {
 
   return (
     <Container>
-      <div className="relative overflow-hidden py-12 md:py-20 lg:py-24 min-h-[500px] lg:min-h-[700px]">
+      <div className="relative overflow-hidden py-12 md:py-20 lg:py-24 ">
         {/* Banner Content Wrapper */}
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-center">
           {/* Text Section */}
@@ -69,8 +69,7 @@ const Banner = () => {
             {/* Main Text Content */}
             <div
               className="relative pt-24 sm:pt-32 md:pt-40 lg:pt-44 
-                            px-4 sm:px-8 md:px-12 lg:pl-20 lg:pr-0
-                            max-w-full lg:max-w-[80%] overflow-hidden
+                            overflow-hidden
                             text-center lg:text-left">
               <h2
                 ref={headingSmallRef}
