@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Tilt from 'react-parallax-tilt';
 import Container from '../../Components/Container';
 import gsap from 'gsap';
@@ -175,7 +175,7 @@ const Skills = () => {
 
   return (
     <Container>
-      <main className="mx-auto flex flex-col w-full lg:max-w-[70rem] py-12 md:py-20">
+      <main className="mx-auto flex flex-col w-full  py-12 md:py-20">
         {/* Header Section */}
         <div className="flex space-x-3 md:space-x-10 mb-12">
           <div className="flex flex-col items-center">
