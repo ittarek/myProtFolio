@@ -8,12 +8,9 @@ import { DEVELOPMENT_SKILLS } from './DEVELOPMENT_SKILLS';
 
 gsap.registerPlugin(ScrollTrigger);
 
-
-
-
 const Skills = () => {
   const [perspective, setPerspective] = useState(getPerspective());
-  const [hoveredSkill, setHoveredSkill] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   function getPerspective() {
     const width = window.innerWidth;
@@ -22,8 +19,20 @@ const Skills = () => {
     return 18000;
   }
 
+  // Check if device is mobile
+  function checkIsMobile() {
+    return window.innerWidth < 768; // Mobile breakpoint
+  }
+
   useEffect(() => {
-    const handleResize = () => setPerspective(getPerspective());
+    // Initial check
+    setIsMobile(checkIsMobile());
+
+    const handleResize = () => {
+      setPerspective(getPerspective());
+      setIsMobile(checkIsMobile());
+    };
+
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
@@ -108,6 +117,62 @@ const Skills = () => {
     );
   };
 
+  // Skills Card Content
+  const SkillsContent = () => (
+    <div className="relative border border-white/10 rounded-2xl bg-gradient-to-br from-slate-900/50 via-slate-800/30 to-slate-900/50 backdrop-blur-sm p-6 md:p-8 lg:p-10 shadow-2xl">
+      {/* Background Gradient Effect */}
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-blue-500/5 rounded-2xl pointer-events-none"></div>
+
+      <div className="relative z-10 flex flex-col lg:flex-row gap-10 lg:gap-16">
+        {/* Tools & Design Skills */}
+        <div className="w-full lg:w-1/2">
+          <div className="mb-8">
+            <div className="flex items-center gap-3 mb-2">
+              <span className="text-3xl">🛠️</span>
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
+                Tools & Design
+              </h2>
+            </div>
+            <p className="text-sm text-gray-400 ml-12">
+              Design and development tools I use daily
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-6">
+            {TOOLS_SKILLS.map(skill => (
+              <SkillCard key={skill.id} skill={skill} showIcon={true} />
+            ))}
+          </div>
+        </div>
+
+        {/* Development & Coding Skills */}
+        <div className="w-full lg:w-1/2">
+          <div className="mb-8">
+            <div className="flex items-center gap-3 mb-2">
+              <span className="text-3xl">💻</span>
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
+                Development & Coding
+              </h2>
+            </div>
+            <p className="text-sm text-gray-400 ml-12">
+              Languages and frameworks I specialize in
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-6">
+            {DEVELOPMENT_SKILLS.map(skill => (
+              <SkillCard key={skill.id} skill={skill} />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Decorative Elements */}
+      <div className="absolute top-0 right-0 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl -z-10"></div>
+      <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl -z-10"></div>
+    </div>
+  );
+
   return (
     <Container>
       <main className="mx-auto flex flex-col w-full lg:max-w-[70rem] py-12 md:py-20">
@@ -152,69 +217,26 @@ const Skills = () => {
           </div>
         </div>
 
-        {/* Skills Cards */}
-        <Tilt
-          className="parallax-effect transition-all duration-500 hover:scale-[1.01]"
-          perspective={perspective}
-          glareEnable={true}
-          glareMaxOpacity={0.3}
-          glareColor="#ffffff"
-          glareBorderRadius="12px"
-          scale={1.0}
-          gyroscope={true}>
-          <div className="relative border border-white/10 rounded-2xl bg-gradient-to-br from-slate-900/50 via-slate-800/30 to-slate-900/50 backdrop-blur-sm p-6 md:p-8 lg:p-10 shadow-2xl">
-            {/* Background Gradient Effect */}
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-blue-500/5 rounded-2xl pointer-events-none"></div>
-
-            <div className="relative z-10 flex flex-col lg:flex-row gap-10 lg:gap-16">
-              {/* Tools & Design Skills */}
-              <div className="w-full lg:w-1/2">
-                <div className="mb-8">
-                  <div className="flex items-center gap-3 mb-2">
-                    <span className="text-3xl">🛠️</span>
-                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
-                      Tools & Design
-                    </h2>
-                  </div>
-                  <p className="text-sm text-gray-400 ml-12">
-                    Design and development tools I use daily
-                  </p>
-                </div>
-
-                <div className="flex flex-col gap-6">
-                  {TOOLS_SKILLS.map(skill => (
-                    <SkillCard key={skill.id} skill={skill} showIcon={true} />
-                  ))}
-                </div>
-              </div>
-
-              {/* Development & Coding Skills */}
-              <div className="w-full lg:w-1/2">
-                <div className="mb-8">
-                  <div className="flex items-center gap-3 mb-2">
-                    <span className="text-3xl">💻</span>
-                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
-                      Development & Coding
-                    </h2>
-                  </div>
-                  <p className="text-sm text-gray-400 ml-12">
-                    Languages and frameworks I specialize in
-                  </p>
-                </div>
-
-                <div className="flex flex-col gap-6">
-                  {DEVELOPMENT_SKILLS.map(skill => (
-                    <SkillCard key={skill.id} skill={skill} />
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Decorative Elements */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl -z-10"></div>
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl -z-10"></div>
+        {/* Skills Cards - Conditional Tilt */}
+        {isMobile ? (
+          // Mobile: No Tilt Effect
+          <div className="transition-all duration-500">
+            <SkillsContent />
           </div>
-        </Tilt>
+        ) : (
+          // Desktop & Tablet: With Tilt Effect
+          <Tilt
+            className="parallax-effect transition-all duration-500 hover:scale-[1.01]"
+            perspective={perspective}
+            glareEnable={true}
+            glareMaxOpacity={0.3}
+            glareColor="#ffffff"
+            glareBorderRadius="12px"
+            scale={1.0}
+            gyroscope={true}>
+            <SkillsContent />
+          </Tilt>
+        )}
 
         {/* Bottom Divider */}
         <div className="h-[100px] mt-12">
