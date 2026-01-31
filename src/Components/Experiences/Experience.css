@@ -1,12 +1,8 @@
 /* Experience Card Wrapper */
-.exp_card_wrapper {
-    position: relative;
-    min-height: 400px;
-}
+
 
 /* Main Card Styles */
 .exp_card {
-    position: relative;
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
