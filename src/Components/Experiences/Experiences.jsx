@@ -139,7 +139,7 @@ export const Experiences = () => {
                         <span className="font-medium">Old Version</span>
                       </a>
 
-                      <p className="text-xs text-gray-500 italic pl-6">
+                      <p className="text-md text-gray-500 italic pl-6 ">
                         *New version may not be accessible due to project hold
                       </p>
                     </div>
