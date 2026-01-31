@@ -35,7 +35,7 @@ const prof_experience = [
 
 export const Experiences = () => {
   return (
-    <div className="text-white flex flex-col items-center justify-center p-4 py-16">
+    <div className="text-white flex flex-col items-center justify-center  py-16">
       {/* Section Header */}
       <div className="text-center mb-16">
         <h1 className="text-5xl lg:text-7xl font-bold bg-gradient-to-r from-white via-blue-200 to-blue-400 bg-clip-text text-transparent mb-4">
@@ -45,7 +45,7 @@ export const Experiences = () => {
       </div>
 
       {/* Experience Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-7xl w-full px-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 items-center  lg:gap-12 max-w-7xl w-full ">
         {prof_experience.map(exp => (
           <div className="exp_card_wrapper relative min-h-[450px] " key={exp.id}>
             <div className="exp_card md:h-[52vh]  group relative bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 p-6 rounded-xl shadow-xl transition-all duration-500 hover:shadow-2xl hover:border-blue-500/50 cursor-pointer overflow-visible">
