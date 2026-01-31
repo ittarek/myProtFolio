@@ -1,4 +1,4 @@
-.hanging_image {
+/* .hanging_image {
     transform-origin: top center;
     opacity: 0;
     transform: translateY(-0.5rem);
@@ -40,8 +40,257 @@
 }
 
 /* Animate only when parent is hovered */
-.group:hover .hanging_image {
+/* .group:hover .hanging_image {
     animation: hanging 2.5s ease-in-out;
     opacity: 1;
     transform: translateY(0);
+}  */
+
+/* Experience Card Wrapper */
+.exp_card_wrapper {
+    position: relative;
+    min-height: 400px;
+}
+
+/* Main Card Styles */
+.exp_card {
+    position: relative;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.exp_card::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);
+    border-radius: 0.75rem;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: -1;
+    filter: blur(10px);
+}
+
+.exp_card:hover::before {
+    opacity: 0.3;
+}
+
+/* Hanging Image Styles */
+.hanging_image {
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    transform: translateX(-50%) translateY(0);
+    opacity: 0;
+    visibility: hidden;
+    z-index: 50;
+    pointer-events: none;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Image Container */
+.image_container {
+    position: relative;
+    padding-top: 20px;
+}
+
+/* Connection Line */
+.connection_line {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 20px;
+    background: linear-gradient(to bottom, #3b82f6, transparent);
+    opacity: 0;
+    transition: opacity 0.4s ease 0.1s;
+}
+
+/* Image Card */
+.image_card {
+    position: relative;
+    width: 400px;
+    max-width: 90vw;
+    height: 250px;
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    border: 2px solid #3b82f6;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(59, 130, 246, 0.3),
+                0 0 0 1px rgba(59, 130, 246, 0.1);
+    transform-origin: top center;
+    transition: all 0.3s ease;
+}
+
+.image_card img {
+    transition: transform 0.5s ease;
+}
+
+.image_card:hover img {
+    transform: scale(1.05);
+}
+
+/* Image Overlay */
+.image_overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    padding: 1rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.image_card:hover .image_overlay {
+    opacity: 1;
+}
+
+/* Show hanging image on card hover */
+.exp_card:hover .hanging_image {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(10px);
+}
+
+.exp_card:hover .connection_line {
+    opacity: 1;
+}
+
+/* Hanging/Swinging Animation */
+@keyframes swinging {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+    10% {
+        transform: rotate(3deg);
+    }
+    30% {
+        transform: rotate(-3deg);
+    }
+    50% {
+        transform: rotate(2deg);
+    }
+    70% {
+        transform: rotate(-2deg);
+    }
+    90% {
+        transform: rotate(1deg);
+    }
+}
+
+/* Apply swinging animation only when card is hovered */
+.exp_card:hover .image_card {
+    animation: swinging 3s ease-in-out infinite;
+}
+
+/* Floating Animation for Image */
+@keyframes floating {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+.exp_card:hover .image_card {
+    animation: swinging 3s ease-in-out infinite, 
+               floating 3s ease-in-out infinite;
+}
+
+/* Pulse Effect on Border */
+@keyframes pulse-border {
+    0%, 100% {
+        box-shadow: 0 20px 60px rgba(59, 130, 246, 0.3),
+                    0 0 0 1px rgba(59, 130, 246, 0.1);
+    }
+    50% {
+        box-shadow: 0 20px 60px rgba(59, 130, 246, 0.5),
+                    0 0 0 2px rgba(59, 130, 246, 0.3);
+    }
+}
+
+.exp_card:hover .image_card {
+    animation: swinging 3s ease-in-out infinite,
+               floating 3s ease-in-out infinite,
+               pulse-border 2s ease-in-out infinite;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .image_card {
+        width: 350px;
+        height: 220px;
+    }
+    
+    .hanging_image {
+        top: 100%;
+    }
+    
+    .exp_card:hover .hanging_image {
+        transform: translateX(-50%) translateY(5px);
+    }
+}
+
+@media (max-width: 480px) {
+    .image_card {
+        width: 300px;
+        height: 190px;
+    }
+}
+
+/* Smooth Entrance Animation */
+.exp_card_wrapper {
+    animation: fadeInUp 0.6s ease-out backwards;
+}
+
+.exp_card_wrapper:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.exp_card_wrapper:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Prevent layout shift when image appears */
+.exp_card_wrapper {
+    margin-bottom: 280px;
+}
+
+@media (max-width: 768px) {
+    .exp_card_wrapper {
+        margin-bottom: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .exp_card_wrapper {
+        margin-bottom: 220px;
+    }
+}
+
+/* Last card in each row doesn't need bottom margin on desktop */
+@media (min-width: 768px) {
+    .exp_card_wrapper:nth-last-child(-n+2) {
+        margin-bottom: 0;
+    }
+}
+
+/* On mobile, only last card doesn't need margin */
+@media (max-width: 767px) {
+    .exp_card_wrapper:last-child {
+        margin-bottom: 0;
+    }
 }

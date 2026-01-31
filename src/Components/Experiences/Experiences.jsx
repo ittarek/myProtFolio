@@ -1,19 +1,19 @@
-import { Link } from 'lucide-react';
+import { Link, ExternalLink } from 'lucide-react';
 import salaTech from '../../assets/protfolio-image/saralTech.png';
 import travent from '../../assets/protfolio-image/travent.png';
-import { useState } from 'react';
-import './Experience.css'; // Assuming you have a CSS file for styles
+import './Experience.css';
+
 const prof_experience = [
   {
     id: 1,
-    title: 'Web developer Internship (Part Time)',
+    title: 'Web Developer Internship (Part Time)',
     company: 'SaralTech',
     location: 'Remote, India',
     duration: 'Dec 2024 - Jun 2025',
     description:
       'Led a team of developers in creating scalable web applications using Next.js. Implemented RESTful APIs and integrated third-party services, resulting in a 30% reduction in development time. Focused on front-end development, ensuring data integrity and security. Mainly worked on the front-end, ensuring responsive design and cross-browser compatibility. Collaborate with others team members to design and implement new features, resulting in a 20% increase in user engagement.',
-    technologies: ['Next.js', 'TailwindCss', 'SwiperJs', 'JavaScript'],
-    cirtificate_link:
+    technologies: ['Next.js', 'TailwindCSS', 'SwiperJS', 'JavaScript'],
+    certificate_link:
       'https://drive.google.com/file/d/1-zB7JRFzsK2BVssNwqooOJBgrNhnSZfQ/view?usp=sharing',
     image: salaTech,
     websiteLink: 'https://incubation.saralgroups.com/userTypeSelection',
@@ -25,101 +25,147 @@ const prof_experience = [
     company: 'Travent',
     duration: 'Jan 2025 - Jun 2025',
     description:
-      'Developed and maintained web applications using React , improving user experience and performance using TailwindCss. Collaborated with cross-functional teams to design and implement new features, resulting in a 20% increase in user engagement. Mainly focused on front-end development, ensuring responsive design and cross-browser compatibility.',
-    technologies: ['React', 'TailwindCss', 'JavaScript', 'CSS'],
+      'Developed and maintained web applications using React, improving user experience and performance using TailwindCSS. Collaborated with cross-functional teams to design and implement new features, resulting in a 20% increase in user engagement. Mainly focused on front-end development, ensuring responsive design and cross-browser compatibility.',
+    technologies: ['React', 'TailwindCSS', 'JavaScript', 'CSS'],
     image: travent,
-      websiteLink: 'https://travent.me/',
+    websiteLink: 'https://travent.me/',
     old_websiteLink: 'https://www.travent.ae/',
   },
 ];
 
 export const Experiences = () => {
-  const [showImage, setShowImage] = useState(false);
   return (
-    <div className="text-white flex flex-col items-center justify-center p-4">
-      <h1 className="text-5xl lg:text-7xl font-bold bg-gradient-to-r from-white via-blue-200 to-blue-400 bg-clip-text text-transparent my-11">
-        Professional Experience
-      </h1>
+    <div className="text-white flex flex-col items-center justify-center p-4 py-16">
+      {/* Section Header */}
+      <div className="text-center mb-16">
+        <h1 className="text-5xl lg:text-7xl font-bold bg-gradient-to-r from-white via-blue-200 to-blue-400 bg-clip-text text-transparent mb-4">
+          Professional Experience
+        </h1>
+        <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto rounded-full"></div>
+      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-11 ">
+      {/* Experience Cards Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-7xl w-full px-4">
         {prof_experience.map(exp => (
-          <div
-            className={`exp_card group relative bg-gray-700 border lg:w-[25vw] p-4 rounded-lg shadow-lg transition-all duration-300 hover:shadow-2xl hover:bg-gray-800 cursor-pointer `}
-            key={exp.id}>
-            {/* card header */}
-            <div className="-space-y-1 mb-4">
-              {/* title */}
-              <h1 className="text-2xl font-bold text-white  group-hover:text-blue-300 transition-colors">
-                {exp.title}
-              </h1>
-              <p className="text-blue-300 font-medium">
-                {exp.company} , {exp.location}
-              </p>
+          <div className="exp_card_wrapper" key={exp.id}>
+            <div className="exp_card group relative bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 p-6 rounded-xl shadow-xl transition-all duration-500 hover:shadow-2xl hover:border-blue-500/50 cursor-pointer overflow-visible">
+              {/* Gradient Overlay on Hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-purple-500/0 group-hover:from-blue-500/5 group-hover:to-purple-500/5 rounded-xl transition-all duration-500"></div>
 
-              <p>{exp.duration}</p>
-
-              <div>
-                {' '}
-                {exp.cirtificate_link && (
-                  <a
-                    href={exp.cirtificate_link}
-                    target="_blank"
-                    className="flex items-center gap-2">
-                    <span className="text-blue-300">Certificate</span>
-                    <Link size={15} />
-                  </a>
-                )}
-                {exp.company === 'SaralTech' ? (
-                  exp.websiteLink && (
-                    <a
-                      href={exp.websiteLink}
-                      target="_blank"
-                      className="flex items-center gap-2">
-                      <span className="text-blue-300">Live link</span>
-                      <Link size={15} />
-                    </a>
-                  )
-                ) : (
-                  <div className="flex flex-col ">
-                    <a
-                      href={exp.websiteLink}
-                      target="_blank"
-                      className="flex items-center gap-2 text-blue-300 hover:text-blue-400">
-                      <span className="font-medium">Live Link (New Version)</span>
-                      <Link size={15} />
-                    </a>
-
-                    <a
-                      href={exp.old_websiteLink}
-                      target="_blank"
-                      className="flex items-center gap-2 text-gray-300 hover:text-gray-400">
-                      <span className="font-medium">Old Version (Alternative Link)</span>
-                      <Link size={15} />
-                    </a>
-
-                    <p className="text-xs text-gray-400 mt-1 italic">
-                      *Note: New version may not be accessible for hold the project.
-                    </p>
+              {/* Card Content */}
+              <div className="relative z-10">
+                {/* Header Section */}
+                <div className="mb-6">
+                  <h2 className="text-2xl lg:text-3xl font-bold text-white mb-2 group-hover:text-blue-300 transition-colors duration-300">
+                    {exp.title}
+                  </h2>
+                  <div className="flex items-center gap-2 text-blue-400 font-semibold mb-1">
+                    <span>{exp.company}</span>
+                    <span className="text-gray-500">•</span>
+                    <span className="text-gray-300 font-normal">{exp.location}</span>
                   </div>
-                )}
-              </div>
-            </div>
-            <p className="text-gray-200 text-md leading-relaxed font-sans">
-              {exp.description}
-            </p>
+                  <p className="text-gray-400 text-sm font-medium">{exp.duration}</p>
+                </div>
 
-            {/* Hanging image that appears below card on hover */}
-            <div className="hanging_image absolute left-0 right-0 top-full mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300  transform group-hover:translate-y-0 -translate-y-2 z-10 ">
-              <div className="relative">
-                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-6 h-6 bg-gray-700 rotate-45"></div>
-                <img
-                  className="w-full max-h-64 object-contain border-2 border-blue-400 rounded-lg bg-gray-800 p-2"
-                  src={exp.image}
-                  alt={exp.company}
-                  width="400"
-                  height="400"
-                  loading="lazy"
-                />
+                {/* Description */}
+                <p className="text-gray-300 text-base leading-relaxed mb-6 font-sans">
+                  {exp.description}
+                </p>
+
+                {/* Technologies */}
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {exp.technologies.map((tech, index) => (
+                    <span
+                      key={index}
+                      className="px-3 py-1 bg-blue-500/10 border border-blue-500/30 text-blue-300 text-sm rounded-full font-medium hover:bg-blue-500/20 transition-colors duration-300">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Links Section */}
+                <div className="space-y-2 pt-4 border-t border-gray-700">
+                  {exp.certificate_link && (
+                    <a
+                      href={exp.certificate_link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors group/link">
+                      <ExternalLink
+                        size={16}
+                        className="group-hover/link:translate-x-1 transition-transform"
+                      />
+                      <span className="font-medium">View Certificate</span>
+                    </a>
+                  )}
+
+                  {exp.company === 'SaralTech' ? (
+                    exp.websiteLink && (
+                      <a
+                        href={exp.websiteLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors group/link">
+                        <ExternalLink
+                          size={16}
+                          className="group-hover/link:translate-x-1 transition-transform"
+                        />
+                        <span className="font-medium">Live Project</span>
+                      </a>
+                    )
+                  ) : (
+                    <div className="space-y-2">
+                      <a
+                        href={exp.websiteLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors group/link">
+                        <ExternalLink
+                          size={16}
+                          className="group-hover/link:translate-x-1 transition-transform"
+                        />
+                        <span className="font-medium">Live Project (New Version)</span>
+                      </a>
+
+                      <a
+                        href={exp.old_websiteLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-gray-400 hover:text-gray-300 transition-colors group/link">
+                        <ExternalLink
+                          size={16}
+                          className="group-hover/link:translate-x-1 transition-transform"
+                        />
+                        <span className="font-medium">Old Version</span>
+                      </a>
+
+                      <p className="text-xs text-gray-500 italic pl-6">
+                        *New version may not be accessible due to project hold
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Hover Image - Only shows when hovering the card */}
+              <div className="hanging_image">
+                <div className="image_container">
+                  {/* Connection Line */}
+                  <div className="connection_line"></div>
+
+                  {/* Image Card */}
+                  <div className="image_card">
+                    <img
+                      src={exp.image}
+                      alt={`${exp.company} project screenshot`}
+                      className="w-full h-full object-cover rounded-lg"
+                      loading="lazy"
+                    />
+                    <div className="image_overlay">
+                      <p className="text-white font-semibold text-lg">{exp.company}</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
