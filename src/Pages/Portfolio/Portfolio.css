@@ -1,0 +1,388 @@
+/* ==================== Best Projects Section ==================== */
+
+.best_project_wrapper {
+  position: relative;
+  animation: fadeInUp 0.8s ease-out backwards;
+}
+
+.best_project_wrapper:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.best_project_wrapper:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.best_project_card {
+  position: relative;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.best_project_card::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  background: linear-gradient(135deg, #fbbf24, #f59e0b, #ea580c);
+  border-radius: 1rem;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: -1;
+  filter: blur(15px);
+}
+
+.best_project_card:hover::before {
+  opacity: 0.4;
+}
+
+/* Project Image Animations */
+.project_image_container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.project_image_overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(17, 24, 39, 0.9) 0%,
+    rgba(17, 24, 39, 0.4) 50%,
+    transparent 100%
+  );
+  z-index: 5;
+}
+
+/* Image Hover Effect - Slow Scroll */
+.best_project_card:hover .project_image_container img {
+  animation: slowScroll 8s ease-in-out infinite;
+}
+
+@keyframes slowScroll {
+  0%, 100% {
+    object-position: center top;
+  }
+  50% {
+    object-position: center bottom;
+  }
+}
+
+/* ==================== Regular Project Cards ==================== */
+
+.project_card_wrapper {
+  animation: fadeInUp 0.6s ease-out backwards;
+}
+
+.project_card {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.project_card::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);
+  border-radius: 1rem;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: -1;
+  filter: blur(10px);
+}
+
+.project_card:hover::before {
+  opacity: 0.3;
+}
+
+.project_card:hover {
+  transform: translateY(-8px);
+}
+
+/* ==================== Global Animations ==================== */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Pulse Animation for Badges */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.best_project_card .flex.items-center.gap-1 {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* ==================== Responsive Design ==================== */
+
+@media (max-width: 1024px) {
+  .best_project_card {
+    margin-bottom: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .project_card_wrapper {
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* ==================== Hover Effects for Links ==================== */
+
+.project_card a,
+.best_project_card a {
+  position: relative;
+  overflow: hidden;
+}
+
+.project_card a::after,
+.best_project_card a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, #3b82f6, #8b5cf6);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+.project_card a:hover::after,
+.best_project_card a:hover::after {
+  transform: translateX(0);
+}
+
+/* ==================== Stagger Animation for Project Grid ==================== */
+
+.projects_grid .project_card_wrapper:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.projects_grid .project_card_wrapper:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.projects_grid .project_card_wrapper:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.projects_grid .project_card_wrapper:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.projects_grid .project_card_wrapper:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+.projects_grid .project_card_wrapper:nth-child(6) {
+  animation-delay: 0.6s;
+}
+
+/* ==================== Shimmer Effect on Hover ==================== */
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.best_project_card:hover,
+.project_card:hover {
+  position: relative;
+}
+
+.best_project_card:hover::after,
+.project_card:hover::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(59, 130, 246, 0.1),
+    transparent
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+  pointer-events: none;
+  z-index: 15;
+  border-radius: 1rem;
+}
+
+/* ==================== Technology Tags Animation ==================== */
+
+.best_project_card .flex.flex-wrap.gap-2 span,
+.project_card .flex.flex-wrap.gap-2 span {
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.best_project_card .flex.flex-wrap.gap-2 span:hover,
+.project_card .flex.flex-wrap.gap-2 span:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+/* ==================== Star Rating Animation ==================== */
+
+@keyframes starPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+.best_project_card .fill-yellow-400 {
+  animation: starPulse 2s ease-in-out infinite;
+}
+
+.best_project_card .fill-yellow-400:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.best_project_card .fill-yellow-400:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.best_project_card .fill-yellow-400:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.best_project_card .fill-yellow-400:nth-child(4) {
+  animation-delay: 0.6s;
+}
+
+.best_project_card .fill-yellow-400:nth-child(5) {
+  animation-delay: 0.8s;
+}
+
+/* ==================== Card Border Glow Animation ==================== */
+
+@keyframes borderGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3),
+                0 0 40px rgba(59, 130, 246, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.5),
+                0 0 60px rgba(59, 130, 246, 0.2);
+  }
+}
+
+.best_project_card:hover,
+.project_card:hover {
+  animation: borderGlow 2s ease-in-out infinite;
+}
+
+/* ==================== Floating Animation for Awards ==================== */
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.best_projects_section h2 svg {
+  animation: float 3s ease-in-out infinite;
+}
+
+.best_projects_section h2 svg:first-child {
+  animation-delay: 0s;
+}
+
+.best_projects_section h2 svg:last-child {
+  animation-delay: 0.5s;
+}
+
+/* ==================== Smooth Transitions ==================== */
+
+* {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==================== Image Zoom on Card Hover ==================== */
+
+.project_card:hover img,
+.best_project_card:hover img {
+  transform: scale(1.1) rotate(1deg);
+}
+
+/* ==================== Featured Badge Pulse ==================== */
+
+@keyframes badgePulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.7);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 8px rgba(168, 85, 247, 0);
+  }
+}
+
+.project_card .flex.items-center.gap-1 {
+  animation: badgePulse 2s ease-in-out infinite;
+}
+
+/* ==================== CTA Button Glow ==================== */
+
+@keyframes ctaGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.8);
+  }
+}
+
+a[href*="linkedin"]:hover {
+  animation: ctaGlow 1.5s ease-in-out infinite;
+}
+
+/* ==================== Loading State (Optional) ==================== */
+
+@keyframes skeleton {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.05) 25%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.05) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton 1.5s ease-in-out infinite;
+}
