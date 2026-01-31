@@ -38,9 +38,6 @@ const bestProjects = [
     github_server: 'https://github.com/ittarek/language-lerning-site-server',
     featured: true,
   },
-];
-
-const projectData = [
   {
     id: 2,
     title: 'News Website',
@@ -54,8 +51,12 @@ const projectData = [
     github_server: '',
     featured: false,
   },
+];
+
+const projectData = [
+
   {
-    id: 3,
+    id: 1,
     title: 'Chef Recipe Hunter',
     subtitle: 'Culinary Discovery Platform',
     description:
@@ -68,7 +69,7 @@ const projectData = [
     featured: true,
   },
   {
-    id: 4,
+    id: 2,
     title: 'Tech Toy Store',
     subtitle: 'E-commerce Platform',
     description:
