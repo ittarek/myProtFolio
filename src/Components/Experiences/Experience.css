@@ -1,51 +1,3 @@
-/* .hanging_image {
-    transform-origin: top center;
-    opacity: 0;
-    transform: translateY(-0.5rem);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-@keyframes hanging {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    15% {
-        transform: rotate(10deg);
-    }
-
-    30% {
-        transform: rotate(-10deg);
-    }
-
-    45% {
-        transform: rotate(8deg);
-    }
-
-    60% {
-        transform: rotate(-8deg);
-    }
-
-    75% {
-        transform: rotate(4deg);
-    }
-
-    90% {
-        transform: rotate(-4deg);
-    }
-
-    100% {
-        transform: rotate(0deg);
-    }
-}
-
-/* Animate only when parent is hovered */
-/* .group:hover .hanging_image {
-    animation: hanging 2.5s ease-in-out;
-    opacity: 1;
-    transform: translateY(0);
-}  */
-
 /* Experience Card Wrapper */
 .exp_card_wrapper {
     position: relative;
@@ -157,7 +109,34 @@
     opacity: 1;
 }
 
-/* Hanging/Swinging Animation */
+/* Hanging/Swinging Animation (Original + Enhanced) */
+@keyframes hanging {
+    0% {
+        transform: rotate(0deg);
+    }
+    15% {
+        transform: rotate(10deg);
+    }
+    30% {
+        transform: rotate(-10deg);
+    }
+    45% {
+        transform: rotate(8deg);
+    }
+    60% {
+        transform: rotate(-8deg);
+    }
+    75% {
+        transform: rotate(4deg);
+    }
+    90% {
+        transform: rotate(-4deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
 @keyframes swinging {
     0%, 100% {
         transform: rotate(0deg);
@@ -179,26 +158,6 @@
     }
 }
 
-/* Apply swinging animation only when card is hovered */
-.exp_card:hover .image_card {
-    animation: swinging 3s ease-in-out infinite;
-}
-
-/* Floating Animation for Image */
-@keyframes floating {
-    0%, 100% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-5px);
-    }
-}
-
-.exp_card:hover .image_card {
-    animation: swinging 3s ease-in-out infinite, 
-               floating 3s ease-in-out infinite;
-}
-
 /* Pulse Effect on Border */
 @keyframes pulse-border {
     0%, 100% {
@@ -211,9 +170,9 @@
     }
 }
 
+/* Apply hanging (left-right swing) and pulse animations when card is hovered */
 .exp_card:hover .image_card {
-    animation: swinging 3s ease-in-out infinite,
-               floating 3s ease-in-out infinite,
+    animation: hanging 2.5s ease-in-out infinite,
                pulse-border 2s ease-in-out infinite;
 }
 
