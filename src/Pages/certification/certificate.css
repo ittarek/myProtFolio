@@ -1,4 +1,4 @@
-.text {
+/* .text {
     font-size: 80px;
     letter-spacing: -.01em;
     line-height: 100%;
@@ -54,4 +54,377 @@ a {
 
     }
 
+} */
+
+/* ==================== Certificate Item Base Styles ==================== */
+
+.text {
+  font-size: clamp(32px, 5vw, 80px);
+  letter-spacing: -0.01em;
+  line-height: 110%;
+  margin: 0;
+  text-transform: uppercase;
+  width: 100%;
+  min-height: 120px;
+
+  /* Initial silver color - more vibrant */
+  color: rgba(220, 220, 220, 0.15);
+  background: linear-gradient(to right, #e8e8e8, #ffffff, #e8e8e8) no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-size: 0%;
+  transition: background-size cubic-bezier(0.1, 0.5, 0.5, 1) 0.5s;
+
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  padding: 2rem 1rem;
+}
+
+/* Glow effect on scroll */
+.text::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 50%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.text:hover::before {
+  opacity: 1;
+}
+
+/* ==================== Main Content ==================== */
+
+.main-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  transition: all 0.4s cubic-bezier(0.1, 0.5, 0.5, 1);
+}
+
+.icon-wrapper {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  transition: all 0.4s ease;
+}
+
+.cert-icon {
+  color: #b6b6b6;
+  transition: all 0.4s ease;
+}
+
+.text:hover .icon-wrapper {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: rotate(360deg) scale(1.1);
+}
+
+.text:hover .cert-icon {
+  color: #ffffff;
+}
+
+.cert-title {
+  font-size: clamp(20px, 3vw, 36px);
+  font-weight: 700;
+  color: #b6b6b6;
+  transition: color 0.4s ease;
+  letter-spacing: -0.02em;
+}
+
+.text:hover .cert-title {
+  color: #ffffff;
+}
+
+.institution-name {
+  font-size: clamp(14px, 2vw, 18px);
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 500;
+  transition: color 0.4s ease;
+}
+
+.text:hover .institution-name {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.chevron-icon {
+  color: rgba(255, 255, 255, 0.3);
+  transition: all 0.4s ease;
+}
+
+.text:hover .chevron-icon {
+  color: rgba(255, 255, 255, 0.8);
+  transform: translateX(5px);
+}
+
+/* ==================== Hover Overlay - LIGHT SILVER ==================== */
+
+.hover-overlay {
+  position: absolute;
+  inset: 0;
+
+  /* Light silver gradient */
+  background: linear-gradient(135deg, #e8e8e8 0%, #f5f5f5 50%, #ffffff 100%);
+
+  clip-path: polygon(0 50%, 100% 50%, 100% 50%, 0 50%);
+  transform-origin: center;
+  transition: all cubic-bezier(0.1, 0.5, 0.5, 1) 0.5s;
+
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+  z-index: 5;
+}
+
+/* Shimmer effect on hover overlay */
+.hover-overlay::before {
+  content: '';
+  position: absolute;
+  inset: -100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.text:hover .hover-overlay::before {
+  transform: translateX(100%);
+}
+
+.text:hover .hover-overlay {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+/* ==================== Hover Content ==================== */
+
+.hover-content {
+  position: relative;
+  z-index: 10;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s cubic-bezier(0.1, 0.5, 0.5, 1) 0.1s;
+}
+
+.text:hover .hover-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hover-description {
+  font-size: clamp(14px, 2vw, 20px);
+  color: rgba(0, 0, 0, 0.9);
+  font-weight: 600;
+  line-height: 1.4;
+  margin-top: 0.5rem;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+/* ==================== Animated Border ==================== */
+
+.animated-border {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(90deg, #d1d5db, #e5e7eb, #f3f4f6);
+  transition: width 0.5s cubic-bezier(0.1, 0.5, 0.5, 1);
+  z-index: 10;
+}
+
+.text:hover .animated-border {
+  width: 100%;
+}
+
+/* ==================== Pulse Animation on Hover ==================== */
+
+@keyframes pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 20px rgba(255, 255, 255, 0);
+  }
+}
+
+.text:hover {
+  animation: pulse 1.5s ease-in-out;
+}
+
+/* ==================== Glow Effect ==================== */
+
+@keyframes glow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+  }
+  50% {
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.6));
+  }
+}
+
+.text:hover .icon-wrapper {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* ==================== Fade In Animation ==================== */
+
+.certificate-item {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+/* Will be animated by GSAP */
+
+/* ==================== Responsive Design ==================== */
+
+@media screen and (max-width: 768px) {
+  .text {
+    min-height: 100px;
+    padding: 1.5rem 0.5rem;
+  }
+
+  .icon-wrapper {
+    width: 48px;
+    height: 48px;
+  }
+
+  .cert-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .hover-content {
+    padding: 0 1rem;
+  }
+
+  .hover-description {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .text {
+    min-height: 80px;
+    padding: 1rem 0.25rem;
+    font-size: 20px;
+  }
+
+  .icon-wrapper {
+    width: 40px;
+    height: 40px;
+  }
+
+  .cert-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .cert-title {
+    font-size: 16px;
+  }
+
+  .institution-name {
+    font-size: 12px;
+  }
+
+  .hover-description {
+    font-size: 12px;
+  }
+}
+
+/* ==================== Link Styles ==================== */
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ==================== Additional Hover Effects ==================== */
+
+/* Particle effect */
+@keyframes particle {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) scale(0);
+    opacity: 0;
+  }
+}
+
+.text::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.text:hover::after {
+  animation: particle 1s ease-out;
+}
+
+/* ==================== Gradient Text Animation on Scroll ==================== */
+
+.text.active {
+  background-size: 100% !important;
+}
+
+/* ==================== Stats Section Styling ==================== */
+
+.certificate .grid {
+  animation: fadeInUp 0.8s ease-out backwards;
+  animation-delay: 0.5s;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==================== Interactive Mouse Trail ==================== */
+
+.text {
+  isolation: isolate;
+}
+
+.text:hover {
+  transform: translateX(10px);
+}
+
+/* ==================== Smooth Transitions ==================== */
+
+* {
+  transition-timing-function: cubic-bezier(0.1, 0.5, 0.5, 1);
 }
