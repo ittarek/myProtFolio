@@ -1,32 +1,31 @@
-import "./Contact.css";
-import emailjs from "@emailjs/browser";
-import * as React from "react";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import { Link } from "react-router-dom";
-import XIcon from "@mui/icons-material/X";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
+import './Contact.css';
+import emailjs from '@emailjs/browser';
+import * as React from 'react';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import { Link } from 'react-router-dom';
+import XIcon from '@mui/icons-material/X';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 
 const Contact = () => {
+  const sendEmail = e => {
+    e.preventDefault();
+    let form = e.target;
 
-const sendEmail = e => {
-  e.preventDefault();
-  let form = e.target;
-
-  emailjs
-    .sendForm("service_nadywzt", "template_5b7cawx", form, "gwdOICZ7xweH2po52")
-    .then(
-      result => {
-        console.log(result.text);
-        alert("Message sent successfully!"); // Success feedback
-      },
-      error => {
-        console.log(error.text);
-        alert("Failed to send message, please try again."); // Error feedback
-      }
-    );
-};
+    emailjs
+      .sendForm('service_ybl1wkh', 'template_t59366v', form, 'gwdOICZ7xweH2po52')
+      .then(
+        result => {
+          console.log(result.text);
+          alert('Message sent successfully!'); // Success feedback
+        },
+        error => {
+          console.log(error.text);
+          alert('Failed to send message, please try again.'); // Error feedback
+        }
+      );
+  };
 
   return (
     <section className="contact  flex justify-center py-[50px]">
