@@ -101,7 +101,10 @@ const About = () => {
         {/* Header Section */}
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
-            About <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400">Me</span>
+            About{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400">
+              Me
+            </span>
           </h1>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 mx-auto rounded-full"></div>
         </div>
@@ -113,7 +116,7 @@ const About = () => {
             <div className="relative group">
               {/* Gradient Background */}
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all duration-500"></div>
-              
+
               {/* Image Container */}
               <div className="relative">
                 <div className="relative overflow-hidden rounded-3xl border-4 border-white/10 bg-gradient-to-br from-slate-800 to-slate-900 p-2">
@@ -121,8 +124,8 @@ const About = () => {
                     src={myImg}
                     className="w-full h-auto rounded-2xl object-cover transform group-hover:scale-105 transition-transform duration-500"
                     alt="Tariqul Islam - Frontend Developer"
-                    width="400"
-                    height="400"
+                    width={150}
+                    height={150}
                     loading="lazy"
                   />
                   {/* Overlay Gradient */}
@@ -144,7 +147,7 @@ const About = () => {
               <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
                 <span>📊</span> GitHub Activity
               </h3>
-              
+
               {/* GitHub Stats */}
               <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-xl border border-white/10 overflow-hidden">
                 <img
@@ -182,20 +185,33 @@ const About = () => {
             {/* Introduction */}
             <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-2xl border border-white/10 p-6 md:p-8">
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
-                I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Md Tariqul Islam</span>
+                I'm{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+                  Md Tariqul Islam
+                </span>
               </h2>
               <h3 className="text-xl md:text-2xl text-blue-300 mb-6 font-medium">
                 Frontend Developer | React.js & Next.js Specialist
               </h3>
-              
+
               <p className="text-gray-300 leading-relaxed text-base md:text-lg mb-6">
-                Frontend-focused Software Developer with <span className="text-blue-400 font-semibold">1+ year of professional experience</span> across India and the UAE. 
-                Specialized in building responsive, high-performance web applications using <span className="text-purple-400 font-semibold">React.js, Next.js, and the MERN stack</span>.
+                Frontend-focused Software Developer with{' '}
+                <span className="text-blue-400 font-semibold">
+                  1+ year of professional experience
+                </span>{' '}
+                across India and the UAE. Specialized in building responsive,
+                high-performance web applications using{' '}
+                <span className="text-purple-400 font-semibold">
+                  React.js, Next.js, and the MERN stack
+                </span>
+                .
               </p>
 
               <p className="text-gray-300 leading-relaxed text-base md:text-lg">
-                Strong expertise in component-based architecture, API integration, Redux state management, and modern UI/UX practices. 
-                Proven ability to collaborate in cross-functional teams and deliver clean, maintainable code that scales.
+                Strong expertise in component-based architecture, API integration, Redux
+                state management, and modern UI/UX practices. Proven ability to
+                collaborate in cross-functional teams and deliver clean, maintainable code
+                that scales.
               </p>
             </div>
 
@@ -208,7 +224,9 @@ const About = () => {
                 {highlights.map((highlight, index) => (
                   <div key={index} className="flex items-start gap-3 group">
                     <div className="flex-shrink-0 w-2 h-2 mt-2 rounded-full bg-gradient-to-r from-blue-400 to-purple-400 group-hover:scale-150 transition-transform duration-300"></div>
-                    <p className="text-gray-300 text-base md:text-lg group-hover:text-white transition-colors duration-300">{highlight}</p>
+                    <p className="text-gray-300 text-base md:text-lg group-hover:text-white transition-colors duration-300">
+                      {highlight}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -219,9 +237,10 @@ const About = () => {
               {stats.map((stat, index) => (
                 <div
                   key={index}
-                  className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-xl border border-white/10 p-6 text-center hover:scale-105 transition-transform duration-300 group"
-                >
-                  <div className="text-4xl mb-2 group-hover:scale-110 transition-transform duration-300">{stat.icon}</div>
+                  className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-xl border border-white/10 p-6 text-center hover:scale-105 transition-transform duration-300 group">
+                  <div className="text-4xl mb-2 group-hover:scale-110 transition-transform duration-300">
+                    {stat.icon}
+                  </div>
                   <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 mb-1">
                     {stat.value}
                   </div>
@@ -235,15 +254,17 @@ const About = () => {
         {/* Expertise Section */}
         <div className="mt-16">
           <h3 className="text-3xl md:text-4xl font-bold text-white text-center mb-12">
-            Technical <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Expertise</span>
+            Technical{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+              Expertise
+            </span>
           </h3>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {expertise.map((item, index) => (
               <div
                 key={index}
-                className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-2xl border border-white/10 p-6 hover:border-purple-500/50 transition-all duration-300 group"
-              >
+                className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-2xl border border-white/10 p-6 hover:border-purple-500/50 transition-all duration-300 group">
                 <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
                   {item.icon}
                 </div>
@@ -252,8 +273,7 @@ const About = () => {
                   {item.skills.map((skill, idx) => (
                     <div
                       key={idx}
-                      className="text-sm text-gray-400 hover:text-blue-400 transition-colors duration-200 flex items-center gap-2"
-                    >
+                      className="text-sm text-gray-400 hover:text-blue-400 transition-colors duration-200 flex items-center gap-2">
                       <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-blue-400 to-purple-400"></span>
                       {skill}
                     </div>
@@ -271,23 +291,23 @@ const About = () => {
               Let's Build Something Amazing Together
             </h3>
             <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
-              I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+              I'm always open to discussing new projects, creative ideas, or opportunities
+              to be part of your vision.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              
-               <a href="https://github.com/ittarek"
+              <a
+                href="https://github.com/ittarek"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-purple-500/50 transition-all duration-300 transform hover:-translate-y-1"
-              >
+                className="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-purple-500/50 transition-all duration-300 transform hover:-translate-y-1">
                 View GitHub
               </a>
-              
-              <a  href="https://www.linkedin.com/in/md-tariqul-islam-ab42b61a1/"
+
+              <a
+                href="https://www.linkedin.com/in/md-tariqul-islam-ab42b61a1/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-8 py-3 bg-slate-800 border border-white/10 text-white rounded-lg font-semibold hover:border-purple-500/50 transition-all duration-300 transform hover:-translate-y-1"
-              >
+                className="px-8 py-3 bg-slate-800 border border-white/10 text-white rounded-lg font-semibold hover:border-purple-500/50 transition-all duration-300 transform hover:-translate-y-1">
                 Connect on LinkedIn
               </a>
             </div>
