@@ -107,7 +107,7 @@ const Banner = () => {
                 className="w-full h-full object-cover object-center rounded-lg shadow-2xl
                            transform translate-z-0 will-change-transform"
                 alt="Tariqul Islam Portfolio"
-                loading="eager"
+                loading="lazy"
               />
             </div>
           </div>
