@@ -5,10 +5,10 @@ export const SectionHeader = ({ header, subTitle, shortTitle, section }) => {
   return (
     <div className="text-center mb-20">
       <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-600/10 to-purple-600/10 rounded-full border border-blue-500/20 mb-6">
-        {section == 'myProjects' &&  <Eye size={16} className="text-blue-400" />}
+        {section == 'myProjects' && <Eye size={16} className="text-blue-400" />}
         <span className="text-blue-400 font-medium">{shortTitle}</span>
       </div>
-      <div className="flex items-center justify-center gap-3 mb-12">
+      <div className="flex items-center justify-center gap-3 mb-2">
         {' '}
         {section == 'bestProjects' && <Award size={28} className="text-yellow-400" />}
         <h1

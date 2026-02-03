@@ -286,12 +286,6 @@ const ModernPortfolio = () => {
             cutting-edge technology and exceptional user experiences."
         />
         <div className="best_projects_section mb-24">
-          <div className="flex items-center justify-center gap-3 mb-12">
-            <Award size={28} className="text-yellow-400" />
-            <h2 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 bg-clip-text text-transparent"></h2>
-            <Award size={28} className="text-yellow-400" />
-          </div>
-
           <p className="text-center text-gray-400 text-lg mb-12 max-w-3xl mx-auto"></p>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
@@ -308,14 +302,10 @@ const ModernPortfolio = () => {
 
         {/* Other Projects Section */}
         <div className="mb-20">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-white via-blue-200 to-blue-400 bg-clip-text text-transparent mb-4">
-              Other Projects
-            </h2>
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              Explore more of my work demonstrating various skills and technologies.
-            </p>
-          </div>
+          <SectionHeader
+            header="Other Projects"
+            subTitle="Explore more of my work demonstrating various skills and technologies."
+          />
 
           <div className="projects_grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
             {projectData.map(project => (
