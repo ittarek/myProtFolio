@@ -272,25 +272,27 @@ const ModernPortfolio = () => {
         {/* Header Section */}
 
         <SectionHeader
-          header="          My Projects"
-          subTitle="    Explore my latest projects showcasing modern web development, innovative
+          section="myProjects"
+          header=" My Projects"
+          subTitle="Explore my latest projects showcasing modern web development, innovative
             solutions, and creative problem-solving."
           shortTitle="Portfolio Showcase "
         />
         {/* Best Projects Section */}
+        <SectionHeader
+          section="bestProjects"
+          header="Best Projects"
+          subTitle=" These are my most impactful and professionally developed projects, showcasing
+            cutting-edge technology and exceptional user experiences."
+        />
         <div className="best_projects_section mb-24">
           <div className="flex items-center justify-center gap-3 mb-12">
             <Award size={28} className="text-yellow-400" />
-            <h2 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 bg-clip-text text-transparent">
-              Best Projects
-            </h2>
+            <h2 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 bg-clip-text text-transparent"></h2>
             <Award size={28} className="text-yellow-400" />
           </div>
 
-          <p className="text-center text-gray-400 text-lg mb-12 max-w-3xl mx-auto">
-            These are my most impactful and professionally developed projects, showcasing
-            cutting-edge technology and exceptional user experiences.
-          </p>
+          <p className="text-center text-gray-400 text-lg mb-12 max-w-3xl mx-auto"></p>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
             {bestProjects.map(project => (
