@@ -1,8 +1,8 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet-async'; // For SEO
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ExternalLink, Github, ArrowRight, Sparkles } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import Container from '../../Components/Container';
 import './Portfolio.css';
 
@@ -11,8 +11,6 @@ import ProtFolio1 from '../../../src/assets/protfolio-image/1assignment-1.png';
 import protFolio2 from '../../assets/protfolio-image/2assignment-2.png';
 import protFolio3 from '../../assets/protfolio-image/3assignment-3.png';
 import protFolioNews from '../../assets/protfolio-image/nextJs.jpg';
-import saralTech from '../../assets/protfolio-image/saralTech.png';
-import travent from '../../assets/protfolio-image/travent.png';
 import { BestProjectCard } from './BestProjectCard';
 import { SectionHeader } from '../../Components/Shared/SectionHeader';
 import { ProjectCard } from './ProjectCard';
