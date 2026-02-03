@@ -1,15 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
+import { Helmet } from 'react-helmet-async'; // For SEO
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import {
-  ExternalLink,
-  Github,
-  Eye,
-  ArrowRight,
-  Sparkles,
-  Award,
-  Star,
-} from 'lucide-react';
+import { ExternalLink, Github, ArrowRight, Sparkles } from 'lucide-react';
 import Container from '../../Components/Container';
 import './Portfolio.css';
 
@@ -129,10 +122,12 @@ const ProjectCard = ({ project }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div
+    <article
       className="project_card_wrapper group"
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}>
+      onMouseLeave={() => setIsHovered(false)}
+      itemScope
+      itemType="https://schema.org/CreativeWork">
       <div className="project_card relative overflow-hidden rounded-2xl bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 shadow-xl transition-all duration-500 hover:shadow-2xl hover:border-blue-500/50">
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-purple-500/0 group-hover:from-blue-500/5 group-hover:to-purple-500/5 transition-all duration-500 z-10"></div>
@@ -151,18 +146,26 @@ const ProjectCard = ({ project }) => {
         <div className="relative h-48 overflow-hidden">
           <img
             src={project.image}
-            alt={project.title}
+            alt={`${project.title} - ${project.subtitle}`}
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            loading="lazy"
+            width="400"
+            height="192"
+            itemProp="image"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
         </div>
 
         {/* Content */}
         <div className="relative z-10 p-6">
-          <h3 className="text-xl font-bold text-white mb-1 group-hover:text-blue-300 transition-colors">
+          <h3
+            className="text-xl font-bold text-white mb-1 group-hover:text-blue-300 transition-colors"
+            itemProp="name">
             {project.title}
           </h3>
-          <p className="text-gray-400 text-sm mb-4">{project.subtitle}</p>
+          <p className="text-gray-400 text-sm mb-4" itemProp="description">
+            {project.subtitle}
+          </p>
 
           {/* Description - Shows on hover */}
           <div
@@ -177,7 +180,8 @@ const ProjectCard = ({ project }) => {
             {project.tags.slice(0, 3).map((tech, index) => (
               <span
                 key={index}
-                className="px-2 py-1 bg-blue-500/10 border border-blue-500/30 text-blue-300 text-xs rounded-full font-medium">
+                className="px-2 py-1 bg-blue-500/10 border border-blue-500/30 text-blue-300 text-xs rounded-full font-medium"
+                itemProp="keywords">
                 {tech}
               </span>
             ))}
@@ -208,157 +212,225 @@ const ProjectCard = ({ project }) => {
         {/* Hover Border */}
         <div className="absolute inset-0 border-2 border-transparent group-hover:border-blue-400/50 rounded-2xl transition-all duration-500"></div>
       </div>
-    </div>
+    </article>
   );
 };
 
-const ModernPortfolio = () => {
+const Portfolio = () => {
+  const bestProjectsRef = useRef(null);
+  const projectsGridRef = useRef(null);
+  const statsRef = useRef(null);
+  const ctaRef = useRef(null);
+
   useEffect(() => {
-    ScrollTrigger.refresh();
+    // Kill all existing ScrollTriggers first
+    ScrollTrigger.getAll().forEach(trigger => trigger.kill());
 
-    // Animate best projects on scroll
-    gsap.fromTo(
-      '.best_project_wrapper',
-      {
-        y: 100,
-        opacity: 0,
-        scale: 0.95,
-      },
-      {
-        y: 0,
-        opacity: 1,
-        scale: 1,
-        duration: 1,
-        stagger: 0.3,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.best_projects_section',
-          start: 'top 80%',
-          end: 'bottom 20%',
-          toggleActions: 'play none none reverse',
-        },
+    // Create GSAP context for cleanup
+    const ctx = gsap.context(() => {
+      // Animate best projects on scroll
+      if (bestProjectsRef.current) {
+        gsap.fromTo(
+          '.best_project_wrapper',
+          {
+            y: 100,
+            opacity: 0,
+            scale: 0.95,
+          },
+          {
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 1,
+            stagger: 0.3,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: bestProjectsRef.current,
+              start: 'top 80%',
+              end: 'bottom 20%',
+              toggleActions: 'play none none reverse',
+            },
+          }
+        );
       }
-    );
 
-    // Animate regular projects
-    gsap.fromTo(
-      '.project_card_wrapper',
-      {
-        y: 80,
-        opacity: 0,
-      },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: '.projects_grid',
-          start: 'top 80%',
-          toggleActions: 'play none none reverse',
-        },
+      // Animate regular projects
+      if (projectsGridRef.current) {
+        gsap.fromTo(
+          '.project_card_wrapper',
+          {
+            y: 80,
+            opacity: 0,
+          },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: projectsGridRef.current,
+              start: 'top 80%',
+              toggleActions: 'play none none reverse',
+            },
+          }
+        );
       }
-    );
+
+      // Animate stats section
+      if (statsRef.current) {
+        gsap.from(statsRef.current.children, {
+          opacity: 0,
+          y: 30,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: statsRef.current,
+            start: 'top 85%',
+          },
+        });
+      }
+
+      // Animate CTA section
+      if (ctaRef.current) {
+        gsap.from(ctaRef.current, {
+          opacity: 0,
+          y: 50,
+          duration: 0.8,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: ctaRef.current,
+            start: 'top 85%',
+          },
+        });
+      }
+    });
 
     return () => {
+      ctx.revert();
       ScrollTrigger.getAll().forEach(t => t.kill());
     };
   }, []);
 
   return (
-    <Container>
-      <main className="py-20 bg-black min-h-screen">
-        {/* Header Section */}
-
-        <SectionHeader
-          section="myProjects"
-          header=" My Projects"
-          subTitle="Explore my latest projects showcasing modern web development, innovative
-            solutions, and creative problem-solving."
-          shortTitle="Portfolio Showcase "
+    <>
+      {/* SEO Meta Tags */}
+      <Helmet>
+        <title>Portfolio - Md Tariqul Islam | React & Next.js Developer</title>
+        <meta
+          name="description"
+          content="Explore my portfolio of web development projects including React.js, Next.js, and full-stack applications. View live demos and source code."
         />
-        {/* Best Projects Section */}
-        <SectionHeader
-          section="bestProjects"
-          header="Best Projects"
-          subTitle=" These are my most impactful and professionally developed projects, showcasing
-            cutting-edge technology and exceptional user experiences."
+        <meta
+          name="keywords"
+          content="React developer portfolio, Next.js projects, web development, frontend developer, MERN stack, Md Tariqul Islam"
         />
-        <div className="best_projects_section mb-24">
-          <p className="text-center text-gray-400 text-lg mb-12 max-w-3xl mx-auto"></p>
+        <meta property="og:title" content="Portfolio - Md Tariqul Islam" />
+        <meta
+          property="og:description"
+          content="Explore my portfolio of web development projects including React.js, Next.js, and full-stack applications."
+        />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://yourwebsite.com/portfolio" />
+      </Helmet>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
-            {bestProjects.map(project => (
-              <BestProjectCard
-                key={project.id}
-                project={project}
-                ActionButton={ActionButton}
-                ExternalLink={ExternalLink}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Other Projects Section */}
-        <div className="mb-20">
+      <Container>
+        <main className="py-20 bg-black min-h-screen">
+          {/* Header Section */}
           <SectionHeader
-            header="Other Projects"
-            subTitle="Explore more of my work demonstrating various skills and technologies."
+            section="myProjects"
+            header="My Projects"
+            subTitle="Explore my latest projects showcasing modern web development, innovative solutions, and creative problem-solving."
+            shortTitle="Portfolio Showcase"
           />
 
-          <div className="projects_grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-            {projectData.map(project => (
-              <ProjectCard key={project.id} project={project} />
-            ))}
-          </div>
-        </div>
+          {/* Best Projects Section */}
+          <section ref={bestProjectsRef} className="best_projects_section mb-24">
+            <SectionHeader
+              section="bestProjects"
+              header="Best Projects"
+              subTitle="These are my most impactful and professionally developed projects, showcasing cutting-edge technology and exceptional user experiences."
+            />
 
-        {/* Stats Section */}
-        <div className="mt-24 pt-16 border-t border-gray-800">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div className="space-y-2">
-              <div className="text-3xl font-bold text-white">
-                {projectData.length + bestProjects.length}+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
+              {bestProjects.map(project => (
+                <BestProjectCard
+                  key={project.id}
+                  project={project}
+                  ActionButton={ActionButton}
+                  ExternalLink={ExternalLink}
+                />
+              ))}
+            </div>
+          </section>
+
+          {/* Other Projects Section */}
+          <section ref={projectsGridRef} className="mb-20">
+            <SectionHeader
+              header="Other Projects"
+              subTitle="Explore more of my work demonstrating various skills and technologies."
+            />
+
+            <div className="projects_grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+              {projectData.map(project => (
+                <ProjectCard key={project.id} project={project} />
+              ))}
+            </div>
+          </section>
+
+          {/* Stats Section */}
+          <section className="mt-24 pt-16 border-t border-gray-800">
+            <div
+              ref={statsRef}
+              className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+              <div className="space-y-2">
+                <div className="text-3xl font-bold text-white">
+                  {projectData.length + bestProjects.length}+
+                </div>
+                <div className="text-gray-400">Projects Completed</div>
               </div>
-              <div className="text-gray-400">Projects Completed</div>
+              <div className="space-y-2">
+                <div className="text-3xl font-bold text-white">2+</div>
+                <div className="text-gray-400">Years Experience</div>
+              </div>
+              <div className="space-y-2">
+                <div className="text-3xl font-bold text-white">10+</div>
+                <div className="text-gray-400">Technologies Used</div>
+              </div>
+              <div className="space-y-2">
+                <div className="text-3xl font-bold text-white">100%</div>
+                <div className="text-gray-400">Client Satisfaction</div>
+              </div>
             </div>
-            <div className="space-y-2">
-              <div className="text-3xl font-bold text-white">2+</div>
-              <div className="text-gray-400">Years Experience</div>
-            </div>
-            <div className="space-y-2">
-              <div className="text-3xl font-bold text-white">10+</div>
-              <div className="text-gray-400">Technologies Used</div>
-            </div>
-            <div className="space-y-2">
-              <div className="text-3xl font-bold text-white">100%</div>
-              <div className="text-gray-400">Client Satisfaction</div>
-            </div>
-          </div>
-        </div>
+          </section>
 
-        {/* CTA Section */}
-        <div className="mt-24 text-center">
-          <div className="bg-gradient-to-r from-blue-600/10 to-purple-600/10 rounded-3xl border border-blue-500/20 p-12 max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-white mb-4">Ready to Work With Me?</h2>
-            <p className="text-gray-400 mb-8 max-w-md mx-auto">
-              Let's create something amazing together. Get in touch to discuss your next
-              project.
-            </p>
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://www.linkedin.com/in/md-tariqul-islam-ab42b61a1/"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
-              <span>Get In Touch</span>
-              <ArrowRight size={20} />
-            </a>
-          </div>
-        </div>
-      </main>
-    </Container>
+          {/* CTA Section */}
+          <section className="mt-24 text-center">
+            <div
+              ref={ctaRef}
+              className="bg-gradient-to-r from-blue-600/10 to-purple-600/10 rounded-3xl border border-blue-500/20 p-12 max-w-4xl mx-auto">
+              <h2 className="text-3xl font-bold text-white mb-4">
+                Ready to Work With Me?
+              </h2>
+              <p className="text-gray-400 mb-8 max-w-md mx-auto">
+                Let's create something amazing together. Get in touch to discuss your next
+                project.
+              </p>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://www.linkedin.com/in/md-tariqul-islam-ab42b61a1/"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                <span>Get In Touch</span>
+                <ArrowRight size={20} />
+              </a>
+            </div>
+          </section>
+        </main>
+      </Container>
+    </>
   );
 };
 
-export default ModernPortfolio;
+export default Portfolio;
