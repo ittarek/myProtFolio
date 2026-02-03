@@ -16,6 +16,7 @@
     "@mui/icons-material": "^5.15.13",
     "@mui/material": "^5.15.0",
     "@studio-freight/lenis": "^1.0.29",
+    "framer-motion": "^12.30.0",
     "gsap": "^3.12.5",
     "hamburger-react": "^2.5.0",
     "localforage": "^1.10.0",
