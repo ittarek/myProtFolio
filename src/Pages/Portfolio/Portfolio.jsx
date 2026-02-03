@@ -15,6 +15,9 @@ import saralTech from '../../assets/protfolio-image/saralTech.png';
 import travent from '../../assets/protfolio-image/travent.png';
 import { BestProjectCard } from './BestProjectCard';
 import { SectionHeader } from '../../Components/Shared/SectionHeader';
+import { ProjectCard } from './ProjectCard';
+import { StatsSection } from './StatsSection';
+import { CTASection } from './CTASection';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -118,103 +121,6 @@ const ActionButton = ({
 };
 
 // Regular Project Card Component
-const ProjectCard = ({ project }) => {
-  const [isHovered, setIsHovered] = useState(false);
-
-  return (
-    <article
-      className="project_card_wrapper group"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      itemScope
-      itemType="https://schema.org/CreativeWork">
-      <div className="project_card relative overflow-hidden rounded-2xl bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 shadow-xl transition-all duration-500 hover:shadow-2xl hover:border-blue-500/50">
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-purple-500/0 group-hover:from-blue-500/5 group-hover:to-purple-500/5 transition-all duration-500 z-10"></div>
-
-        {/* Featured Badge */}
-        {project.featured && (
-          <div className="absolute top-3 right-3 z-20">
-            <div className="flex items-center gap-1 px-3 py-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-xs font-bold text-white">
-              <Sparkles size={12} />
-              Featured
-            </div>
-          </div>
-        )}
-
-        {/* Image */}
-        <div className="relative h-48 overflow-hidden">
-          <img
-            src={project.image}
-            alt={`${project.title} - ${project.subtitle}`}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-            loading="lazy"
-            width="400"
-            height="192"
-            itemProp="image"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
-        </div>
-
-        {/* Content */}
-        <div className="relative z-10 p-6">
-          <h3
-            className="text-xl font-bold text-white mb-1 group-hover:text-blue-300 transition-colors"
-            itemProp="name">
-            {project.title}
-          </h3>
-          <p className="text-gray-400 text-sm mb-4" itemProp="description">
-            {project.subtitle}
-          </p>
-
-          {/* Description - Shows on hover */}
-          <div
-            className={`transition-all duration-500 mb-4 ${
-              isHovered ? 'opacity-100 max-h-40' : 'opacity-0 max-h-0'
-            } overflow-hidden`}>
-            <p className="text-gray-300 text-sm leading-relaxed">{project.description}</p>
-          </div>
-
-          {/* Technologies */}
-          <div className="flex flex-wrap gap-2 mb-4">
-            {project.tags.slice(0, 3).map((tech, index) => (
-              <span
-                key={index}
-                className="px-2 py-1 bg-blue-500/10 border border-blue-500/30 text-blue-300 text-xs rounded-full font-medium"
-                itemProp="keywords">
-                {tech}
-              </span>
-            ))}
-            {project.tags.length > 3 && (
-              <span className="px-2 py-1 bg-gray-700 text-gray-300 text-xs rounded-full font-medium">
-                +{project.tags.length - 3}
-              </span>
-            )}
-          </div>
-
-          {/* Actions */}
-          <div className="flex flex-wrap gap-2">
-            <ActionButton href={project.live_link} icon={ExternalLink} variant="primary">
-              Live Demo
-            </ActionButton>
-
-            {project.github_client && (
-              <ActionButton
-                href={project.github_client}
-                icon={Github}
-                variant="secondary">
-                Code
-              </ActionButton>
-            )}
-          </div>
-        </div>
-
-        {/* Hover Border */}
-        <div className="absolute inset-0 border-2 border-transparent group-hover:border-blue-400/50 rounded-2xl transition-all duration-500"></div>
-      </div>
-    </article>
-  );
-};
 
 const Portfolio = () => {
   const bestProjectsRef = useRef(null);
@@ -332,7 +238,7 @@ const Portfolio = () => {
           content="Explore my portfolio of web development projects including React.js, Next.js, and full-stack applications."
         />
         <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://yourwebsite.com/portfolio" />
+        <link rel="canonical" href="https://tareq.netlify.app/myProtFolio" />
       </Helmet>
 
       <Container>
@@ -374,59 +280,25 @@ const Portfolio = () => {
 
             <div className="projects_grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
               {projectData.map(project => (
-                <ProjectCard key={project.id} project={project} />
+                <ProjectCard
+                  key={project.id}
+                  project={project}
+                  ActionButton={ActionButton}
+                  ExternalLink={ExternalLink}
+                />
               ))}
             </div>
           </section>
 
           {/* Stats Section */}
-          <section className="mt-24 pt-16 border-t border-gray-800">
-            <div
-              ref={statsRef}
-              className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-              <div className="space-y-2">
-                <div className="text-3xl font-bold text-white">
-                  {projectData.length + bestProjects.length}+
-                </div>
-                <div className="text-gray-400">Projects Completed</div>
-              </div>
-              <div className="space-y-2">
-                <div className="text-3xl font-bold text-white">2+</div>
-                <div className="text-gray-400">Years Experience</div>
-              </div>
-              <div className="space-y-2">
-                <div className="text-3xl font-bold text-white">10+</div>
-                <div className="text-gray-400">Technologies Used</div>
-              </div>
-              <div className="space-y-2">
-                <div className="text-3xl font-bold text-white">100%</div>
-                <div className="text-gray-400">Client Satisfaction</div>
-              </div>
-            </div>
-          </section>
+          <StatsSection
+            projectData={projectData}
+            statsRef={statsRef}
+            bestProjects={bestProjects}
+          />
 
           {/* CTA Section */}
-          <section className="mt-24 text-center">
-            <div
-              ref={ctaRef}
-              className="bg-gradient-to-r from-blue-600/10 to-purple-600/10 rounded-3xl border border-blue-500/20 p-12 max-w-4xl mx-auto">
-              <h2 className="text-3xl font-bold text-white mb-4">
-                Ready to Work With Me?
-              </h2>
-              <p className="text-gray-400 mb-8 max-w-md mx-auto">
-                Let's create something amazing together. Get in touch to discuss your next
-                project.
-              </p>
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://www.linkedin.com/in/md-tariqul-islam-ab42b61a1/"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
-                <span>Get In Touch</span>
-                <ArrowRight size={20} />
-              </a>
-            </div>
-          </section>
+          <CTASection ctaRef={ctaRef} />
         </main>
       </Container>
     </>
