@@ -1,11 +1,12 @@
 import { Github, Sparkles } from 'lucide-react';
 import { useState } from 'react';
 
-export const ProjectCard = ({ key, project, ActionButton, ExternalLink }) => {
+export const ProjectCard = ({  project, ActionButton, ExternalLink }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
     <article
+
       className="project_card_wrapper group"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}

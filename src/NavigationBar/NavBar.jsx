@@ -70,6 +70,7 @@ const NavBar = () => {
               isOpen={isOpen}
               onStateChange={handleStateChange}
               customBurgerIcon={false}
+
               className="bg-slate-800/95 backdrop-blur-md"
               overlayClassName="fixed inset-0 bg-black/50">
               <nav className="text-white p-4" aria-label="Mobile navigation">
