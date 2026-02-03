@@ -21,6 +21,7 @@ import protFolioNews from '../../assets/protfolio-image/nextJs.jpg';
 import saralTech from '../../assets/protfolio-image/saralTech.png';
 import travent from '../../assets/protfolio-image/travent.png';
 import { BestProjectCard } from './BestProjectCard';
+import { SectionHeader } from '../../Components/Shared/SectionHeader';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -54,7 +55,6 @@ const bestProjects = [
 ];
 
 const projectData = [
-
   {
     id: 1,
     title: 'Chef Recipe Hunter',
@@ -270,22 +270,13 @@ const ModernPortfolio = () => {
     <Container>
       <main className="py-20 bg-black min-h-screen">
         {/* Header Section */}
-        <div className="text-center mb-20">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-600/10 to-purple-600/10 rounded-full border border-blue-500/20 mb-6">
-            <Eye size={16} className="text-blue-400" />
-            <span className="text-blue-400 font-medium">Portfolio Showcase</span>
-          </div>
 
-          <h1 className="text-5xl lg:text-7xl font-bold bg-gradient-to-r from-white via-blue-200 to-blue-400 bg-clip-text text-transparent mb-6">
-            My Projects
-          </h1>
-
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
-            Explore my latest projects showcasing modern web development, innovative
-            solutions, and creative problem-solving.
-          </p>
-        </div>
-
+        <SectionHeader
+          header="          My Projects"
+          subTitle="    Explore my latest projects showcasing modern web development, innovative
+            solutions, and creative problem-solving."
+          shortTitle="Portfolio Showcase "
+        />
         {/* Best Projects Section */}
         <div className="best_projects_section mb-24">
           <div className="flex items-center justify-center gap-3 mb-12">
