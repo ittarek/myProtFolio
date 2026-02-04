@@ -1,0 +1,101 @@
+/* ==================== 3D Perspective Container ==================== */
+
+.perspective-container {
+  perspective: 2000px;
+  perspective-origin: center center;
+}
+
+/* ==================== Recommendation Card 3D Styles ==================== */
+
+.recommendation-card {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+/* Add subtle shadow to create depth */
+.recommendation-card > div {
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    0 0 100px rgba(59, 130, 246, 0.1);
+}
+
+/* Hover effect for the card */
+.recommendation-card:hover > div {
+  box-shadow: 
+    0 25px 80px rgba(0, 0, 0, 0.6),
+    0 0 120px rgba(59, 130, 246, 0.15);
+}
+
+/* ==================== Page Flip Effect ==================== */
+
+/* Add subtle gradient on the side during flip */
+.recommendation-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 20px;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.3),
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+/* ==================== Smooth Transitions ==================== */
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==================== Custom Scrollbar (Optional) ==================== */
+
+.recommendation-card::-webkit-scrollbar {
+  width: 8px;
+}
+
+.recommendation-card::-webkit-scrollbar-track {
+  background: rgba(31, 41, 55, 0.5);
+  border-radius: 10px;
+}
+
+.recommendation-card::-webkit-scrollbar-thumb {
+  background: rgba(59, 130, 246, 0.5);
+  border-radius: 10px;
+}
+
+.recommendation-card::-webkit-scrollbar-thumb:hover {
+  background: rgba(59, 130, 246, 0.7);
+}
+
+/* ==================== Animation Performance ==================== */
+
+.recommendation-card {
+  will-change: transform, opacity;
+}
+
+/* Disable transitions during page load for better performance */
+.recommendation-card.no-transition {
+  transition: none !important;
+}
+
+/* ==================== Responsive Adjustments ==================== */
+
+@media (max-width: 768px) {
+  .perspective-container {
+    perspective: 1000px;
+  }
+}
+
+/* ==================== Print Styles ==================== */
+
+@media print {
+  .recommendation-card {
+    transform: none !important;
+    page-break-inside: avoid;
+  }
+}
