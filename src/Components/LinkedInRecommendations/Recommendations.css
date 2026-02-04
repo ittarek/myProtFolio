@@ -1,101 +1,260 @@
-/* ==================== 3D Perspective Container ==================== */
+/* ==================== Stacking Recommendations Styles ==================== */
 
-.perspective-container {
-  perspective: 2000px;
-  perspective-origin: center center;
+.stacking-recommendations {
+  width: 100%;
+  min-height: 100vh;
+  padding: 0;
+  background: #000;
+  color: white;
 }
 
-/* ==================== Recommendation Card 3D Styles ==================== */
+/* ==================== Cards Container ==================== */
 
-.recommendation-card {
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
+.cards {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-rows: repeat(var(--cards-count), var(--card-height));
+  gap: 40px 0;
 }
 
-/* Add subtle shadow to create depth */
-.recommendation-card > div {
-  box-shadow: 
-    0 20px 60px rgba(0, 0, 0, 0.5),
-    0 0 100px rgba(59, 130, 246, 0.1);
-}
+/* ==================== Individual Card ==================== */
 
-/* Hover effect for the card */
-.recommendation-card:hover > div {
-  box-shadow: 
-    0 25px 80px rgba(0, 0, 0, 0.6),
-    0 0 120px rgba(59, 130, 246, 0.15);
-}
-
-/* ==================== Page Flip Effect ==================== */
-
-/* Add subtle gradient on the side during flip */
-.recommendation-card::before {
-  content: '';
-  position: absolute;
+.card {
+  position: sticky;
   top: 0;
-  bottom: 0;
-  width: 20px;
-  background: linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0.3),
-    transparent
-  );
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
+  padding-top: 0; /* Will be set dynamically via JS */
 }
 
-/* ==================== Smooth Transitions ==================== */
+/* ==================== Card Inner Container ==================== */
 
-* {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.card__inner {
+  will-change: transform, filter;
+  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+  border-radius: 24px;
+  display: flex;
+  overflow: hidden;
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(59, 130, 246, 0.1);
+  transform-origin: center top;
+  transition: transform 0.1s ease-out, filter 0.1s ease-out;
+  border: 2px solid rgba(55, 65, 81, 0.5);
+  min-height: 500px;
 }
 
-/* ==================== Custom Scrollbar (Optional) ==================== */
+/* ==================== Image Container ==================== */
 
-.recommendation-card::-webkit-scrollbar {
-  width: 8px;
+.card__image-container {
+  position: relative;
+  display: flex;
+  width: 40%;
+  flex-shrink: 0;
+  overflow: hidden;
 }
 
-.recommendation-card::-webkit-scrollbar-track {
-  background: rgba(31, 41, 55, 0.5);
+.card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 1;
+}
+
+/* ==================== Content Section ==================== */
+
+.card__content {
+  position: relative;
+  padding: 40px 35px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background: linear-gradient(135deg, rgba(31, 41, 55, 0.8) 0%, rgba(17, 24, 39, 0.9) 100%);
+}
+
+.card__name {
+  font-size: 28px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.card__description-wrapper {
+  flex: 1;
+  overflow-y: auto;
+  margin: 20px 0;
+  padding-right: 10px;
+}
+
+.card__description {
+  line-height: 1.7;
+  font-size: 18px;
+  color: #d1d5db;
+  margin: 0;
+}
+
+/* Custom Scrollbar */
+.card__description-wrapper::-webkit-scrollbar {
+  width: 6px;
+}
+
+.card__description-wrapper::-webkit-scrollbar-track {
+  background: rgba(55, 65, 81, 0.3);
   border-radius: 10px;
 }
 
-.recommendation-card::-webkit-scrollbar-thumb {
+.card__description-wrapper::-webkit-scrollbar-thumb {
   background: rgba(59, 130, 246, 0.5);
   border-radius: 10px;
 }
 
-.recommendation-card::-webkit-scrollbar-thumb:hover {
+.card__description-wrapper::-webkit-scrollbar-thumb:hover {
   background: rgba(59, 130, 246, 0.7);
+}
+
+/* ==================== Spacing Sections ==================== */
+
+.space {
+  height: 90vh;
+}
+
+.space--small {
+  height: 40vh;
+}
+
+/* ==================== Hover Effects ==================== */
+
+.card__inner:hover {
+  border-color: rgba(59, 130, 246, 0.5);
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(59, 130, 246, 0.3),
+    0 0 40px rgba(59, 130, 246, 0.1);
+}
+
+/* ==================== Responsive Design ==================== */
+
+@media (max-width: 768px) {
+  .card__inner {
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  .card__image-container {
+    width: 100%;
+    height: 250px;
+  }
+
+  .card__image {
+    aspect-ratio: 16 / 9;
+  }
+
+  .card__name {
+    font-size: 24px;
+  }
+
+  .card__description {
+    font-size: 16px;
+  }
+
+  .card__content {
+    padding: 30px 20px;
+  }
+
+  .space {
+    height: 60vh;
+  }
+
+  .space--small {
+    height: 20vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .cards {
+    padding: 0 16px;
+  }
+
+  .card__inner {
+    border-radius: 16px;
+  }
+
+  .card__image-container {
+    height: 200px;
+  }
+
+  .card__name {
+    font-size: 20px;
+  }
+
+  .card__description {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .card__content {
+    padding: 24px 16px;
+  }
 }
 
 /* ==================== Animation Performance ==================== */
 
-.recommendation-card {
-  will-change: transform, opacity;
-}
-
-/* Disable transitions during page load for better performance */
-.recommendation-card.no-transition {
-  transition: none !important;
-}
-
-/* ==================== Responsive Adjustments ==================== */
-
-@media (max-width: 768px) {
-  .perspective-container {
-    perspective: 1000px;
-  }
+.card__inner {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
 
 /* ==================== Print Styles ==================== */
 
 @media print {
-  .recommendation-card {
-    transform: none !important;
+  .card {
+    position: relative !important;
     page-break-inside: avoid;
+  }
+
+  .card__inner {
+    transform: none !important;
+    filter: none !important;
+  }
+
+  .space,
+  .space--small {
+    height: 0 !important;
+  }
+}
+
+/* ==================== Accessibility ==================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .card__inner {
+    transition: none;
+  }
+}
+
+/* ==================== Dark Mode Support ==================== */
+
+@media (prefers-color-scheme: light) {
+  .stacking-recommendations {
+    background: #f9fafb;
+  }
+
+  .card__inner {
+    background: linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%);
+  }
+
+  .card__content {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(243, 244, 246, 0.95) 100%);
+  }
+
+  .card__name {
+    color: #111827;
+  }
+
+  .card__description {
+    color: #374151;
   }
 }
