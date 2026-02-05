@@ -147,120 +147,73 @@ export const LinkedInRecommendations = () => {
   const valueAtPercentage = (from, to, percentage) => {
     return from + (to - from) * percentage;
   };
+  //  =================================== another style
+  // This was built using aat.js: https://github.com/TahaSh/aat
+
 
   return (
     <>
- <div className="stacking-recommendations bg-black">
-      {/* Top Spacing */}
-      <div className="space space--small"></div>
-
-      {/* Header */}
-      <div className="text-center mb-16 px-4">
-        <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-600/10 to-purple-600/10 rounded-full border border-blue-500/20 mb-6">
-          <Linkedin size={16} className="text-blue-400" />
-          <span className="text-blue-400 font-medium">LinkedIn Recommendations</span>
-        </div>
-
-        <h2 className="text-5xl lg:text-7xl font-bold bg-gradient-to-r from-white via-blue-200 to-blue-400 bg-clip-text text-transparent mb-6">
-          What People Say
-        </h2>
-
-        <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
-          Recommendations from colleagues and managers I've worked with
-        </p>
-
-        <p className="text-sm text-gray-500 mt-4">
-          Scroll down to see all recommendations
-        </p>
-      </div>
-
-      {/* Cards Container */}
-      <div ref={cardsContainerRef} className="cards">
-        {recommendations.map((rec, index) => (
-          <div
-            key={rec.id}
-            ref={el => (cardRefs.current[index] = el)}
-            className="card"
-            data-index={index}>
-            <div className="card__inner">
-              {/* Image Section */}
-              <div className="card__image-container">
-                <img
-                  className="card__image"
-                  src={rec.image}
-                  alt={rec.name}
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20"></div>
-              </div>
-
-              {/* Content Section */}
-              <div className="card__content">
-                {/* Quote Icon */}
-                <div className="absolute top-4 right-4 opacity-10">
-                  <Quote size={60} className="text-blue-400" />
-                </div>
-
-                {/* Header Info */}
-                <div className="mb-6">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-16 h-16 rounded-full overflow-hidden border-4 border-blue-500/30 flex-shrink-0">
-                      <img
-                        src={rec.image}
-                        alt={rec.name}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="card__name text-2xl font-bold text-white">
-                        {rec.name}
-                      </h3>
-                      <p className="text-blue-400 font-semibold text-sm">
-                        {rec.position} at {rec.company}
-                      </p>
-                    </div>
-                    <a
-                      href={rec.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-shrink-0 p-2 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-colors duration-300">
-                      <Linkedin size={20} />
-                    </a>
-                  </div>
-
-                  <div className="flex items-center gap-4 text-sm text-gray-400">
-                    <span>{rec.date}</span>
-                    <span className="w-1 h-1 rounded-full bg-gray-600"></span>
-                    <span className="italic">{rec.relationship}</span>
-                  </div>
-                </div>
-
-                {/* Recommendation Text */}
-                <div className="card__description-wrapper">
-                  <p className="card__description text-gray-300 leading-relaxed">
-                    "{rec.recommendation}"
-                  </p>
-                </div>
-
-                {/* Footer */}
-                <div className="mt-auto pt-6 border-t border-gray-700">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-500">
-                      Recommendation {index + 1} of {recommendations.length}
-                    </span>
-                    <span className="text-xs text-gray-600">Posted on LinkedIn</span>
-                  </div>
-                </div>
-              </div>
+      <div class="space space--small"></div>
+      <div class="cards">
+        <div class="card" data-index="0">
+          <div class="card__inner">
+            <div class="card__image-container">
+              <img
+                class="card__image"
+                src="https://images.unsplash.com/photo-1620207418302-439b387441b0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=100"
+                alt=""
+              />
+            </div>
+            <div class="card__content">
+              <h1 class="card__title">Card Title</h1>
+              <p class="card__description">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab dicta error
+                nam eaque. Eum fuga laborum quos expedita iste saepe similique, unde
+                possimus quia at magnam sed cupiditate? Reprehenderit, harum!
+              </p>
             </div>
           </div>
-        ))}
+        </div>
+        <div class="card" data-index="0">
+          <div class="card__inner">
+            <div class="card__image-container">
+              <img
+                class="card__image"
+                src="https://images.unsplash.com/photo-1620207418302-439b387441b0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=100"
+                alt=""
+              />
+            </div>
+            <div class="card__content">
+              <h1 class="card__title">Card Title</h1>
+              <p class="card__description">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab dicta error
+                nam eaque. Eum fuga laborum quos expedita iste saepe similique, unde
+                possimus quia at magnam sed cupiditate? Reprehenderit, harum!
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="card" data-index="0">
+          <div class="card__inner">
+            <div class="card__image-container">
+              <img
+                class="card__image"
+                src="https://images.unsplash.com/photo-1620207418302-439b387441b0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=100"
+                alt=""
+              />
+            </div>
+            <div class="card__content">
+              <h1 class="card__title">Card Title</h1>
+              <p class="card__description">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab dicta error
+                nam eaque. Eum fuga laborum quos expedita iste saepe similique, unde
+                possimus quia at magnam sed cupiditate? Reprehenderit, harum!
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
-
-      {/* Bottom Spacing - Prevents scrolling to next section until all cards are viewed */}
-      <div className="space"></div>
-      </div>
-
+      <div class="space"></div>
     </>
   );
-};
+};;
