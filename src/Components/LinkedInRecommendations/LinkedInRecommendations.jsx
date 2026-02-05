@@ -54,103 +54,95 @@ const recommendations = [
 ];
 
 export const LinkedInRecommendations = () => {
-  const cardsContainerRef = useRef(null);
-  const cardRefs = useRef([]);
 
-  useEffect(() => {
-    const cardsContainer = cardsContainerRef.current;
-    const cards = cardRefs.current;
-
-    if (!cardsContainer || cards.length === 0) return;
-
-    // Set CSS variables
-    cardsContainer.style.setProperty('--cards-count', cards.length);
-    cardsContainer.style.setProperty('--card-height', `${cards[0].clientHeight}px`);
-
-    // Setup scroll observers
-    const observers = [];
-
-    cards.forEach((card, index) => {
-      const offsetTop = 20 + index * 20;
-      card.style.paddingTop = `${offsetTop}px`;
-
-      if (index === cards.length - 1) {
-        return;
-      }
-
-      const toScale = 1 - (cards.length - 1 - index) * 0.1;
-      const nextCard = cards[index + 1];
-      const cardInner = card.querySelector('.card__inner');
-
-      // Create intersection observer for scroll effect
-      const observer = new IntersectionObserver(
-        entries => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              const scrollProgress = getScrollProgress(nextCard, card, offsetTop);
-              updateCardTransform(cardInner, scrollProgress, toScale);
-            }
-          });
-        },
-        {
-          threshold: Array.from({ length: 100 }, (_, i) => i / 100),
-          rootMargin: '0px',
-        }
-      );
-
-      observer.observe(nextCard);
-      observers.push(observer);
-
-      // Add scroll listener for smooth updates
-      const handleScroll = () => {
-        const scrollProgress = getScrollProgress(nextCard, card, offsetTop);
-        updateCardTransform(cardInner, scrollProgress, toScale);
-      };
-
-      window.addEventListener('scroll', handleScroll, { passive: true });
-
-      // Cleanup function
-      return () => {
-        window.removeEventListener('scroll', handleScroll);
-      };
-    });
-
-    // Cleanup observers
-    return () => {
-      observers.forEach(observer => observer.disconnect());
-    };
-  }, []);
-
-  // Calculate scroll progress
-  const getScrollProgress = (nextCard, currentCard, offsetTop) => {
-    const nextCardRect = nextCard.getBoundingClientRect();
-    const currentCardRect = currentCard.getBoundingClientRect();
-
-    const offsetBottom = window.innerHeight - currentCard.clientHeight;
-    const start = offsetTop;
-    const end = window.innerHeight - currentCard.clientHeight;
-
-    const progress = (start - nextCardRect.top) / (start - end);
-    return Math.max(0, Math.min(1, progress));
-  };
-
-  // Update card transform based on scroll
-  const updateCardTransform = (cardInner, percentage, toScale) => {
-    const scale = valueAtPercentage(1, toScale, percentage);
-    const brightness = valueAtPercentage(1, 0.6, percentage);
-
-    cardInner.style.transform = `scale(${scale})`;
-    cardInner.style.filter = `brightness(${brightness})`;
-  };
-
-  // Interpolate value at percentage
-  const valueAtPercentage = (from, to, percentage) => {
-    return from + (to - from) * percentage;
-  };
   //  =================================== another style
   // This was built using aat.js: https://github.com/TahaSh/aat
 
+  const cardsContainerRef = useRef(null);
+  const cardRefs = useRef([]);
 
+  // Helper function: valueAtPercentage
+  const valueAtPercentage = ({ from, to, percentage }) => {
+    return from + (to - from) * percentage;
+  };
+
+  // Helper function: Calculate scroll percentage
+  const getScrollPercentage = (element, offsetTop, offsetBottom) => {
+    const rect = element.getBoundingClientRect();
+    const elementTop = rect.top;
+    const elementHeight = rect.height;
+
+    const start = offsetTop;
+    const end = window.innerHeight - offsetBottom;
+    const total = end - start;
+
+    if (elementTop > start) return 0;
+    if (elementTop < end) return 1;
+
+    const progress = (start - elementTop) / total;
+    return Math.max(0, Math.min(1, progress));
+  };
+
+  useEffect(() => {
+    const cardsContainer = cardsContainerRef.current;
+    const cards = cardRefs.current.filter(Boolean);
+
+    if (!cardsContainer || cards.length === 0) return;
+
+    // Set CSS custom properties
+    cardsContainer.style.setProperty('--cards-count', cards.length);
+    cardsContainer.style.setProperty('--card-height', `${cards[0].clientHeight}px`);
+
+    // Setup scroll animation for each card
+    const handleScroll = () => {
+      cards.forEach((card, index) => {
+        const offsetTop = 20 + index * 20;
+        card.style.paddingTop = `${offsetTop}px`;
+
+        // Skip last card
+        if (index === cards.length - 1) {
+          return;
+        }
+
+        const toScale = 1 - (cards.length - 1 - index) * 0.1;
+        const nextCard = cards[index + 1];
+        const cardInner = card.querySelector('.card__inner');
+
+        if (!nextCard || !cardInner) return;
+
+        // Calculate scroll percentage
+        const offsetBottom = window.innerHeight - card.clientHeight;
+        const percentageY = getScrollPercentage(nextCard, offsetTop, offsetBottom);
+
+        // Apply transformations
+        const scale = valueAtPercentage({
+          from: 1,
+          to: toScale,
+          percentage: percentageY,
+        });
+
+        const brightness = valueAtPercentage({
+          from: 1,
+          to: 0.6,
+          percentage: percentageY,
+        });
+
+        cardInner.style.scale = scale;
+        cardInner.style.filter = `brightness(${brightness})`;
+      });
+    };
+
+    // Initial call
+    handleScroll();
+
+    // Add scroll listener
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
   return (
     <>
       <div class="space space--small"></div>

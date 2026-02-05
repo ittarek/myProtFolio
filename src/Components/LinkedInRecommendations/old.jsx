@@ -1,6 +1,98 @@
 import React from 'react'
 
-export const old = () => {
+export const old = () => {  const cardsContainerRef = useRef(null);
+  const cardRefs = useRef([]);
+
+  useEffect(() => {
+    const cardsContainer = cardsContainerRef.current;
+    const cards = cardRefs.current;
+
+    if (!cardsContainer || cards.length === 0) return;
+
+    // Set CSS variables
+    cardsContainer.style.setProperty('--cards-count', cards.length);
+    cardsContainer.style.setProperty('--card-height', `${cards[0].clientHeight}px`);
+
+    // Setup scroll observers
+    const observers = [];
+
+    cards.forEach((card, index) => {
+      const offsetTop = 20 + index * 20;
+      card.style.paddingTop = `${offsetTop}px`;
+
+      if (index === cards.length - 1) {
+        return;
+      }
+
+      const toScale = 1 - (cards.length - 1 - index) * 0.1;
+      const nextCard = cards[index + 1];
+      const cardInner = card.querySelector('.card__inner');
+
+      // Create intersection observer for scroll effect
+      const observer = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const scrollProgress = getScrollProgress(nextCard, card, offsetTop);
+              updateCardTransform(cardInner, scrollProgress, toScale);
+            }
+          });
+        },
+        {
+          threshold: Array.from({ length: 100 }, (_, i) => i / 100),
+          rootMargin: '0px',
+        }
+      );
+
+      observer.observe(nextCard);
+      observers.push(observer);
+
+      // Add scroll listener for smooth updates
+      const handleScroll = () => {
+        const scrollProgress = getScrollProgress(nextCard, card, offsetTop);
+        updateCardTransform(cardInner, scrollProgress, toScale);
+      };
+
+      window.addEventListener('scroll', handleScroll, { passive: true });
+
+      // Cleanup function
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+      };
+    });
+
+    // Cleanup observers
+    return () => {
+      observers.forEach(observer => observer.disconnect());
+    };
+  }, []);
+
+  // Calculate scroll progress
+  const getScrollProgress = (nextCard, currentCard, offsetTop) => {
+    const nextCardRect = nextCard.getBoundingClientRect();
+    const currentCardRect = currentCard.getBoundingClientRect();
+
+    const offsetBottom = window.innerHeight - currentCard.clientHeight;
+    const start = offsetTop;
+    const end = window.innerHeight - currentCard.clientHeight;
+
+    const progress = (start - nextCardRect.top) / (start - end);
+    return Math.max(0, Math.min(1, progress));
+  };
+
+  // Update card transform based on scroll
+  const updateCardTransform = (cardInner, percentage, toScale) => {
+    const scale = valueAtPercentage(1, toScale, percentage);
+    const brightness = valueAtPercentage(1, 0.6, percentage);
+
+    cardInner.style.transform = `scale(${scale})`;
+    cardInner.style.filter = `brightness(${brightness})`;
+  };
+
+  // Interpolate value at percentage
+  const valueAtPercentage = (from, to, percentage) => {
+    return from + (to - from) * percentage;
+  };
   return (
     <div className="stacking-recommendations bg-black">
       {/* Top Spacing */}
