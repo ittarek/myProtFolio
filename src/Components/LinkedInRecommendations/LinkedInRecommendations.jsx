@@ -149,7 +149,8 @@ export const LinkedInRecommendations = () => {
   };
 
   return (
-    <div className="stacking-recommendations bg-black">
+    <>
+ <div className="stacking-recommendations bg-black">
       {/* Top Spacing */}
       <div className="space space--small"></div>
 
@@ -258,6 +259,8 @@ export const LinkedInRecommendations = () => {
 
       {/* Bottom Spacing - Prevents scrolling to next section until all cards are viewed */}
       <div className="space"></div>
-    </div>
+      </div>
+
+    </>
   );
 };
