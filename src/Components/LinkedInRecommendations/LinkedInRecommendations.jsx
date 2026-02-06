@@ -1,18 +1,20 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { Linkedin, Quote } from 'lucide-react';
 import './Recommendations.css';
 
+// Sample recommendations data
 const recommendations = [
   {
     id: 1,
     name: 'John Doe',
     position: 'CEO',
     company: 'SaralTech',
-    image: 'https://via.placeholder.com/400',
+    image:
+      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop',
     linkedin: 'https://linkedin.com/in/johndoe',
     date: 'December 2024',
     recommendation:
-      'Tariqul is an exceptional developer with outstanding skills in React and Next.js. His ability to solve complex problems and deliver high-quality code consistently impressed our team. He was instrumental in developing our venture builder platform, and his dedication to clean code and best practices made him a valuable asset to our organization.',
+      'Tariqul is an exceptional developer with outstanding skills in React and Next.js. His ability to solve complex problems and deliver high-quality code consistently impressed our team. He was instrumental in developing our venture builder platform.',
     relationship: "John was Tariqul's manager",
   },
   {
@@ -20,11 +22,12 @@ const recommendations = [
     name: 'Jane Smith',
     position: 'CTO',
     company: 'Travent',
-    image: 'https://via.placeholder.com/400',
+    image:
+      'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop',
     linkedin: 'https://linkedin.com/in/janesmith',
     date: 'January 2025',
     recommendation:
-      'Working with Tariqul was a fantastic experience. His frontend expertise, particularly with React and Tailwind CSS, helped us deliver our booking platform ahead of schedule. He has excellent communication skills and always brings innovative solutions to the table. I highly recommend him for any web development position.',
+      'Working with Tariqul was a fantastic experience. His frontend expertise, particularly with React and Tailwind CSS, helped us deliver our booking platform ahead of schedule. He has excellent communication skills.',
     relationship: 'Jane worked directly with Tariqul',
   },
   {
@@ -32,56 +35,19 @@ const recommendations = [
     name: 'Mike Johnson',
     position: 'Senior Developer',
     company: 'SaralTech',
-    image: 'https://via.placeholder.com/400',
+    image:
+      'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop',
     linkedin: 'https://linkedin.com/in/mikejohnson',
     date: 'November 2024',
     recommendation:
-      "Tariqul is a skilled developer who consistently delivers exceptional work. His knowledge of modern web technologies and his ability to learn quickly made collaboration seamless. He's a team player who always goes the extra mile to ensure project success.",
+      "Tariqul is a skilled developer who consistently delivers exceptional work. His knowledge of modern web technologies made collaboration seamless. He's a team player who always goes the extra mile.",
     relationship: 'Mike worked with Tariqul on the same team',
-  },
-  {
-    id: 4,
-    name: 'Sarah Williams',
-    position: 'Product Manager',
-    company: 'Travent',
-    image: 'https://via.placeholder.com/400',
-    linkedin: 'https://linkedin.com/in/sarahwilliams',
-    date: 'February 2025',
-    recommendation:
-      'Tariqul demonstrated exceptional technical skills and professionalism throughout our project. His attention to detail and commitment to delivering pixel-perfect implementations made him stand out. He was always proactive in suggesting improvements and optimizations.',
-    relationship: 'Sarah managed Tariqul directly',
   },
 ];
 
 export const LinkedInRecommendations = () => {
-
-  //  =================================== another style
-  // This was built using aat.js: https://github.com/TahaSh/aat
-
   const cardsContainerRef = useRef(null);
   const cardRefs = useRef([]);
-
-  // Helper function: valueAtPercentage
-  const valueAtPercentage = ({ from, to, percentage }) => {
-    return from + (to - from) * percentage;
-  };
-
-  // Helper function: Calculate scroll percentage
-  const getScrollPercentage = (element, offsetTop, offsetBottom) => {
-    const rect = element.getBoundingClientRect();
-    const elementTop = rect.top;
-    const elementHeight = rect.height;
-
-    const start = offsetTop;
-    const end = window.innerHeight - offsetBottom;
-    const total = end - start;
-
-    if (elementTop > start) return 0;
-    if (elementTop < end) return 1;
-
-    const progress = (start - elementTop) / total;
-    return Math.max(0, Math.min(1, progress));
-  };
 
   useEffect(() => {
     const cardsContainer = cardsContainerRef.current;
@@ -91,18 +57,26 @@ export const LinkedInRecommendations = () => {
 
     // Set CSS custom properties
     cardsContainer.style.setProperty('--cards-count', cards.length);
-    cardsContainer.style.setProperty('--card-height', `${cards[0].clientHeight}px`);
 
-    // Setup scroll animation for each card
+    // Wait for layout to be ready
+    setTimeout(() => {
+      if (cards[0]) {
+        cardsContainer.style.setProperty('--card-height', `${cards[0].clientHeight}px`);
+      }
+    }, 100);
+
+    // Helper: valueAtPercentage
+    const valueAtPercentage = (from, to, percentage) => {
+      return from + (to - from) * percentage;
+    };
+
+    // Setup scroll animation
     const handleScroll = () => {
       cards.forEach((card, index) => {
         const offsetTop = 20 + index * 20;
         card.style.paddingTop = `${offsetTop}px`;
 
-        // Skip last card
-        if (index === cards.length - 1) {
-          return;
-        }
+        if (index === cards.length - 1) return;
 
         const toScale = 1 - (cards.length - 1 - index) * 0.1;
         const nextCard = cards[index + 1];
@@ -110,24 +84,26 @@ export const LinkedInRecommendations = () => {
 
         if (!nextCard || !cardInner) return;
 
-        // Calculate scroll percentage
+        const nextCardRect = nextCard.getBoundingClientRect();
+        const cardRect = card.getBoundingClientRect();
+
         const offsetBottom = window.innerHeight - card.clientHeight;
-        const percentageY = getScrollPercentage(nextCard, offsetTop, offsetBottom);
+        const scrollStart = offsetTop;
+        const scrollEnd = window.innerHeight - offsetBottom;
+
+        // Calculate percentage
+        let percentageY = 0;
+        if (nextCardRect.top <= scrollStart && nextCardRect.top >= scrollEnd) {
+          percentageY = (scrollStart - nextCardRect.top) / (scrollStart - scrollEnd);
+        } else if (nextCardRect.top < scrollEnd) {
+          percentageY = 1;
+        }
 
         // Apply transformations
-        const scale = valueAtPercentage({
-          from: 1,
-          to: toScale,
-          percentage: percentageY,
-        });
+        const scale = valueAtPercentage(1, toScale, percentageY);
+        const brightness = valueAtPercentage(1, 0.6, percentageY);
 
-        const brightness = valueAtPercentage({
-          from: 1,
-          to: 0.6,
-          percentage: percentageY,
-        });
-
-        cardInner.style.scale = scale;
+        cardInner.style.transform = `scale(${scale})`;
         cardInner.style.filter = `brightness(${brightness})`;
       });
     };
@@ -137,75 +113,103 @@ export const LinkedInRecommendations = () => {
 
     // Add scroll listener
     window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll, { passive: true });
 
     // Cleanup
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
     };
   }, []);
+
   return (
-    <>
-      <div class="space space--small"></div>
-      <div class="cards">
-        <div class="card" data-index="0">
-          <div class="card__inner">
-            <div class="card__image-container">
-              <img
-                class="card__image"
-                src="https://images.unsplash.com/photo-1620207418302-439b387441b0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=100"
-                alt=""
-              />
-            </div>
-            <div class="card__content">
-              <h1 class="card__title">Card Title</h1>
-              <p class="card__description">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab dicta error
-                nam eaque. Eum fuga laborum quos expedita iste saepe similique, unde
-                possimus quia at magnam sed cupiditate? Reprehenderit, harum!
-              </p>
-            </div>
-          </div>
+    <div className="w-full min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+      {/* Top Spacing */}
+      <div className="space-small"></div>
+
+      {/* Header Section */}
+      <div className="text-center mb-16 px-4 pt-20">
+        <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/10 rounded-full border border-blue-500/20 mb-6">
+          <Linkedin size={16} className="text-blue-400" />
+          <span className="text-blue-400 font-medium">LinkedIn Recommendations</span>
         </div>
-        <div class="card" data-index="0">
-          <div class="card__inner">
-            <div class="card__image-container">
-              <img
-                class="card__image"
-                src="https://images.unsplash.com/photo-1620207418302-439b387441b0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=100"
-                alt=""
-              />
-            </div>
-            <div class="card__content">
-              <h1 class="card__title">Card Title</h1>
-              <p class="card__description">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab dicta error
-                nam eaque. Eum fuga laborum quos expedita iste saepe similique, unde
-                possimus quia at magnam sed cupiditate? Reprehenderit, harum!
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="card" data-index="0">
-          <div class="card__inner">
-            <div class="card__image-container">
-              <img
-                class="card__image"
-                src="https://images.unsplash.com/photo-1620207418302-439b387441b0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=100"
-                alt=""
-              />
-            </div>
-            <div class="card__content">
-              <h1 class="card__title">Card Title</h1>
-              <p class="card__description">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab dicta error
-                nam eaque. Eum fuga laborum quos expedita iste saepe similique, unde
-                possimus quia at magnam sed cupiditate? Reprehenderit, harum!
-              </p>
-            </div>
-          </div>
-        </div>
+
+        <h2 className="text-5xl lg:text-7xl font-bold bg-gradient-to-r from-white via-blue-200 to-blue-400 bg-clip-text text-transparent mb-6">
+          What People Say
+        </h2>
+
+        <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
+          Scroll down to see all recommendations
+        </p>
       </div>
-      <div class="space"></div>
-    </>
+
+      {/* Cards Container */}
+      <div ref={cardsContainerRef} className="cards">
+        {recommendations.map((rec, index) => (
+          <div
+            key={rec.id}
+            ref={el => (cardRefs.current[index] = el)}
+            className="card"
+            data-index={index}>
+            <div className="card__inner">
+              {/* Image Section */}
+              <div className="card__image-container">
+                <img
+                  className="card__image"
+                  src={rec.image}
+                  alt={rec.name}
+                  loading="lazy"
+                />
+              </div>
+
+              {/* Content Section */}
+              <div className="card__content">
+                {/* Quote Icon */}
+                <Quote
+                  size={60}
+                  className="absolute top-4 right-4 opacity-10 text-blue-400"
+                />
+
+                {/* Header */}
+                <div className="flex items-start gap-4 mb-6">
+                  <div className="w-16 h-16 rounded-full overflow-hidden border-4 border-blue-500/30 flex-shrink-0">
+                    <img
+                      src={rec.image}
+                      alt={rec.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="card__title">{rec.name}</h3>
+                    <p className="text-blue-600 font-semibold text-lg mb-1">
+                      {rec.position} at {rec.company}
+                    </p>
+                    <p className="text-gray-500 text-sm">{rec.date}</p>
+                  </div>
+                  <a
+                    href={rec.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-colors flex-shrink-0">
+                    <Linkedin size={18} />
+                  </a>
+                </div>
+
+                {/* Recommendation Text */}
+                <p className="card__description">"{rec.recommendation}"</p>
+
+                {/* Footer */}
+                <div className="mt-auto pt-4 border-t border-gray-200">
+                  <p className="text-sm text-gray-500 italic">{rec.relationship}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Bottom Spacing */}
+      <div className="space"></div>
+    </div>
   );
-};;
+};

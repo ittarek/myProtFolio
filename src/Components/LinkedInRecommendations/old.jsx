@@ -1,4 +1,54 @@
 import React from 'react'
+const recommendations = [
+  {
+    id: 1,
+    name: 'John Doe',
+    position: 'CEO',
+    company: 'SaralTech',
+    image: 'https://via.placeholder.com/400',
+    linkedin: 'https://linkedin.com/in/johndoe',
+    date: 'December 2024',
+    recommendation:
+      'Tariqul is an exceptional developer with outstanding skills in React and Next.js. His ability to solve complex problems and deliver high-quality code consistently impressed our team. He was instrumental in developing our venture builder platform, and his dedication to clean code and best practices made him a valuable asset to our organization.',
+    relationship: "John was Tariqul's manager",
+  },
+  {
+    id: 2,
+    name: 'Jane Smith',
+    position: 'CTO',
+    company: 'Travent',
+    image: 'https://via.placeholder.com/400',
+    linkedin: 'https://linkedin.com/in/janesmith',
+    date: 'January 2025',
+    recommendation:
+      'Working with Tariqul was a fantastic experience. His frontend expertise, particularly with React and Tailwind CSS, helped us deliver our booking platform ahead of schedule. He has excellent communication skills and always brings innovative solutions to the table. I highly recommend him for any web development position.',
+    relationship: 'Jane worked directly with Tariqul',
+  },
+  {
+    id: 3,
+    name: 'Mike Johnson',
+    position: 'Senior Developer',
+    company: 'SaralTech',
+    image: 'https://via.placeholder.com/400',
+    linkedin: 'https://linkedin.com/in/mikejohnson',
+    date: 'November 2024',
+    recommendation:
+      "Tariqul is a skilled developer who consistently delivers exceptional work. His knowledge of modern web technologies and his ability to learn quickly made collaboration seamless. He's a team player who always goes the extra mile to ensure project success.",
+    relationship: 'Mike worked with Tariqul on the same team',
+  },
+  {
+    id: 4,
+    name: 'Sarah Williams',
+    position: 'Product Manager',
+    company: 'Travent',
+    image: 'https://via.placeholder.com/400',
+    linkedin: 'https://linkedin.com/in/sarahwilliams',
+    date: 'February 2025',
+    recommendation:
+      'Tariqul demonstrated exceptional technical skills and professionalism throughout our project. His attention to detail and commitment to delivering pixel-perfect implementations made him stand out. He was always proactive in suggesting improvements and optimizations.',
+    relationship: 'Sarah managed Tariqul directly',
+  },
+];
 
 export const old = () => {  const cardsContainerRef = useRef(null);
   const cardRefs = useRef([]);
