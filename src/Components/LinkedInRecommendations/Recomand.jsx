@@ -60,7 +60,7 @@ const recommendations = [
 
 export const Recomand = () => {
   return (
-    <div className="bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 min-h-screen">
+    <div className="">
       {/* Header Section */}
       <div className="text-center px-4 pt-32 pb-16">
         <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/10 rounded-full border border-blue-500/20 mb-6">
@@ -90,7 +90,7 @@ export const Recomand = () => {
         itemDistance={200}>
         {recommendations.map(rec => (
           <ScrollStackItem key={rec.id} itemClassName="bg-white">
-            <div className="flex gap-6 h-full">
+            <div className="flex gap-6 h-full ">
               {/* Left: Image */}
               <div className="w-1/3 flex-shrink-0 h-full">
                 <img
