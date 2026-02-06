@@ -43,6 +43,19 @@ const recommendations = [
       "Tariqul is a skilled developer who consistently delivers exceptional work. His knowledge of modern web technologies made collaboration seamless. He's a team player who always goes the extra mile.",
     relationship: 'Mike worked with Tariqul on the same team',
   },
+  {
+    id: 4,
+    name: 'Sarah Williams',
+    position: 'Product Manager',
+    company: 'Travent',
+    image:
+      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop',
+    linkedin: 'https://linkedin.com/in/sarahwilliams',
+    date: 'October 2024',
+    recommendation:
+      'Tariqul demonstrated exceptional technical skills and professionalism throughout our project. His attention to detail and commitment to delivering pixel-perfect implementations made him stand out.',
+    relationship: 'Sarah managed Tariqul directly',
+  },
 ];
 
 export const LinkedInRecommendations = () => {
@@ -85,7 +98,6 @@ export const LinkedInRecommendations = () => {
         if (!nextCard || !cardInner) return;
 
         const nextCardRect = nextCard.getBoundingClientRect();
-        const cardRect = card.getBoundingClientRect();
 
         const offsetBottom = window.innerHeight - card.clientHeight;
         const scrollStart = offsetTop;
@@ -123,8 +135,8 @@ export const LinkedInRecommendations = () => {
   }, []);
 
   return (
-    <div className="w-full min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-      {/* Top Spacing */}
+    <section className="w-full min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+      {/* Top Spacing - prevents jumping from previous section */}
       <div className="space-small"></div>
 
       {/* Header Section */}
@@ -190,7 +202,8 @@ export const LinkedInRecommendations = () => {
                     href={rec.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-colors flex-shrink-0">
+                    className="p-2 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-colors flex-shrink-0"
+                    aria-label={`View ${rec.name}'s LinkedIn profile`}>
                     <Linkedin size={18} />
                   </a>
                 </div>
@@ -208,8 +221,16 @@ export const LinkedInRecommendations = () => {
         ))}
       </div>
 
-      {/* Bottom Spacing */}
+      {/* 
+        Bottom Spacing - CRITICAL: This prevents scrolling to next section 
+        until all cards are fully viewed. Adjust height based on:
+        - Number of cards
+        - Card height
+        - Desired scroll length
+        
+        Formula: At least (cards.length * 100vh) for smooth experience
+      */}
       <div className="space"></div>
-    </div>
+    </section>
   );
 };

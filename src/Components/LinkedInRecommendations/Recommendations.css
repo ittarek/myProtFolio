@@ -1,4 +1,4 @@
-/* ==================== Stacking Cards CSS ==================== */
+/* ==================== Stacking Cards CSS - Final Version ==================== */
 
 * {
   box-sizing: border-box;
@@ -7,14 +7,13 @@
 /* ==================== Cards Container ==================== */
 
 .cards {
-  
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
   padding: 0 20px;
   display: grid;
   grid-template-rows: repeat(var(--cards-count), var(--card-height));
-  gap: -240px 0;
+  gap: 0; /* Cards will overlap */
 }
 
 /* ==================== Card (Sticky) ==================== */
@@ -22,7 +21,7 @@
 .card {
   position: sticky;
   top: 0;
-  padding-top: 0; /* Will be set dynamically */
+  padding-top: 0; /* Set dynamically: 20px, 40px, 60px, etc. */
 }
 
 /* ==================== Card Inner ==================== */
@@ -35,9 +34,7 @@
   overflow: hidden;
   box-shadow: 0 25px 50px -12px hsla(265.3, 20%, 10%, 0.35);
   transform-origin: center top;
-  transition:
-    transform 0.1s ease-out,
-    filter 0.1s ease-out;
+  transition: transform 0.1s ease-out, filter 0.1s ease-out;
 }
 
 /* ==================== Image Container ==================== */
@@ -81,15 +78,44 @@
   margin-top: 20px;
 }
 
-/* ==================== Spacing ==================== */
+/* ==================== Spacing (Critical for Scroll Lock) ==================== */
 
-.space {
-  height: 90vh;
-}
-
+/*
+  Top spacing: Prevents abrupt jump from previous section
+  Should be enough to create smooth transition
+*/
 .space-small {
   height: 40vh;
 }
+
+/*
+  Bottom spacing: LOCKS SCROLLING until all cards viewed
+  
+  How it works:
+  - Creates enough vertical space that users MUST scroll through all cards
+  - Height should be: viewport height * number of cards
+  - This ensures smooth card transitions
+  
+  Formula:
+  - 3 cards = 90vh (minimum)
+  - 4 cards = 120vh
+  - 5+ cards = 150vh or more
+  
+  Adjust based on:
+  1. Number of cards
+  2. Card height
+  3. Desired scroll speed
+*/
+.space {
+  height: 90vh; /* Default for 3 cards */
+  min-height: 90vh;
+}
+
+/* If you have 4 cards, use this: */
+/* .space { height: 120vh; } */
+
+/* If you have 5+ cards, use this: */
+/* .space { height: 150vh; } */
 
 /* ==================== Responsive ==================== */
 
@@ -120,6 +146,15 @@
 
   .cards {
     padding: 0 16px;
+  }
+  
+  /* Adjust spacing for mobile */
+  .space {
+    height: 60vh;
+  }
+  
+  .space-small {
+    height: 20vh;
   }
 }
 

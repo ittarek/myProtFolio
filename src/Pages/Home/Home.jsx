@@ -7,6 +7,8 @@ import "./Home.css";
 import Certificate from "../certification/Certificate";
 import { Experiences } from "../../Components/Experiences/Experiences";
 import { LinkedInRecommendations } from "../../Components/LinkedInRecommendations/LinkedInRecommendations";
+import ScrollStack, { ScrollStackItem } from "../../Components/LinkedInRecommendations/ScrollStack";
+import { Recomand } from "../../Components/LinkedInRecommendations/Recomand";
 const Home = () => {
   useSmoothScroll();
   return (
@@ -15,7 +17,9 @@ const Home = () => {
       <Skills />
       <Experiences />
       <Portfolio />
-      <LinkedInRecommendations/>
+      {/* <LinkedInRecommendations /> */}
+      <Recomand />
+
       <Certificate />
       <Contact />
     </main>
