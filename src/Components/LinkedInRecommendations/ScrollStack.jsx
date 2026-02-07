@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef } from 'react';
+import { useLayoutEffect, useRef, useState, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -34,129 +34,54 @@ const ScrollStack = ({
   const scrollerRef = useRef(null);
   const cardsRef = useRef([]);
   const scrollTriggersRef = useRef([]);
+  const [isReady, setIsReady] = useState(false);
+
+  // Wait for DOM to be fully loaded
+  useEffect(() => {
+    // Force a delay to ensure DOM is ready
+    const timer = setTimeout(() => {
+      setIsReady(true);
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   useLayoutEffect(() => {
-    // Kill existing ScrollTriggers first
-    ScrollTrigger.getAll().forEach(trigger => {
-      if (trigger.vars.trigger?.classList?.contains('scroll-stack-card')) {
-        trigger.kill();
-      }
-    });
+    if (!isReady) return;
+
+    // Kill ALL existing ScrollTriggers to prevent conflicts
+    ScrollTrigger.getAll().forEach(st => st.kill());
+    ScrollTrigger.clearMatchMedia();
 
     const ctx = gsap.context(() => {
-      const cards = Array.from(
-        useWindowScroll
-          ? document.querySelectorAll('.scroll-stack-card')
-          : scrollerRef.current?.querySelectorAll('.scroll-stack-card') || []
-      );
+      // Wait for images and layout to load
+      const initScrollStack = () => {
+        const cards = Array.from(
+          useWindowScroll
+            ? document.querySelectorAll('.scroll-stack-card')
+            : scrollerRef.current?.querySelectorAll('.scroll-stack-card') || []
+        );
 
-      if (cards.length === 0) {
-        console.warn('No scroll-stack-card elements found');
-        return;
-      }
-
-      cardsRef.current = cards;
-
-      // Set margin bottom for spacing
-      cards.forEach((card, i) => {
-        if (i < cards.length - 1) {
-          card.style.marginBottom = `${itemDistance}px`;
-        }
-      });
-
-      // Create scroll animations for each card
-      cards.forEach((card, i) => {
-        const targetScale = baseScale + i * itemScale;
-
-        // Pin animation
-        const pinTrigger = ScrollTrigger.create({
-          trigger: card,
-          start: `top-=${itemStackDistance * i} ${stackPosition}`,
-          end: () => {
-            const endElement = useWindowScroll
-              ? document.querySelector('.scroll-stack-end')
-              : scrollerRef.current?.querySelector('.scroll-stack-end');
-            if (endElement) {
-              const endRect = endElement.getBoundingClientRect();
-              const endTop =
-                endRect.top +
-                (useWindowScroll ? window.scrollY : scrollerRef.current?.scrollTop || 0);
-              return `${endTop}px top`;
-            }
-            return '+=5000';
-          },
-          pin: true,
-          pinSpacing: false,
-          scrub: 0.5,
-          scroller: useWindowScroll ? undefined : scrollerRef.current,
-          invalidateOnRefresh: true,
-          markers: false, // Set to true for debugging
-        });
-
-        // Scale animation
-        const scaleTrigger = ScrollTrigger.create({
-          trigger: card,
-          start: `top-=${itemStackDistance * i} ${stackPosition}`,
-          end: `top ${scaleEndPosition}`,
-          scrub: 0.5,
-          scroller: useWindowScroll ? undefined : scrollerRef.current,
-          onUpdate: self => {
-            const progress = self.progress;
-            const scale = 1 - progress * (1 - targetScale);
-            const rotation = rotationAmount ? i * rotationAmount * progress : 0;
-
-            gsap.set(card, {
-              scale: scale,
-              rotation: rotation,
-              transformOrigin: 'top center',
-              force3D: true,
-            });
-          },
-          invalidateOnRefresh: true,
-        });
-
-        // Blur animation (if enabled)
-        if (blurAmount > 0) {
-          const blurTrigger = ScrollTrigger.create({
-            trigger: card,
-            start: `top-=${itemStackDistance * (i + 1)} ${stackPosition}`,
-            end: 'bottom top',
-            scrub: 0.5,
-            scroller: useWindowScroll ? undefined : scrollerRef.current,
-            onUpdate: () => {
-              let blur = 0;
-              let topCardIndex = 0;
-
-              // Find which card is currently on top
-              cards.forEach((c, j) => {
-                const rect = c.getBoundingClientRect();
-                const viewportHeight = window.innerHeight;
-                const stackPos = (parseFloat(stackPosition) / 100) * viewportHeight;
-
-                if (rect.top <= stackPos + itemStackDistance * j) {
-                  topCardIndex = j;
-                }
-              });
-
-              if (i < topCardIndex) {
-                const depthInStack = topCardIndex - i;
-                blur = Math.max(0, depthInStack * blurAmount);
-              }
-
-              gsap.set(card, {
-                filter: blur > 0 ? `blur(${blur}px)` : 'none',
-              });
-            },
-            invalidateOnRefresh: true,
-          });
-          scrollTriggersRef.current.push(blurTrigger);
+        if (cards.length === 0) {
+          console.warn('No scroll-stack-card elements found');
+          return;
         }
 
-        scrollTriggersRef.current.push(pinTrigger, scaleTrigger);
+        cardsRef.current = cards;
 
-        // Stack complete callback
-        if (i === cards.length - 1 && onStackComplete) {
-          const completeTrigger = ScrollTrigger.create({
+        // Set margin bottom for spacing
+        cards.forEach((card, i) => {
+          if (i < cards.length - 1) {
+            card.style.marginBottom = `${itemDistance}px`;
+          }
+        });
+
+        // Create scroll animations for each card
+        cards.forEach((card, i) => {
+          const targetScale = baseScale + i * itemScale;
+
+          // Pin animation
+          const pinTrigger = ScrollTrigger.create({
             trigger: card,
             start: `top-=${itemStackDistance * i} ${stackPosition}`,
             end: () => {
@@ -174,26 +99,150 @@ const ScrollStack = ({
               }
               return '+=5000';
             },
+            pin: true,
+            pinSpacing: false,
+            scrub: 0.5,
             scroller: useWindowScroll ? undefined : scrollerRef.current,
-            onEnter: () => onStackComplete(),
-            onLeaveBack: () => {},
+            invalidateOnRefresh: true,
+            anticipatePin: 1,
           });
-          scrollTriggersRef.current.push(completeTrigger);
-        }
-      });
 
-      // Refresh ScrollTrigger after setup
-      setTimeout(() => {
+          // Scale animation
+          const scaleTrigger = ScrollTrigger.create({
+            trigger: card,
+            start: `top-=${itemStackDistance * i} ${stackPosition}`,
+            end: `top ${scaleEndPosition}`,
+            scrub: 0.5,
+            scroller: useWindowScroll ? undefined : scrollerRef.current,
+            onUpdate: self => {
+              const progress = self.progress;
+              const scale = 1 - progress * (1 - targetScale);
+              const rotation = rotationAmount ? i * rotationAmount * progress : 0;
+
+              gsap.set(card, {
+                scale: scale,
+                rotation: rotation,
+                transformOrigin: 'top center',
+                force3D: true,
+              });
+            },
+            invalidateOnRefresh: true,
+          });
+
+          // Blur animation (if enabled)
+          if (blurAmount > 0) {
+            const blurTrigger = ScrollTrigger.create({
+              trigger: card,
+              start: `top-=${itemStackDistance * (i + 1)} ${stackPosition}`,
+              end: 'bottom top',
+              scrub: 0.5,
+              scroller: useWindowScroll ? undefined : scrollerRef.current,
+              onUpdate: () => {
+                let blur = 0;
+                let topCardIndex = 0;
+
+                cards.forEach((c, j) => {
+                  const rect = c.getBoundingClientRect();
+                  const viewportHeight = window.innerHeight;
+                  const stackPos = (parseFloat(stackPosition) / 100) * viewportHeight;
+
+                  if (rect.top <= stackPos + itemStackDistance * j) {
+                    topCardIndex = j;
+                  }
+                });
+
+                if (i < topCardIndex) {
+                  const depthInStack = topCardIndex - i;
+                  blur = Math.max(0, depthInStack * blurAmount);
+                }
+
+                gsap.set(card, {
+                  filter: blur > 0 ? `blur(${blur}px)` : 'none',
+                });
+              },
+              invalidateOnRefresh: true,
+            });
+            scrollTriggersRef.current.push(blurTrigger);
+          }
+
+          scrollTriggersRef.current.push(pinTrigger, scaleTrigger);
+
+          // Stack complete callback
+          if (i === cards.length - 1 && onStackComplete) {
+            const completeTrigger = ScrollTrigger.create({
+              trigger: card,
+              start: `top-=${itemStackDistance * i} ${stackPosition}`,
+              end: () => {
+                const endElement = useWindowScroll
+                  ? document.querySelector('.scroll-stack-end')
+                  : scrollerRef.current?.querySelector('.scroll-stack-end');
+                if (endElement) {
+                  const endRect = endElement.getBoundingClientRect();
+                  const endTop =
+                    endRect.top +
+                    (useWindowScroll
+                      ? window.scrollY
+                      : scrollerRef.current?.scrollTop || 0);
+                  return `${endTop}px top`;
+                }
+                return '+=5000';
+              },
+              scroller: useWindowScroll ? undefined : scrollerRef.current,
+              onEnter: () => onStackComplete(),
+              onLeaveBack: () => {},
+            });
+            scrollTriggersRef.current.push(completeTrigger);
+          }
+        });
+
+        // Refresh after all triggers are created
         ScrollTrigger.refresh();
-      }, 100);
+      };
+
+      // Wait for images to load
+      const images = document.querySelectorAll('.scroll-stack-card img');
+      if (images.length > 0) {
+        Promise.all(
+          Array.from(images).map(
+            img =>
+              new Promise(resolve => {
+                if (img.complete) {
+                  resolve();
+                } else {
+                  img.onload = resolve;
+                  img.onerror = resolve;
+                }
+              })
+          )
+        ).then(() => {
+          // Give browser time to layout
+          setTimeout(() => {
+            initScrollStack();
+          }, 100);
+        });
+      } else {
+        // No images, init immediately
+        setTimeout(() => {
+          initScrollStack();
+        }, 100);
+      }
     }, scrollerRef);
 
+    // Handle window resize
+    const handleResize = () => {
+      ScrollTrigger.refresh();
+    };
+
+    window.addEventListener('resize', handleResize);
+
     return () => {
+      window.removeEventListener('resize', handleResize);
       ctx.revert();
       scrollTriggersRef.current.forEach(st => st.kill());
       scrollTriggersRef.current = [];
     };
   }, [
+    isReady,
     itemDistance,
     itemScale,
     itemStackDistance,
