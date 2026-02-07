@@ -6,7 +6,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export const ScrollStackItem = ({ children, itemClassName = '' }) => (
   <div
-    className={`scroll-stack-card relative  w-full max-w-[900px] mx-auto min-h-[400px] my-8 p-6 md:p-10 lg:p-12 rounded-3xl md:rounded-[40px] shadow-2xl box-border origin-top ${itemClassName}`.trim()}
+    className={`scroll-stack-card relative w-full max-w-[900px] mx-auto min-h-[400px] my-8 p-6 md:p-10 lg:p-12 rounded-3xl md:rounded-[40px] shadow-2xl box-border origin-top ${itemClassName}`.trim()}
     style={{
       backfaceVisibility: 'hidden',
       transformStyle: 'preserve-3d',
@@ -36,9 +36,7 @@ const ScrollStack = ({
   const scrollTriggersRef = useRef([]);
   const [isReady, setIsReady] = useState(false);
 
-  // Wait for DOM to be fully loaded
   useEffect(() => {
-    // Force a delay to ensure DOM is ready
     const timer = setTimeout(() => {
       setIsReady(true);
     }, 100);
@@ -49,12 +47,10 @@ const ScrollStack = ({
   useLayoutEffect(() => {
     if (!isReady) return;
 
-    // Kill ALL existing ScrollTriggers to prevent conflicts
     ScrollTrigger.getAll().forEach(st => st.kill());
     ScrollTrigger.clearMatchMedia();
 
     const ctx = gsap.context(() => {
-      // Wait for images and layout to load
       const initScrollStack = () => {
         const cards = Array.from(
           useWindowScroll
@@ -69,14 +65,12 @@ const ScrollStack = ({
 
         cardsRef.current = cards;
 
-        // Set margin bottom for spacing
         cards.forEach((card, i) => {
           if (i < cards.length - 1) {
             card.style.marginBottom = `${itemDistance}px`;
           }
         });
 
-        // Create scroll animations for each card
         cards.forEach((card, i) => {
           const targetScale = baseScale + i * itemScale;
 
@@ -90,14 +84,15 @@ const ScrollStack = ({
                 : scrollerRef.current?.querySelector('.scroll-stack-end');
               if (endElement) {
                 const endRect = endElement.getBoundingClientRect();
-                const endTop =
-                  endRect.top +
-                  (useWindowScroll
-                    ? window.scrollY
-                    : scrollerRef.current?.scrollTop || 0);
-                return `${endTop}px top`;
+                const scrollOffset = useWindowScroll
+                  ? window.scrollY
+                  : scrollerRef.current?.scrollTop || 0;
+                const endTop = endRect.top + scrollOffset;
+
+                // Cards এর last card unpin হওয়ার আগে একটু space
+                return `${endTop - window.innerHeight * 0.3}px top`;
               }
-              return '+=5000';
+              return '+=3000';
             },
             pin: true,
             pinSpacing: false,
@@ -129,7 +124,7 @@ const ScrollStack = ({
             invalidateOnRefresh: true,
           });
 
-          // Blur animation (if enabled)
+          // Blur animation
           if (blurAmount > 0) {
             const blurTrigger = ScrollTrigger.create({
               trigger: card,
@@ -178,14 +173,13 @@ const ScrollStack = ({
                   : scrollerRef.current?.querySelector('.scroll-stack-end');
                 if (endElement) {
                   const endRect = endElement.getBoundingClientRect();
-                  const endTop =
-                    endRect.top +
-                    (useWindowScroll
-                      ? window.scrollY
-                      : scrollerRef.current?.scrollTop || 0);
-                  return `${endTop}px top`;
+                  const scrollOffset = useWindowScroll
+                    ? window.scrollY
+                    : scrollerRef.current?.scrollTop || 0;
+                  const endTop = endRect.top + scrollOffset;
+                  return `${endTop - window.innerHeight * 0.3}px top`;
                 }
-                return '+=5000';
+                return '+=3000';
               },
               scroller: useWindowScroll ? undefined : scrollerRef.current,
               onEnter: () => onStackComplete(),
@@ -195,11 +189,10 @@ const ScrollStack = ({
           }
         });
 
-        // Refresh after all triggers are created
         ScrollTrigger.refresh();
       };
 
-      // Wait for images to load
+      // Wait for images
       const images = document.querySelectorAll('.scroll-stack-card img');
       if (images.length > 0) {
         Promise.all(
@@ -215,20 +208,17 @@ const ScrollStack = ({
               })
           )
         ).then(() => {
-          // Give browser time to layout
           setTimeout(() => {
             initScrollStack();
           }, 100);
         });
       } else {
-        // No images, init immediately
         setTimeout(() => {
           initScrollStack();
         }, 100);
       }
     }, scrollerRef);
 
-    // Handle window resize
     const handleResize = () => {
       ScrollTrigger.refresh();
     };
@@ -266,8 +256,9 @@ const ScrollStack = ({
 
   return (
     <div className={containerClassName} ref={scrollerRef} style={containerStyles}>
-      <div className="scroll-stack-inner pt-[10vh] px-4 md:px-8 lg:px-20 pb-[100vh]">
+      <div className="scroll-stack-inner pt-[10vh] px-4 md:px-8 lg:px-20 pb-[10vh]">
         {children}
+        {/* এই element টা cards শেষ হওয়ার marker */}
         <div className="scroll-stack-end w-full h-px" />
       </div>
     </div>
