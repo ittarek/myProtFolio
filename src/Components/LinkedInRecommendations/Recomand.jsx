@@ -60,7 +60,7 @@ const recommendations = [
 
 export const Recomand = () => {
   return (
-    <section className="w-full min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <section className="w-full bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
       {/* Header Section */}
       <div className="text-center px-4 pt-32 pb-16">
         <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/10 rounded-full border border-blue-500/20 mb-6">

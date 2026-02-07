@@ -6,7 +6,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export const ScrollStackItem = ({ children, itemClassName = '' }) => (
   <div
-    className={`scroll-stack-card relative w-full max-w-[900px] mx-auto min-h-[400px] my-8 p-6 md:p-10 lg:p-12 rounded-3xl md:rounded-[40px] shadow-2xl box-border origin-top ${itemClassName}`.trim()}
+    className={`scroll-stack-card relative  w-full max-w-[900px] mx-auto min-h-[400px] my-8 p-6 md:p-10 lg:p-12 rounded-3xl md:rounded-[40px] shadow-2xl box-border origin-top ${itemClassName}`.trim()}
     style={{
       backfaceVisibility: 'hidden',
       transformStyle: 'preserve-3d',
