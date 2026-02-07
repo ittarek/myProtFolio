@@ -60,7 +60,7 @@ const recommendations = [
 
 export const Recomand = () => {
   return (
-    <div className="">
+    <section className="w-full min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
       {/* Header Section */}
       <div className="text-center px-4 pt-32 pb-16">
         <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/10 rounded-full border border-blue-500/20 mb-6">
@@ -90,33 +90,28 @@ export const Recomand = () => {
         itemDistance={200}>
         {recommendations.map(rec => (
           <ScrollStackItem key={rec.id} itemClassName="bg-white">
-            <div className="flex gap-6 h-full ">
+            <div className="flex flex-col md:flex-row gap-6 h-full w-full">
               {/* Left: Image */}
-              <div className="w-1/3 flex-shrink-0 h-full">
+              <div className="w-full md:w-2/5 flex-shrink-0 h-48 md:h-full">
                 <img
                   className="w-full h-full object-cover rounded-2xl"
                   src={rec.image}
                   alt={rec.name}
                   loading="lazy"
-                  style={{
-                    objectFit: 'cover',
-                    width: '100%',
-                    height: '100%',
-                  }}
                 />
               </div>
 
               {/* Right: Content */}
-              <div className="flex-1 flex flex-col relative overflow-hidden">
+              <div className="flex-1 flex flex-col relative overflow-hidden min-w-0">
                 {/* Quote Icon */}
                 <Quote
-                  size={50}
-                  className="absolute top-0 right-0 opacity-10 text-blue-400"
+                  size={60}
+                  className="absolute top-0 right-0 opacity-10 text-blue-400 hidden md:block"
                 />
 
                 {/* Header */}
-                <div className="flex items-start gap-3 mb-3">
-                  <div className="w-12 h-12 rounded-full overflow-hidden border-3 border-blue-500/30 flex-shrink-0">
+                <div className="flex items-start gap-3 mb-4">
+                  <div className="w-14 h-14 rounded-full overflow-hidden border-4 border-blue-500/30 flex-shrink-0">
                     <img
                       src={rec.image}
                       alt={rec.name}
@@ -124,35 +119,35 @@ export const Recomand = () => {
                     />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-lg font-bold text-gray-900 line-clamp-1">
+                    <h3 className="text-xl md:text-2xl font-bold text-gray-900 truncate">
                       {rec.name}
                     </h3>
-                    <p className="text-blue-600 font-semibold text-sm line-clamp-1">
+                    <p className="text-blue-600 font-semibold text-sm md:text-base truncate">
                       {rec.position} at {rec.company}
                     </p>
-                    <p className="text-gray-500 text-xs">{rec.date}</p>
+                    <p className="text-gray-500 text-xs md:text-sm">{rec.date}</p>
                   </div>
 
                   <a
                     href={rec.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-colors flex-shrink-0"
+                    className="p-2 md:p-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-colors flex-shrink-0"
                     aria-label={`View ${rec.name}'s LinkedIn profile`}>
-                    <Linkedin size={14} />
+                    <Linkedin size={16} className="md:w-5 md:h-5" />
                   </a>
                 </div>
 
                 {/* Recommendation Text */}
-                <div className="flex-1 overflow-hidden">
-                  <p className="text-gray-700 text-sm leading-relaxed line-clamp-6">
+                <div className="flex-1 overflow-y-auto pr-2">
+                  <p className="text-gray-700 text-sm md:text-base lg:text-lg leading-relaxed">
                     "{rec.recommendation}"
                   </p>
                 </div>
 
                 {/* Footer */}
-                <div className="mt-3 pt-2 border-t border-gray-200">
-                  <p className="text-xs text-gray-500 italic line-clamp-1">
+                <div className="mt-4 pt-3 border-t border-gray-200">
+                  <p className="text-xs md:text-sm text-gray-500 italic truncate">
                     {rec.relationship}
                   </p>
                 </div>
@@ -161,6 +156,6 @@ export const Recomand = () => {
           </ScrollStackItem>
         ))}
       </ScrollStack>
-    </div>
+    </section>
   );
 };

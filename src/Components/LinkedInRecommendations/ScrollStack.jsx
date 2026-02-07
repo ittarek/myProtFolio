@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useCallback } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -6,7 +6,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export const ScrollStackItem = ({ children, itemClassName = '' }) => (
   <div
-    className={`scroll-stack-card relative w-full max-w-[900px] mx-auto h-80 my-8 p-12 rounded-[40px] shadow-[0_0_30px_rgba(0,0,0,0.1)] box-border origin-top ${itemClassName}`.trim()}
+    className={`scroll-stack-card relative w-full max-w-[900px] mx-auto min-h-[400px] my-8 p-6 md:p-10 lg:p-12 rounded-3xl md:rounded-[40px] shadow-2xl box-border origin-top ${itemClassName}`.trim()}
     style={{
       backfaceVisibility: 'hidden',
       transformStyle: 'preserve-3d',
@@ -36,6 +36,13 @@ const ScrollStack = ({
   const scrollTriggersRef = useRef([]);
 
   useLayoutEffect(() => {
+    // Kill existing ScrollTriggers first
+    ScrollTrigger.getAll().forEach(trigger => {
+      if (trigger.vars.trigger?.classList?.contains('scroll-stack-card')) {
+        trigger.kill();
+      }
+    });
+
     const ctx = gsap.context(() => {
       const cards = Array.from(
         useWindowScroll
@@ -43,7 +50,10 @@ const ScrollStack = ({
           : scrollerRef.current?.querySelectorAll('.scroll-stack-card') || []
       );
 
-      if (cards.length === 0) return;
+      if (cards.length === 0) {
+        console.warn('No scroll-stack-card elements found');
+        return;
+      }
 
       cardsRef.current = cards;
 
@@ -68,16 +78,19 @@ const ScrollStack = ({
               : scrollerRef.current?.querySelector('.scroll-stack-end');
             if (endElement) {
               const endRect = endElement.getBoundingClientRect();
-              const endTop = endRect.top + window.scrollY;
-              return `${endTop - window.innerHeight / 2}px top`;
+              const endTop =
+                endRect.top +
+                (useWindowScroll ? window.scrollY : scrollerRef.current?.scrollTop || 0);
+              return `${endTop}px top`;
             }
             return '+=5000';
           },
           pin: true,
           pinSpacing: false,
-          scrub: 0.5, // Smooth scrubbing
+          scrub: 0.5,
           scroller: useWindowScroll ? undefined : scrollerRef.current,
           invalidateOnRefresh: true,
+          markers: false, // Set to true for debugging
         });
 
         // Scale animation
@@ -104,7 +117,7 @@ const ScrollStack = ({
 
         // Blur animation (if enabled)
         if (blurAmount > 0) {
-          ScrollTrigger.create({
+          const blurTrigger = ScrollTrigger.create({
             trigger: card,
             start: `top-=${itemStackDistance * (i + 1)} ${stackPosition}`,
             end: 'bottom top',
@@ -136,13 +149,14 @@ const ScrollStack = ({
             },
             invalidateOnRefresh: true,
           });
+          scrollTriggersRef.current.push(blurTrigger);
         }
 
         scrollTriggersRef.current.push(pinTrigger, scaleTrigger);
 
         // Stack complete callback
         if (i === cards.length - 1 && onStackComplete) {
-          ScrollTrigger.create({
+          const completeTrigger = ScrollTrigger.create({
             trigger: card,
             start: `top-=${itemStackDistance * i} ${stackPosition}`,
             end: () => {
@@ -151,8 +165,12 @@ const ScrollStack = ({
                 : scrollerRef.current?.querySelector('.scroll-stack-end');
               if (endElement) {
                 const endRect = endElement.getBoundingClientRect();
-                const endTop = endRect.top + window.scrollY;
-                return `${endTop - window.innerHeight / 2}px top`;
+                const endTop =
+                  endRect.top +
+                  (useWindowScroll
+                    ? window.scrollY
+                    : scrollerRef.current?.scrollTop || 0);
+                return `${endTop}px top`;
               }
               return '+=5000';
             },
@@ -160,11 +178,14 @@ const ScrollStack = ({
             onEnter: () => onStackComplete(),
             onLeaveBack: () => {},
           });
+          scrollTriggersRef.current.push(completeTrigger);
         }
       });
 
       // Refresh ScrollTrigger after setup
-      ScrollTrigger.refresh();
+      setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 100);
     }, scrollerRef);
 
     return () => {
@@ -185,15 +206,10 @@ const ScrollStack = ({
     onStackComplete,
   ]);
 
-  const containerStyles = useWindowScroll
-    ? {
-        overscrollBehavior: 'contain',
-        WebkitOverflowScrolling: 'touch',
-      }
-    : {
-        overscrollBehavior: 'contain',
-        WebkitOverflowScrolling: 'touch',
-      };
+  const containerStyles = {
+    overscrollBehavior: 'contain',
+    WebkitOverflowScrolling: 'touch',
+  };
 
   const containerClassName = useWindowScroll
     ? `relative w-full ${className}`.trim()
@@ -201,7 +217,7 @@ const ScrollStack = ({
 
   return (
     <div className={containerClassName} ref={scrollerRef} style={containerStyles}>
-      <div className="scroll-stack-inner pt-[10vh] px-20 pb-[10rem] ">
+      <div className="scroll-stack-inner pt-[10vh] px-4 md:px-8 lg:px-20 pb-[100vh]">
         {children}
         <div className="scroll-stack-end w-full h-px" />
       </div>
