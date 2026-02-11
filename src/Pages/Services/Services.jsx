@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Code, Palette, Zap, Users, Shield, TrendingUp } from 'lucide-react';
@@ -108,8 +109,18 @@ const Services = () => {
   }, []);
 
   return (
-    <Container>
-      <div ref={containerRef} className="py-16 md:py-24">
+    <>
+      <Helmet>
+        <title>Services - Md Tariqul Islam | Web Development & Design</title>
+        <meta name="description" content="Professional web development services including full stack development, UI/UX design, performance optimization, and scalable architecture." />
+        <meta name="keywords" content="web development services, React developer, full stack development, UI/UX design, performance optimization" />
+        <meta property="og:title" content="Services - Web Development & Design" />
+        <meta property="og:description" content="Professional web development and design services tailored to your needs." />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://tareq.netlify.app/services" />
+      </Helmet>
+      <Container>
+        <div ref={containerRef} className="py-16 md:py-24">
         {/* Header */}
         <div ref={headingRef} className="text-center mb-16">
           <h2 className="text-5xl lg:text-7xl font-bold bg-gradient-to-r from-white via-blue-200 to-blue-400 bg-clip-text text-transparent mb-4">
@@ -183,6 +194,7 @@ const Services = () => {
         </div>
       </div>
     </Container>
+    </>
   );
 };
 

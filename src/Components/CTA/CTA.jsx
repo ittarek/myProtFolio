@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight, Zap } from 'lucide-react';
@@ -82,8 +83,18 @@ const CTA = () => {
   };
 
   return (
-    <Container>
-      <div ref={containerRef} className="py-20 md:py-32">
+    <>
+      <Helmet>
+        <title>Start Your Project - Md Tariqul Islam | Let's Build Together</title>
+        <meta name="description" content="Ready to transform your idea into reality? Let's collaborate on your next web development project today." />
+        <meta name="keywords" content="hire web developer, start a project, web development services, freelance developer" />
+        <meta property="og:title" content="Transform Your Ideas into Reality" />
+        <meta property="og:description" content="Let's collaborate and build something amazing together." />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://tareq.netlify.app/start" />
+      </Helmet>
+      <Container>
+        <div ref={containerRef} className="py-20 md:py-32">
         {/* Main CTA Section */}
         <div className="relative rounded-3xl overflow-hidden">
           {/* Background gradient */}
@@ -162,6 +173,7 @@ const CTA = () => {
         </div>
       </div>
     </Container>
+    </>
   );
 };
 

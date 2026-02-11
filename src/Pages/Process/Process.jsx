@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
@@ -10,7 +11,7 @@ import {
   BarChart3,
 } from 'lucide-react';
 import Container from '../../Components/Container';
-import './Process.css';
+// import './Process.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -131,8 +132,18 @@ const Process = () => {
   }, []);
 
   return (
-    <Container>
-      <div ref={containerRef} className="py-16 md:py-24">
+    <>
+      <Helmet>
+        <title>Development Process - Md Tariqul Islam | How I Work</title>
+        <meta name="description" content="Understand my structured development process: Discovery, Planning, Design, Development, Testing, and Deployment for web projects." />
+        <meta name="keywords" content="development process, web development methodology, agile development, project management" />
+        <meta property="og:title" content="Development Process - Professional Web Development" />
+        <meta property="og:description" content="Structured and transparent development approach with clear communication." />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://tareq.netlify.app/process" />
+      </Helmet>
+      <Container>
+        <div ref={containerRef} className="py-16 md:py-24">
         {/* Header */}
         <div ref={headingRef} className="text-center mb-20">
           <h2 className="text-5xl lg:text-7xl font-bold bg-gradient-to-r from-white via-blue-200 to-blue-400 bg-clip-text text-transparent mb-4">
@@ -233,6 +244,7 @@ const Process = () => {
         </div>
       </div>
     </Container>
+    </>
   );
 };
 

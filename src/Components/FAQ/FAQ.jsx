@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ChevronDown } from 'lucide-react';
@@ -154,8 +155,18 @@ const FAQ = () => {
   }, []);
 
   return (
-    <Container>
-      <div ref={containerRef} className="py-16 md:py-24">
+    <>
+      <Helmet>
+        <title>FAQ - Md Tariqul Islam | Common Questions</title>
+        <meta name="description" content="Frequently asked questions about web development services, pricing, process, timeline, and project requirements." />
+        <meta name="keywords" content="FAQ, web development questions, project timeline, development cost, hiring developer" />
+        <meta property="og:title" content="Frequently Asked Questions" />
+        <meta property="og:description" content="Answers to common questions about web development and project collaboration." />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://tareq.netlify.app/faq" />
+      </Helmet>
+      <Container>
+        <div ref={containerRef} className="py-16 md:py-24">
         {/* Header */}
         <div ref={headingRef} className="text-center mb-16">
           <h2 className="text-5xl lg:text-7xl font-bold bg-gradient-to-r from-white via-blue-200 to-blue-400 bg-clip-text text-transparent mb-4">
@@ -185,6 +196,7 @@ const FAQ = () => {
         </div>
       </div>
     </Container>
+    </>
   );
 };
 

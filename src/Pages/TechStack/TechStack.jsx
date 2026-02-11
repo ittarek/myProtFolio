@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Container from '../../Components/Container';
@@ -127,8 +128,18 @@ const TechStack = () => {
   }, []);
 
   return (
-    <Container>
-      <div ref={containerRef} className="py-16 md:py-24">
+    <>
+      <Helmet>
+        <title>Tech Stack - Md Tariqul Islam | Technologies & Tools</title>
+        <meta name="description" content="Comprehensive tech stack overview: React, Next.js, Node.js, MongoDB, TypeScript, Tailwind CSS, and modern development tools." />
+        <meta name="keywords" content="tech stack, React, Node.js, MongoDB, Next.js, web development technologies" />
+        <meta property="og:title" content="Tech Stack - Web Development Technologies" />
+        <meta property="og:description" content="Expert knowledge in modern web technologies and frameworks." />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://tareq.netlify.app/tech-stack" />
+      </Helmet>
+      <Container>
+        <div ref={containerRef} className="py-16 md:py-24">
         {/* Header */}
         <div ref={headingRef} className="text-center mb-16">
           <h2 className="text-5xl lg:text-7xl font-bold bg-gradient-to-r from-white via-blue-200 to-blue-400 bg-clip-text text-transparent mb-4">
@@ -195,6 +206,7 @@ const TechStack = () => {
         </div>
       </div>
     </Container>
+    </>
   );
 };
 
