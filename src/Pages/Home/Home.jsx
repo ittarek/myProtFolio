@@ -7,10 +7,6 @@ import './Home.css';
 import Certificate from '../certification/Certificate';
 import { Experiences } from '../../Components/Experiences/Experiences';
 import { LinkedInRecommendations } from '../../Components/LinkedInRecommendations/LinkedInRecommendations';
-import { ScrollStack } from '../../Components/LinkedInRecommendations/ScrollStack';
-import ScrollRcmd from '../../Components/LinkedInRecommendations/ScrollRcmd';
-
-// import { Recomand } from '../../Components/LinkedInRecommendations/Recomand';
 
 const Home = () => {
   useSmoothScroll();
@@ -20,12 +16,9 @@ const Home = () => {
       <Skills />
       <Experiences />
       <Portfolio />
-      {/* <LinkedInRecommendations /> */}
-      {/* <Recomand /> */}
-      <ScrollStack></ScrollStack>
-      {/* <ScrollRcmd /> */}
       <Certificate />
       <Contact />
+      <LinkedInRecommendations />
     </main>
   );
 };
