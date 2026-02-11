@@ -1,0 +1,25 @@
+/* ==================== Tech Stack Section ==================== */
+
+.tech-category {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tech-category:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
+}
+
+.tech-item {
+  transition: all 0.3s ease;
+}
+
+.tech-item:hover {
+  transform: translateX(4px);
+}
+
+@media (max-width: 768px) {
+  .tech-category {
+    padding: 1.5rem;
+  }
+}

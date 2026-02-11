@@ -1,0 +1,32 @@
+/* ==================== FAQ Section ==================== */
+
+.faq-item {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.faq-item:hover {
+  box-shadow: 0 10px 30px rgba(59, 130, 246, 0.1);
+}
+
+.faq-item button {
+  position: relative;
+}
+
+.faq-item button:focus {
+  outline: none;
+}
+
+@media (max-width: 768px) {
+  .faq-item {
+    margin-bottom: 0.5rem;
+  }
+
+  .faq-item button {
+    padding: 1rem 1.25rem;
+  }
+
+  .faq-item h3 {
+    font-size: 1rem;
+  }
+}
