@@ -127,9 +127,6 @@ const Portfolio = () => {
   const ctaRef = useRef(null);
 
   useEffect(() => {
-    // Kill all existing ScrollTriggers first
-    ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-
     // Create GSAP context for cleanup
     const ctx = gsap.context(() => {
       // Animate best projects on scroll
@@ -213,7 +210,6 @@ const Portfolio = () => {
 
     return () => {
       ctx.revert();
-      ScrollTrigger.getAll().forEach(t => t.kill());
     };
   }, []);
 

@@ -39,25 +39,29 @@ const Skills = () => {
 
   // Animate skill bars on scroll
   useEffect(() => {
-    const skills = document.querySelectorAll('.skill-bar');
+    const ctx = gsap.context(() => {
+      const skills = document.querySelectorAll('.skill-bar');
 
-    skills.forEach((skill, index) => {
-      gsap.fromTo(
-        skill,
-        { width: '0%' },
-        {
-          width: skill.dataset.value + '%',
-          duration: 1.5,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: skill,
-            start: 'top 80%',
-            toggleActions: 'play none none reverse',
-          },
-          delay: index * 0.1,
-        }
-      );
+      skills.forEach((skill, index) => {
+        gsap.fromTo(
+          skill,
+          { width: '0%' },
+          {
+            width: skill.dataset.value + '%',
+            duration: 1.5,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: skill,
+              start: 'top 80%',
+              toggleActions: 'play none none reverse',
+            },
+            delay: index * 0.1,
+          }
+        );
+      });
     });
+
+    return () => ctx.revert();
   }, []);
 
   const SkillCard = ({ skill, showIcon = false }) => {

@@ -73,9 +73,6 @@ export const LinkedInRecommendations = () => {
   useLayoutEffect(() => {
     if (!isReady) return;
 
-    // Kill all previous ScrollTriggers
-    ScrollTrigger.getAll().forEach(st => st.kill());
-
     const ctx = gsap.context(() => {
       const cards = gsap.utils.toArray('.recommendation-card');
       if (cards.length === 0) return;
