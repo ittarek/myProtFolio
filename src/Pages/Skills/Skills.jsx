@@ -40,22 +40,77 @@ const Skills = () => {
   // Animate skill bars on scroll
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const skills = document.querySelectorAll('.skill-bar');
+      // Animate header section
+      const headerSection = document.querySelector('.skills-header');
+      if (headerSection) {
+        gsap.from(headerSection, {
+          opacity: 0,
+          y: 40,
+          duration: 0.8,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: headerSection,
+            start: 'top 80%',
+            toggleActions: 'play none none none',
+          },
+        });
+      }
 
-      skills.forEach((skill, index) => {
+      // Animate skills container with scale
+      const skillsContainer = document.querySelector('.skills-container');
+      if (skillsContainer) {
+        gsap.from(skillsContainer, {
+          opacity: 0,
+          scale: 0.98,
+          duration: 0.8,
+          ease: 'back.out',
+          scrollTrigger: {
+            trigger: skillsContainer,
+            start: 'top 85%',
+            toggleActions: 'play none none none',
+          },
+        });
+      }
+
+      // Animate individual skill items with stagger
+      const skillItems = document.querySelectorAll('.skill-item');
+      if (skillItems.length > 0) {
+        gsap.fromTo(
+          skillItems,
+          {
+            opacity: 0,
+            x: -20,
+          },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.6,
+            stagger: 0.05,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: skillsContainer,
+              start: 'top 80%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      }
+
+      // Animate skill bars with smooth fill
+      const skills = document.querySelectorAll('.skill-bar');
+      skills.forEach((skill) => {
         gsap.fromTo(
           skill,
           { width: '0%' },
           {
             width: skill.dataset.value + '%',
-            duration: 1.5,
+            duration: 1.2,
             ease: 'power3.out',
             scrollTrigger: {
               trigger: skill,
-              start: 'top 80%',
-              toggleActions: 'play none none reverse',
+              start: 'top 85%',
+              toggleActions: 'play none none none',
             },
-            delay: index * 0.1,
           }
         );
       });
@@ -181,7 +236,7 @@ const Skills = () => {
     <Container>
       <main className="mx-auto flex flex-col w-full  py-12 md:py-20">
         {/* Header Section */}
-        <div className="flex space-x-3 md:space-x-10 mb-12">
+        <div className="flex space-x-3 md:space-x-10 mb-12 skills-header">
           <div className="flex flex-col items-center">
             {/* Icon */}
             <div className="relative group">
@@ -222,25 +277,27 @@ const Skills = () => {
         </div>
 
         {/* Skills Cards - Conditional Tilt */}
-        {isMobile ? (
-          // Mobile: No Tilt Effect
-          <div className="transition-all duration-500">
-            <SkillsContent />
-          </div>
-        ) : (
-          // Desktop & Tablet: With Tilt Effect
-          <Tilt
-            className="parallax-effect transition-all duration-500 hover:scale-[1.01]"
-            perspective={perspective}
-            glareEnable={true}
-            glareMaxOpacity={0.3}
-            glareColor="#ffffff"
-            glareBorderRadius="12px"
-            scale={1.0}
-            gyroscope={true}>
-            <SkillsContent />
-          </Tilt>
-        )}
+        <div className="skills-container">
+          {isMobile ? (
+            // Mobile: No Tilt Effect
+            <div className="transition-all duration-500">
+              <SkillsContent />
+            </div>
+          ) : (
+            // Desktop & Tablet: With Tilt Effect
+            <Tilt
+              className="parallax-effect transition-all duration-500 hover:scale-[1.01]"
+              perspective={perspective}
+              glareEnable={true}
+              glareMaxOpacity={0.3}
+              glareColor="#ffffff"
+              glareBorderRadius="12px"
+              scale={1.0}
+              gyroscope={true}>
+              <SkillsContent />
+            </Tilt>
+          )}
+        </div>
 
         {/* Bottom Divider */}
         <div className="h-[100px] mt-12">

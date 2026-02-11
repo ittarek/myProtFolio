@@ -96,14 +96,11 @@ export const LinkedInRecommendations = () => {
           end: () => {
             // .scroll-stack-end element খুঁজবে
             const endElement = document.querySelector('.scroll-stack-end');
-            // console.log(endElement);
 
             if (endElement) {
               const endRect = endElement.getBoundingClientRect();
-              console.log(endRect);
 
               const endTop = endRect.top + window.scrollY;
-              console.log(endTop);
 
               // Cards এর last card unpin হওয়ার আগে একটু space
               return `${endTop - window.innerHeight * 1}px top`;
@@ -125,14 +122,11 @@ export const LinkedInRecommendations = () => {
           end: () => {
             // .scroll-stack-end element খুঁজবে
             const endElement = document.querySelector('.scroll-stack-end');
-            // console.log(endElement);
 
             if (endElement) {
               const endRect = endElement.getBoundingClientRect();
-              console.log(endRect);
 
               const endTop = endRect.top + window.scrollY;
-              console.log(endTop);
 
               // Cards এর last card unpin হওয়ার আগে একটু space
               return `${endTop - window.innerHeight * 1}px top`;

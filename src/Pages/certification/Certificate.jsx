@@ -15,7 +15,45 @@ const Certificate = () => {
 
     // Create GSAP context for proper cleanup
     const ctx = gsap.context(() => {
-      textElements.forEach(text => {
+      // Animate the main heading
+      const heading = document.querySelector('.certificate-heading');
+      if (heading) {
+        gsap.from(heading, {
+          opacity: 0,
+          y: 40,
+          duration: 0.8,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: heading,
+            start: 'top 80%',
+            toggleActions: 'play none none none',
+          },
+        });
+      }
+
+      // Animate certificate items with stagger
+      textElements.forEach((text, index) => {
+        gsap.fromTo(
+          text,
+          {
+            opacity: 0,
+            x: -30,
+          },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.6,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: text,
+              start: 'top 85%',
+              toggleActions: 'play none none none',
+            },
+            delay: index * 0.06,
+          }
+        );
+
+        // Gradient text animation
         gsap.to(text, {
           backgroundSize: '100%',
           ease: 'none',
@@ -23,7 +61,7 @@ const Certificate = () => {
             trigger: text,
             start: 'center 80%',
             end: 'center 20%',
-            scrub: true,
+            scrub: 0.5,
           },
         });
       });
@@ -38,7 +76,7 @@ const Certificate = () => {
   return (
     <Container>
       <div className="certificate my-16" ref={containerRef}>
-        <h1 className="text-5xl lg:text-7xl font-bold bg-gradient-to-r from-white via-blue-200 to-blue-400 bg-clip-text text-transparent text-center mb-6">
+        <h1 className="text-5xl lg:text-7xl font-bold bg-gradient-to-r from-white via-blue-200 to-blue-400 bg-clip-text text-transparent text-center mb-6 certificate-heading">
           All Credentials
         </h1>
         <h1 className="text">

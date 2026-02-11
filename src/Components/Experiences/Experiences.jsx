@@ -57,12 +57,12 @@ export const Experiences = () => {
           {
             opacity: 1,
             y: 0,
-            duration: 0.8,
+            duration: 0.7,
             ease: 'power2.out',
             scrollTrigger: {
               trigger: card,
               start: 'top 80%',
-              toggleActions: 'play none none reverse',
+              toggleActions: 'play none none none',
             },
           }
         );
