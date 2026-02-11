@@ -14,7 +14,12 @@ const Contact = () => {
     let form = e.target;
 
     emailjs
-      .sendForm('service_ybl1wkh', 'template_t59366v', form, 'gwdOICZ7xweH2po52')
+      .sendForm(
+        process.env.REACT_APP_EMAIL_SERVICE_ID,
+        process.env.REACT_APP_EMAIL_TEMPLATE_ID,
+        form,
+        process.env.REACT_APP_EMAIL_PUBLIC_KEY
+      )
       .then(
         result => {
           console.log(result.text);

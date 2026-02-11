@@ -142,14 +142,13 @@ const Portfolio = () => {
             y: 0,
             opacity: 1,
             scale: 1,
-            duration: 1,
-            stagger: 0.3,
+            duration: 0.8,
+            stagger: 0.15,
             ease: 'power3.out',
             scrollTrigger: {
               trigger: bestProjectsRef.current,
               start: 'top 80%',
-              end: 'bottom 20%',
-              toggleActions: 'play none none reverse',
+              toggleActions: 'play none none none',
             },
           }
         );
@@ -166,13 +165,13 @@ const Portfolio = () => {
           {
             y: 0,
             opacity: 1,
-            duration: 0.8,
-            stagger: 0.15,
+            duration: 0.6,
+            stagger: 0.08,
             ease: 'power2.out',
             scrollTrigger: {
               trigger: projectsGridRef.current,
               start: 'top 80%',
-              toggleActions: 'play none none reverse',
+              toggleActions: 'play none none none',
             },
           }
         );
@@ -183,8 +182,8 @@ const Portfolio = () => {
         gsap.from(statsRef.current.children, {
           opacity: 0,
           y: 30,
-          duration: 0.6,
-          stagger: 0.1,
+          duration: 0.5,
+          stagger: 0.08,
           ease: 'power2.out',
           scrollTrigger: {
             trigger: statsRef.current,
@@ -198,7 +197,7 @@ const Portfolio = () => {
         gsap.from(ctaRef.current, {
           opacity: 0,
           y: 50,
-          duration: 0.8,
+          duration: 0.6,
           ease: 'power3.out',
           scrollTrigger: {
             trigger: ctaRef.current,

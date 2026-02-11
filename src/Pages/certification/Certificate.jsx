@@ -1,36 +1,45 @@
-import  { useEffect, useRef } from "react";
-import "./certificate.css";
-import Container from "../../Components/Container";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/all";
+import { useEffect, useRef } from 'react';
+import './certificate.css';
+import Container from '../../Components/Container';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/all';
+
+// Register GSAP plugin at module level (NOT inside component)
+gsap.registerPlugin(ScrollTrigger);
 
 const Certificate = () => {
-  gsap.registerPlugin(ScrollTrigger);
-
   const containerRef = useRef(null);
 
   useEffect(() => {
-    const textElements = gsap.utils.toArray(".text");
+    const textElements = gsap.utils.toArray('.text');
 
-    textElements.forEach(text => {
-      gsap.to(text, {
-        backgroundSize: "100%",
-        ease: "none",
-        scrollTrigger: {
-          trigger: text,
-          start: "center 80%",
-          end: "center 20%",
-          scrub: true,
-        },
+    // Create GSAP context for proper cleanup
+    const ctx = gsap.context(() => {
+      textElements.forEach(text => {
+        gsap.to(text, {
+          backgroundSize: '100%',
+          ease: 'none',
+          scrollTrigger: {
+            trigger: text,
+            start: 'center 80%',
+            end: 'center 20%',
+            scrub: true,
+          },
+        });
       });
-    });
+    }, containerRef);
+
+    // Cleanup function to prevent memory leaks
+    return () => {
+      ctx.revert();
+    };
   }, []);
 
   return (
     <Container>
       <div className="certificate my-16" ref={containerRef}>
         <h1 className="text-5xl lg:text-7xl font-bold bg-gradient-to-r from-white via-blue-200 to-blue-400 bg-clip-text text-transparent text-center mb-6">
-          All Cradintional
+          All Credentials
         </h1>
         <h1 className="text">
           higher secondary certificate<span>LSD Collage</span>

@@ -1,7 +1,13 @@
 import { Link, ExternalLink } from 'lucide-react';
+import { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import salaTech from '../../assets/protfolio-image/saralTech.png';
 import travent from '../../assets/protfolio-image/travent.png';
 import './Experience.css';
+
+// Register GSAP plugin at module level
+gsap.registerPlugin(ScrollTrigger);
 
 const prof_experience = [
   {
@@ -34,8 +40,43 @@ const prof_experience = [
 ];
 
 export const Experiences = () => {
+  const containerRef = useRef(null);
+
+  // Add scroll animations
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const cards = gsap.utils.toArray('.exp_card_wrapper');
+
+      cards.forEach((card) => {
+        gsap.fromTo(
+          card,
+          {
+            opacity: 0,
+            y: 50,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 80%',
+              toggleActions: 'play none none reverse',
+            },
+          }
+        );
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <div className="text-white flex flex-col items-center justify-center  py-16">
+    <div
+      className="text-white flex flex-col items-center justify-center  py-16"
+      ref={containerRef}
+    >
       {/* Section Header */}
       <div className="text-center mb-16">
         <h1 className="text-5xl lg:text-7xl font-bold bg-gradient-to-r from-white via-blue-200 to-blue-400 bg-clip-text text-transparent mb-4">

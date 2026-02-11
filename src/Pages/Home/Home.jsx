@@ -17,8 +17,8 @@ const Home = () => {
       <Experiences />
       <Portfolio />
       <Certificate />
-      <Contact />
       <LinkedInRecommendations />
+      <Contact />
     </main>
   );
 };
