@@ -165,7 +165,7 @@ export const LinkedInRecommendations = () => {
   }, [isReady]);
 
   return (
-    <div className="bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 min-h-screen ">
+    <div className=" ">
       {/* Header Section */}
       <div className="text-center px-4 pt-32 pb-16">
         <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/10 rounded-full border border-blue-500/20 mb-6">

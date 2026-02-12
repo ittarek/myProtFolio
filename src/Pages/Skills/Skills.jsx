@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import Tilt from 'react-parallax-tilt';
 import Container from '../../Components/Container';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -9,34 +8,6 @@ import { DEVELOPMENT_SKILLS } from './DEVELOPMENT_SKILLS';
 gsap.registerPlugin(ScrollTrigger);
 
 const Skills = () => {
-  const [perspective, setPerspective] = useState(getPerspective());
-  const [isMobile, setIsMobile] = useState(false);
-
-  function getPerspective() {
-    const width = window.innerWidth;
-    if (width >= 1280) return 3000;
-    if (width >= 768) return 2500;
-    return 18000;
-  }
-
-  // Check if device is mobile
-  function checkIsMobile() {
-    return window.innerWidth < 768; // Mobile breakpoint
-  }
-
-  useEffect(() => {
-    // Initial check
-    setIsMobile(checkIsMobile());
-
-    const handleResize = () => {
-      setPerspective(getPerspective());
-      setIsMobile(checkIsMobile());
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
   // Animate skill bars on scroll
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -98,7 +69,7 @@ const Skills = () => {
 
       // Animate skill bars with smooth fill
       const skills = document.querySelectorAll('.skill-bar');
-      skills.forEach((skill) => {
+      skills.forEach(skill => {
         gsap.fromTo(
           skill,
           { width: '0%' },
@@ -178,7 +149,7 @@ const Skills = () => {
 
   // Skills Card Content
   const SkillsContent = () => (
-    <div className="relative border border-white/10 rounded-2xl bg-gradient-to-br from-slate-900/50 via-slate-800/30 to-slate-900/50 backdrop-blur-sm p-6 md:p-8 lg:p-10 shadow-2xl">
+    <div className="relative border border-white/10 rounded-2xl bg-gradient-to-br from-slate-900/50 via-slate-800/30 to-slate-900/50 backdrop-blur-sm p-6 md:p-8 lg:p-10 shadow-2xl transition-all duration-500 hover:shadow-purple-500/20">
       {/* Background Gradient Effect */}
       <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-blue-500/5 rounded-2xl pointer-events-none"></div>
 
@@ -234,7 +205,7 @@ const Skills = () => {
 
   return (
     <Container>
-      <main className="mx-auto flex flex-col w-full  py-12 md:py-20">
+      <main className="mx-auto flex flex-col w-full py-12 md:py-20">
         {/* Header Section */}
         <div className="flex space-x-3 md:space-x-10 mb-12 skills-header">
           <div className="flex flex-col items-center">
@@ -276,27 +247,9 @@ const Skills = () => {
           </div>
         </div>
 
-        {/* Skills Cards - Conditional Tilt */}
+        {/* Skills Cards - No Tilt Effect */}
         <div className="skills-container">
-          {isMobile ? (
-            // Mobile: No Tilt Effect
-            <div className="transition-all duration-500">
-              <SkillsContent />
-            </div>
-          ) : (
-            // Desktop & Tablet: With Tilt Effect
-            <Tilt
-              className="parallax-effect transition-all duration-500 hover:scale-[1.01]"
-              perspective={perspective}
-              glareEnable={true}
-              glareMaxOpacity={0.3}
-              glareColor="#ffffff"
-              glareBorderRadius="12px"
-              scale={1.0}
-              gyroscope={true}>
-              <SkillsContent />
-            </Tilt>
-          )}
+          <SkillsContent />
         </div>
 
         {/* Bottom Divider */}

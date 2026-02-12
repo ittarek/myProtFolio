@@ -19,7 +19,7 @@ const Home = () => {
   return (
     <main className="-mt-[80px] h-full -mb-[30px]">
       <Banner />
-      <Services />
+      {/* <Services /> */}
       <Skills />
       <Experiences />
       <Portfolio />
@@ -29,8 +29,8 @@ const Home = () => {
       <SocialProof />
       <FAQ />
       <CTA />
-      <LinkedInRecommendations />
       <Contact />
+      <LinkedInRecommendations />
     </main>
   );
 };
