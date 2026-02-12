@@ -28,7 +28,7 @@ const Home = () => {
       <Process />
       {/* <SocialProof /> */}
       <FAQ />
-      <CTA />
+      {/* <CTA /> */}
       <Contact />
       <LinkedInRecommendations />
     </main>
