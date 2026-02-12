@@ -26,7 +26,7 @@ const Home = () => {
       <TechStack />
       <Certificate />
       <Process />
-      <SocialProof />
+      {/* <SocialProof /> */}
       <FAQ />
       <CTA />
       <Contact />
