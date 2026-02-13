@@ -9,8 +9,6 @@ import { services } from './ServicesData';
 gsap.registerPlugin(ScrollTrigger);
 
 const Services = React.memo(() => {
-  console.log('2 service');
-
   const containerRef = useRef(null);
   const headingRef = useRef(null);
 

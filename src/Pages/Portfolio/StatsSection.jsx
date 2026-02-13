@@ -6,7 +6,7 @@ export const StatsSection = ({ projectData, statsRef, bestProjects }) => {
       <div ref={statsRef} className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
         <div className="space-y-2">
           <div className="text-3xl font-bold text-white">
-            {projectData.length + bestProjects.length}+
+            15+
           </div>
           <div className="text-gray-400">Projects Completed</div>
         </div>

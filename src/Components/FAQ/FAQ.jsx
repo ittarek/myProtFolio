@@ -158,44 +158,53 @@ const FAQ = () => {
     <>
       <Helmet>
         <title>FAQ - Md Tariqul Islam | Common Questions</title>
-        <meta name="description" content="Frequently asked questions about web development services, pricing, process, timeline, and project requirements." />
-        <meta name="keywords" content="FAQ, web development questions, project timeline, development cost, hiring developer" />
+        <meta
+          name="description"
+          content="Frequently asked questions about web development services, pricing, process, timeline, and project requirements."
+        />
+        <meta
+          name="keywords"
+          content="FAQ, web development questions, project timeline, development cost, hiring developer"
+        />
         <meta property="og:title" content="Frequently Asked Questions" />
-        <meta property="og:description" content="Answers to common questions about web development and project collaboration." />
+        <meta
+          property="og:description"
+          content="Answers to common questions about web development and project collaboration."
+        />
         <meta property="og:type" content="website" />
         <link rel="canonical" href="https://tareq.netlify.app/faq" />
       </Helmet>
       <Container>
         <div ref={containerRef} className="py-16 md:py-24">
-        {/* Header */}
-        <div ref={headingRef} className="text-center mb-16">
-          <h2 className="text-5xl lg:text-7xl font-bold bg-gradient-to-r from-white via-blue-200 to-blue-400 bg-clip-text text-transparent mb-4">
-            Frequently Asked Questions
-          </h2>
-          <p className="text-lg text-gray-400 max-w-3xl mx-auto">
-            Got questions? Here are some of the most common ones I get asked about my
-            services.
-          </p>
-        </div>
+          {/* Header */}
+          <div ref={headingRef} className="text-center mb-16">
+            <h2 className="text-5xl lg:text-7xl font-bold bg-gradient-to-r from-white via-blue-200 to-blue-400 bg-clip-text text-transparent mb-4">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-lg text-gray-400 max-w-3xl mx-auto">
+              Got questions? Here are some of the most common ones I get asked about my
+              services.
+            </p>
+          </div>
 
-        {/* FAQ Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-5xl mx-auto">
-          {faqs.map((faq, index) => (
-            <FAQItem key={faq.id} faq={faq} index={index} />
-          ))}
-        </div>
+          {/* FAQ Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-5xl mx-auto">
+            {faqs.map((faq, index) => (
+              <FAQItem key={faq.id} faq={faq} index={index} />
+            ))}
+          </div>
 
-        {/* CTA */}
-        <div className="text-center mt-16 p-8 rounded-xl bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20">
-          <p className="text-gray-300 mb-4">Didn't find your answer?</p>
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/50">
-            Get in touch
-          </a>
+          {/* CTA */}
+          <div className="text-center mt-16 p-8 rounded-xl bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20">
+            <p className="text-gray-300 mb-4">Didn't find your answer?</p>
+            <a
+              href="https://www.linkedin.com/in/md-tariqul-islam-ab42b61a1/"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/50">
+              Get in touch
+            </a>
+          </div>
         </div>
-      </div>
-    </Container>
+      </Container>
     </>
   );
 };
