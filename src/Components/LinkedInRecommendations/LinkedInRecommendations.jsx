@@ -5,58 +5,61 @@ import { Linkedin, Quote } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
+import traventCEO from '../../assets/ClientImage/ceo at travent.png';
+import assadalauddin from '../../assets/ClientImage/assadAlauddin.png';
+import jubaerImage from '../../assets/ClientImage/jubaer Ibn Zahir.png';
+import MehediHasan from '../../assets/ClientImage/mehedi.png';
+
 const recommendations = [
   {
     id: 1,
-    name: 'John Doe',
+    name: 'Faisal Alhosani',
     position: 'CEO',
-    company: 'SaralTech',
-    image:
-      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop',
-    linkedin: 'https://linkedin.com/in/johndoe',
-    date: 'December 2024',
+    company: 'Travent',
+    image: traventCEO,
+    linkedin: 'https://www.linkedin.com/in/faisal-alhosani/',
+    date: 'October 2025',
     recommendation:
-      'Tariqul is an exceptional developer with outstanding skills in React and Next.js. His ability to solve complex problems and deliver high-quality code consistently impressed our team. He was instrumental in developing our venture builder platform.',
-    relationship: "John was Tariqul's manager",
+      'I had the pleasure of working with Md. Tariqul Islam during his time as a Front-End Software Developer at Travent. Over the six months he spent with us, he proved to be a dedicated and talented developer who consistently delivered high-quality work.At Travent, Tariqul made a noticeable impact by improving the performance and responsiveness of our web platform. He designed clean, user-friendly interfaces using React.js and introduced reusable components and custom hooks that significantly enhanced the scalability and maintainability of our code. His ability to apply the right data structures and algorithms helped optimize key parts of the application.What I appreciated most was his collaborative attitude and eagerness to grow. He worked well with both the tech and product teams, welcomed feedback with a positive mindset, and was always ready to help others. His problem-solving skills and attention to detail were a real asset to our team.I fully recommend Tariqul for any front-end development opportunity. He would be a strong addition to any team looking for someone reliable, skilled, and team-oriented.',
+    relationship:
+      "Faisal Alhosani was Tariqul's CEO at Travent and worked closely with him on multiple projects",
   },
   {
     id: 2,
-    name: 'Jane Smith',
-    position: 'CTO',
-    company: 'Travent',
-    image:
-      'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop',
-    linkedin: 'https://linkedin.com/in/janesmith',
-    date: 'January 2025',
+    name: 'Assadaldin Osman',
+    position: 'CEO',
+    company: 'Nilvion',
+    image: assadalauddin,
+    date: 'October 2025',
+    linkedin: 'https://www.linkedin.com/in/assadaldin/',
     recommendation:
-      'Working with Tariqul was a fantastic experience. His frontend expertise, particularly with React and Tailwind CSS, helped us deliver our booking platform ahead of schedule. He has excellent communication skills.',
-    relationship: 'Jane worked directly with Tariqul',
+      'I had the pleasure of working with Md. Tariqul Islam as a Front-End Software Developer for around 6 months in our company. During this time, he consistently demonstrated professionalism, creativity, and a strong command of front-end technologies.Tariqul played a key role in improving the performance of our website, designing user-friendly UIs, and building responsive components using React.js. He also developed several reusable and custom hooks, which significantly enhanced the efficiency and maintainability of our codebase.Moreover, he applied data structure and algorithm knowledge to optimize rendering and data processing. His approach to data fetching was efficient and scalable, and he implemented modern error-handling techniques and followed industry-standard best practices in his coding style.His dedication, problem-solving ability, and teamwork were truly impressive. I highly recommend him for any front-end development role. He would be a valuable asset to any team.',
+    relationship: 'Assadaldin Osman worked directly with Tariqul',
   },
   {
     id: 3,
-    name: 'Mike Johnson',
-    position: 'Senior Developer',
-    company: 'SaralTech',
-    image:
-      'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop',
-    linkedin: 'https://linkedin.com/in/mikejohnson',
+    name: 'Jubaer Ibn Zahir',
+    position: ' Project Manager',
+    company: 'Programming hero',
+    image: jubaerImage,
+    linkedin: 'https://www.linkedin.com/in/jubaer-ibn-zahir-9471841aa/',
     date: 'November 2024',
     recommendation:
-      "Tariqul is a skilled developer who consistently delivers exceptional work. His knowledge of modern web technologies made collaboration seamless. He's a team player who always goes the extra mile.",
-    relationship: 'Mike worked with Tariqul on the same team',
+      'I have mentored Md Tariqul Islam in my boot camp for the past few months. He is a very productive and multi-skilled person with vast knowledge. He is a careful, active, self-motivated, deadline-oriented, passionate, intelligent team player, and has a great vision for his work. His focus keeps everything moving smoothly; he makes sure all the deadlines are met and that whatever project he is working on meets the highest standards. Thanks to his interpersonal skills, he has excellent relations with team members and the mentor(me). Highly recommended.',
+    relationship:
+      'Jubaer Ibn Zahir Was Mentor of Tariqul Islam in Programming Hero Bootcamp',
   },
   {
     id: 4,
-    name: 'Sarah Williams',
-    position: 'Product Manager',
-    company: 'Travent',
-    image:
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop',
-    linkedin: 'https://linkedin.com/in/sarahwilliams',
-    date: 'October 2024',
+    name: 'Mehedi Hasan',
+    position: 'Software Developer',
+    company: 'Horizon Plus',
+    image: MehediHasan,
+    date: 'December 2024',
+    linkedin: 'https://www.linkedin.com/in/mehedi1803hasan/',
     recommendation:
-      'Tariqul demonstrated exceptional technical skills and professionalism throughout our project. His attention to detail and commitment to delivering pixel-perfect implementations made him stand out.',
-    relationship: 'Sarah managed Tariqul directly',
+      'Md Tariqul is a talented MERN stack frontend developer known for his hard work and eagerness to learn new technologies. As a supportive and reliable team player, I wish him continued success in all his future endeavors.',
+    relationship: 'Mehedi Hasan Work on same BootCamp with Tariqul',
   },
 ];
 
@@ -187,7 +190,7 @@ export const LinkedInRecommendations = () => {
         {recommendations.map((rec, index) => (
           <div
             key={rec.id}
-            className="recommendation-card relative w-full max-w-[900px] mx-auto bg-white min-h-[400px] mb-[200px] p-6 md:p-10 lg:p-12 rounded-3xl md:rounded-[40px] shadow-2xl"
+            className="recommendation-card relative w-full max-w-[900px] mx-auto bg-white min-h-[400px] h-[25vh] mb-[200px] p-6 md:p-10 lg:p-12 rounded-3xl md:rounded-[40px] shadow-2xl"
             style={{
               backfaceVisibility: 'hidden',
               transformStyle: 'preserve-3d',
@@ -243,7 +246,7 @@ export const LinkedInRecommendations = () => {
 
                 {/* Recommendation Text */}
                 <div className="flex-1 overflow-y-auto pr-2">
-                  <p className="text-gray-700 text-sm md:text-base lg:text-lg leading-relaxed">
+                  <p className="text-gray-700 text-sm md:text-base lg:text-lg leading-relaxed eclipse-5">
                     "{rec.recommendation}"
                   </p>
                 </div>
