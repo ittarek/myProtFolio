@@ -19,16 +19,16 @@ const Home = () => {
   return (
     <main className="-mt-[80px] h-full -mb-[30px]">
       <Banner />
-      {/* <Services /> */}
+      <Services />
       <Skills />
       <Experiences />
       <Portfolio />
       <TechStack />
       <Certificate />
       <Process />
-      {/* <SocialProof /> */}
+      <SocialProof />
       <FAQ />
-      {/* <CTA /> */}
+      <CTA />
       <Contact />
       <LinkedInRecommendations />
     </main>
