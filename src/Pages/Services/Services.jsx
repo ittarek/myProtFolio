@@ -12,10 +12,10 @@ const services = [
   {
     id: 1,
     icon: Code,
-    title: 'Full Stack Development',
+    title: 'Frontend Development',
     description:
       'End-to-end web application development using modern technologies like React, Next.js, Node.js, and MongoDB. Building scalable, maintainable solutions.',
-    highlights: ['React/Next.js', 'Node.js/Express', 'MongoDB', 'PostgreSQL'],
+    highlights: ['React/Next.js', 'Node.js/Express', 'MongoDB', 'RESTful APIs'],
   },
   {
     id: 2,
@@ -47,7 +47,7 @@ const services = [
     title: 'Security & Best Practices',
     description:
       'Implementing security best practices and following industry standards. Secure authentication and data protection.',
-    highlights: ['Authentication', 'CORS', 'Input Validation', 'HTTPS'],
+    highlights: ['Authentication', 'CORS', 'Input Validation', 'HTTPS', "Firebase Security Rules"],
   },
   {
     id: 6,
