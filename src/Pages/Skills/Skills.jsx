@@ -154,27 +154,6 @@ const Skills = () => {
       <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-blue-500/5 rounded-2xl pointer-events-none"></div>
 
       <div className="relative z-10 flex flex-col lg:flex-row gap-10 lg:gap-16">
-        {/* Tools & Design Skills */}
-        <div className="w-full lg:w-1/2">
-          <div className="mb-8">
-            <div className="flex items-center gap-3 mb-2">
-              <span className="text-3xl">🛠️</span>
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
-                Tools & Design
-              </h2>
-            </div>
-            <p className="text-sm text-gray-400 ml-12">
-              Design and development tools I use daily
-            </p>
-          </div>
-
-          <div className="flex flex-col gap-6">
-            {TOOLS_SKILLS.map(skill => (
-              <SkillCard key={skill.id} skill={skill} showIcon={true} />
-            ))}
-          </div>
-        </div>
-
         {/* Development & Coding Skills */}
         <div className="w-full lg:w-1/2">
           <div className="mb-8">
@@ -192,6 +171,26 @@ const Skills = () => {
           <div className="flex flex-col gap-6">
             {DEVELOPMENT_SKILLS.map(skill => (
               <SkillCard key={skill.id} skill={skill} />
+            ))}
+          </div>
+        </div>
+        {/* Tools & Design Skills */}
+        <div className="w-full lg:w-1/2">
+          <div className="mb-8">
+            <div className="flex items-center gap-3 mb-2">
+              <span className="text-3xl">🛠️</span>
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
+                Tools & Design
+              </h2>
+            </div>
+            <p className="text-sm text-gray-400 ml-12">
+              Design and development tools I use daily
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-6">
+            {TOOLS_SKILLS.map(skill => (
+              <SkillCard key={skill.id} skill={skill} showIcon={true} />
             ))}
           </div>
         </div>

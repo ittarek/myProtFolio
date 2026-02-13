@@ -75,8 +75,7 @@ export const Experiences = () => {
   return (
     <div
       className="text-white flex flex-col items-center justify-center  py-16"
-      ref={containerRef}
-    >
+      ref={containerRef}>
       {/* Section Header */}
       <div className="text-center mb-16">
         <h1 className="text-5xl lg:text-7xl font-bold bg-gradient-to-r from-white via-blue-200 to-blue-400 bg-clip-text text-transparent mb-4">
@@ -195,11 +194,11 @@ export const Experiences = () => {
                   <div className="connection_line"></div>
 
                   {/* Image Card */}
-                  <div className="image_card">
+                  <div className="image_card ">
                     <img
                       src={exp.image}
                       alt={`${exp.company} project screenshot`}
-                      className="w-full h-full object-cover rounded-lg"
+                      className="w-full h-full object-cover rounded-lg "
                       loading="lazy"
                     />
                     <div className="image_overlay">
