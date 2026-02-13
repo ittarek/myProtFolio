@@ -29,7 +29,11 @@ const Home = () => {
       <SocialProof />
       <FAQ />
       <CTA />
-      <Contact />
+      <section className="contact-section">
+        {' '}
+        <Contact />
+      </section>
+
       <LinkedInRecommendations />
     </main>
   );

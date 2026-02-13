@@ -91,7 +91,7 @@ const CTA = () => {
         <meta property="og:title" content="Transform Your Ideas into Reality" />
         <meta property="og:description" content="Let's collaborate and build something amazing together." />
         <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://tareq.netlify.app/start" />
+        <link rel="canonical" href="https://tareq.netlify.app/" />
       </Helmet>
       <Container>
         <div ref={containerRef} className="py-20 md:py-32">
@@ -135,15 +135,15 @@ const CTA = () => {
               {/* Stats before CTA */}
               <div className="grid grid-cols-3 gap-4 mb-12 max-w-2xl mx-auto">
                 <div className="p-4 rounded-lg bg-white/5 border border-white/10">
-                  <p className="text-2xl md:text-3xl font-bold text-blue-400">50+</p>
+                  <p className="text-2xl md:text-3xl font-bold text-blue-400">15+</p>
                   <p className="text-sm text-gray-400">Projects</p>
                 </div>
                 <div className="p-4 rounded-lg bg-white/5 border border-white/10">
-                  <p className="text-2xl md:text-3xl font-bold text-purple-400">30+</p>
+                  <p className="text-2xl md:text-3xl font-bold text-purple-400">5+</p>
                   <p className="text-sm text-gray-400">Clients</p>
                 </div>
                 <div className="p-4 rounded-lg bg-white/5 border border-white/10">
-                  <p className="text-2xl md:text-3xl font-bold text-pink-400">4+</p>
+                  <p className="text-2xl md:text-3xl font-bold text-pink-400">1+</p>
                   <p className="text-sm text-gray-400">Years</p>
                 </div>
               </div>
@@ -164,9 +164,9 @@ const CTA = () => {
             <p className="mt-8 text-gray-400 text-sm">
               Or email me directly at{' '}
               <a
-                href="mailto:your@email.com"
+                href="mailto:ittarek551@email.com"
                 className="text-blue-400 hover:text-blue-300 font-semibold transition-colors">
-                your@email.com
+                ittarek551@email.com
               </a>
             </p>
           </div>
@@ -174,7 +174,6 @@ const CTA = () => {
       </div>
     </Container>
     </>
-  );
-};
+   );};
 
 export default CTA;
