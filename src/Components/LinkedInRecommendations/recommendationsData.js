@@ -3,7 +3,6 @@ import assadalauddin from '../../assets/ClientImage/assadAlauddin.png';
 import jubaerImage from '../../assets/ClientImage/jubaer Ibn Zahir.png';
 import MehediHasan from '../../assets/ClientImage/mehedi.png';
 
-
 export const recommendationsData = [
   {
     id: 1,
