@@ -26,18 +26,24 @@ const Banner = React.memo(() => {
       });
 
       // Heading Big animation
-      tl.to(
-        headingBigRef.current,
-        {
-          duration: 1.5,
-          scale: 2,
-          transformOrigin: 'top left',
-          yoyo: true,
-          repeat: 1,
-        },
-        0.8
-      );
+      // ✅ Control start and end
+      // ✅ Start big, animate bigger, stay big
+      gsap.set(headingBigRef.current, {
+        scale: 1.5, // Start bigger
+      });
+      // ✅ Start at 2x (bigger!)
+      gsap.set(headingBigRef.current, {
+        scale: 2, // Was 1.5, now 2
+      });
 
+      // ✅ Pulse to 2.8x
+      tl.to(headingBigRef.current, {
+        scale: 2.8, // Bigger peak
+      })
+        // ✅ Return to 2x (stay big)
+        .to(headingBigRef.current, {
+          scale: 2,
+        });
       // Heading Small and Text animations
       [headingSmallRef.current, headingTextRef.current].forEach(el => {
         tl.to(el, { duration: 0.1, opacity: 0 }, 1.2)
@@ -59,10 +65,11 @@ const Banner = React.memo(() => {
             {/* Large "D" Background Text with Image Mask */}
             <h1
               ref={headingBigRef}
-              className="banner-mask-text absolute left-0 lg:left-0 top-0 -z-10 select-none pointer-events-none
-                         text-[160px] sm:text-[200px] md:text-[250px] lg:text-[280px] xl:text-[339px]
-                         leading-none font-normal uppercase opacity-60"
-              aria-label="Design">
+              className="banner-mask-text absolute left-0 lg:left-0 top-0 -z-10 select-none pointer-events-none font-extrabold 
+                         text-[160px]  md:text-[250px] lg:text-[280px] xl:text-[339px]
+                         leading-none text-red-600  uppercase opacity-60"
+              aria-label="Design"
+            >
               D
             </h1>
 

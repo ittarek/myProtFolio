@@ -2,7 +2,7 @@
 
 /* Large "D" Heading with Image Mask - Cannot be done with Tailwind alone */
 .banner-mask-text {
-  background-image: url(https://www.yudiz.com/codepen/interior-design/mask-img.jpg);
+  background-image: url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80');
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
