@@ -8,8 +8,6 @@ import Container from '../Container';
 gsap.registerPlugin(ScrollTrigger);
 
 const Banner = React.memo(() => {
-  console.log('1 Banner');
-
   const bannerImgRef = useRef(null);
   const headingBigRef = useRef(null);
   const headingSmallRef = useRef(null);

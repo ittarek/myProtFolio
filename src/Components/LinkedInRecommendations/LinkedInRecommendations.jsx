@@ -1,7 +1,7 @@
 import React, { useLayoutEffect, useRef, useState, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Linkedin, Quote } from 'lucide-react';
+import { Linkedin, LucideLinkedin, Quote } from 'lucide-react';
 import { recommendationsData } from './recommendationsData';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -181,9 +181,9 @@ export const LinkedInRecommendations = React.memo(() => {
                     href={rec.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 md:p-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-colors flex-shrink-0"
+                    className="p-2 md:p-3 bg-blue-600 z-10 hover:bg-blue-700 text-white rounded-full transition-colors flex-shrink-0"
                     aria-label={`View ${rec.name}'s LinkedIn profile`}>
-                    <Linkedin size={16} className="md:w-5 md:h-5" />
+                    <LucideLinkedin size={16} className="md:w-5 md:h-5" /> 
                   </a>
                 </div>
 
