@@ -4,7 +4,9 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Container from '../../Components/Container';
 import './SocialProof.css';
-
+import traventCEO from '../../assets/ClientImage/ceo at travent.png';
+import assadalauddin from '../../assets/ClientImage/assadAlauddin.png';
+import jubaerImage from '../../assets/ClientImage/jubaer Ibn Zahir.png';
 gsap.registerPlugin(ScrollTrigger);
 
 const companies = [
@@ -22,7 +24,7 @@ const testimonials = [
     name: 'Jubaer Ibn Zahir',
     role: 'Project Manager',
     company: 'Programming Hero',
-    image: '👩‍💼',
+    image: jubaerImage,
     text: 'Excellent developer! Completed our project on time with amazing quality. Highly recommend!',
     rating: 5,
   },
@@ -31,7 +33,7 @@ const testimonials = [
     name: 'Faisal Alhosani',
     role: 'CEO at Travent',
     company: 'Tourism Platform',
-    image: '👨‍💻',
+    image: traventCEO,
     text: 'Great communication and technical skills. Made our complex requirements seem simple.',
     rating: 5,
   },
@@ -40,7 +42,7 @@ const testimonials = [
     name: 'Assadaldin Osman',
     role: 'Founder at Nilvion',
     company: 'Design Agency',
-    image: '👩‍🎨',
+    image: assadalauddin,
     text: 'Perfect collaboration! Turned our designs into reality flawlessly. 10/10 experience.',
     rating: 5,
   },
