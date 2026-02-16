@@ -190,7 +190,7 @@ const SocialProof = () => {
 
                 {/* Author */}
                 <div className="flex items-center gap-4">
-                  <div className="text-3xl">{testimonial.image}</div>
+                  <img src={testimonial.image} alt={testimonial.name} className="w-12 h-12 rounded-full object-cover" />
                   <div>
                     <p className="font-bold text-white">{testimonial.name}</p>
                     <p className="text-sm text-gray-400">
