@@ -28,7 +28,8 @@ const SectionHeader = lazy(() =>
 // Images
 import ProtFolio1 from '../../../src/assets/protfolio-image/1assignment-1.png';
 import protFolio2 from '../../assets/protfolio-image/2assignment-2.png';
-import protFolio3 from '../../assets/protfolio-image/3assignment-3.png';
+import protFolio3 from '../../assets/protfolio-image/Capture.jfif';
+// import protFolio3 from '../../assets/protfolio-image/3assignment-3.JPG';
 import protFolioNews from '../../assets/protfolio-image/nextJs.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
