@@ -1,41 +1,58 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import MainLayOut from '../LayOut/MainLayOut';
+
+// ✅ Lazy load pages
 const LazyHome = React.lazy(() => import('../Pages/Home/Home'));
-// import About from "../Pages/About/About";
-const LazyValueProgress = React.lazy(
-  () => import('../Components/ProgressBar/ValueProgress')
-);
 const LazyPortfolio = React.lazy(() => import('../Pages/Portfolio/Portfolio'));
 const LazyAbout = React.lazy(() => import('../Pages/About/About'));
+
+// ✅ Simple loading component
+const PageLoader = () => (
+  <div className="min-h-screen flex items-center justify-center bg-black">
+    <div className="flex flex-col items-center gap-4">
+      <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+      <p className="text-white text-sm">Loading...</p>
+    </div>
+  </div>
+);
 
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <MainLayOut></MainLayOut>,
+    element: <MainLayOut />,
     children: [
       {
         path: '/',
         element: (
-          <React.Suspense fallback={<LazyValueProgress></LazyValueProgress>}>
-            <LazyHome></LazyHome>
-          </React.Suspense>
+          <Suspense fallback={<PageLoader />}>
+            <LazyHome />
+          </Suspense>
         ),
       },
       {
         path: '/myProtFolio',
         element: (
-          <React.Suspense fallback="Loading....">
-            <LazyPortfolio></LazyPortfolio>
-          </React.Suspense>
+          <Suspense fallback={<PageLoader />}>
+            <LazyPortfolio />
+          </Suspense>
         ),
       },
       {
         path: '/about',
         element: (
-          <React.Suspense fallback="Loading....">
-            <LazyAbout></LazyAbout>
-          </React.Suspense>
+          <Suspense fallback={<PageLoader />}>
+            <LazyAbout />
+          </Suspense>
+        ),
+      },
+      {
+        // ✅ Add 404 fallback
+        path: '*',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <LazyHome />
+          </Suspense>
         ),
       },
     ],
