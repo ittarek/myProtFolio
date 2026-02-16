@@ -1,98 +1,80 @@
-// vite.config.js - Performance Optimized
+// vite.config.js - Aggressive Code Splitting
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import { visualizer } from 'rollup-plugin-visualizer';
-import viteImagemin from 'vite-plugin-imagemin';
 
 export default defineConfig({
-  plugins: [
-    react(),
-
-    // ✅ Bundle analyzer
-    visualizer({
-      open: true,
-      gzipSize: true,
-      brotliSize: true,
-    }),
-
-    // ✅ Image optimization
-    viteImagemin({
-      gifsicle: {
-        optimizationLevel: 7,
-        interlaced: false,
-      },
-      optipng: {
-        optimizationLevel: 7,
-      },
-      mozjpeg: {
-        quality: 80, // Reduce from 100 to 80
-      },
-      pngquant: {
-        quality: [0.8, 0.9],
-        speed: 4,
-      },
-      svgo: {
-        plugins: [
-          {
-            name: 'removeViewBox',
-          },
-          {
-            name: 'removeEmptyAttrs',
-            active: false,
-          },
-        ],
-      },
-    }),
-  ],
+  plugins: [react()],
 
   build: {
-    // ✅ Target modern browsers
     target: 'es2015',
-
-    // ✅ Reduce chunk size warnings
-    chunkSizeWarningLimit: 1000,
+    chunkSizeWarningLimit: 500, // Warn at 500 KB instead of 1000 KB
 
     rollupOptions: {
       output: {
-        // ✅ Manual chunks for better code splitting
-        manualChunks: {
-          // Vendor chunks
-          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-          'gsap-vendor': ['gsap'],
-          'framer-vendor': ['framer-motion'],
+        manualChunks(id) {
+          // ✅ Split node_modules into smaller chunks
+          if (id.includes('node_modules')) {
+            // React core (always needed)
+            if (id.includes('react/') || id.includes('react-dom/')) {
+              return 'react-core';
+            }
 
-          // Feature chunks
-          icons: ['lucide-react'],
-         
-        },
+            // React Router (only for routing)
+            if (id.includes('react-router')) {
+              return 'react-router';
+            }
 
-        // ✅ Better file naming
-        chunkFileNames: 'assets/js/[name]-[hash].js',
-        entryFileNames: 'assets/js/[name]-[hash].js',
-        assetFileNames: ({ name }) => {
-          if (/\.(gif|jpe?g|png|svg|webp)$/.test(name ?? '')) {
-            return 'assets/images/[name]-[hash][extname]';
+            // GSAP animations
+            if (id.includes('gsap')) {
+              return 'gsap';
+            }
+
+            // Icons
+            if (id.includes('lucide-react')) {
+              return 'lucide';
+            }
+
+            // Framer Motion (if used)
+            if (id.includes('framer-motion')) {
+              return 'framer';
+            }
+
+            // All other node_modules
+            return 'vendor';
           }
-          if (/\.css$/.test(name ?? '')) {
-            return 'assets/css/[name]-[hash][extname]';
+
+          // ✅ Split your own code by routes/features
+          if (id.includes('/src/pages/')) {
+            const pageName = id.split('/pages/')[1].split('/')[0];
+            return `page-${pageName}`;
           }
-          return 'assets/[name]-[hash][extname]';
+
+          if (id.includes('/src/Components/')) {
+            const componentName = id.split('/Components/')[1].split('/')[0];
+            return `component-${componentName}`;
+          }
         },
       },
     },
 
-    // ✅ Minification
+    // ✅ More aggressive minification
     minify: 'terser',
     terserOptions: {
       compress: {
-        drop_console: true, // Remove console.logs in production
+        drop_console: true,
         drop_debugger: true,
+        pure_funcs: ['console.log', 'console.info'], // Remove specific console methods
+        passes: 2, // Run compression twice
+      },
+      mangle: {
+        safari10: true,
       },
     },
   },
 
   // ✅ Optimize dependencies
   optimizeDeps: {
-    include: ['react', 'react-dom', 'react-router-dom'],
+    include: ['react', 'react-dom'],
+    exclude: ['@vite/client', '@vite/env'], // Don't pre-bundle these
   },
 });

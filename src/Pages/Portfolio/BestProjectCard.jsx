@@ -35,6 +35,8 @@ export const BestProjectCard = ({ project, ActionButton, ExternalLink }) => {
               scrollBehavior: 'smooth',
             }}>
             <img
+              width="200"
+              height="200"
               src={project.image}
               alt={project.title}
               loading="lazy"

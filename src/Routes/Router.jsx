@@ -3,7 +3,9 @@ import { createBrowserRouter } from 'react-router-dom';
 import MainLayOut from '../LayOut/MainLayOut';
 const LazyHome = React.lazy(() => import('../Pages/Home/Home'));
 // import About from "../Pages/About/About";
-import ValueProgress from '../Components/ProgressBar/ValueProgress';
+const LazyValueProgress = React.lazy(
+  () => import('../Components/ProgressBar/ValueProgress')
+);
 const LazyPortfolio = React.lazy(() => import('../Pages/Portfolio/Portfolio'));
 const LazyAbout = React.lazy(() => import('../Pages/About/About'));
 
@@ -15,7 +17,7 @@ export const router = createBrowserRouter([
       {
         path: '/',
         element: (
-          <React.Suspense fallback={<ValueProgress></ValueProgress>}>
+          <React.Suspense fallback={<LazyValueProgress></LazyValueProgress>}>
             <LazyHome></LazyHome>
           </React.Suspense>
         ),
