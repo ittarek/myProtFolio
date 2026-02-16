@@ -63,7 +63,7 @@ export default defineConfig({
 
           // Feature chunks
           icons: ['lucide-react'],
-          forms: ['react-hook-form'],
+         
         },
 
         // ✅ Better file naming

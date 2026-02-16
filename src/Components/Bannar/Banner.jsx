@@ -24,7 +24,10 @@ const Banner = React.memo(() => {
         yoyo: true,
         repeat: 1,
       });
-
+if (headingBigRef.current) {
+  headingBigRef.current.style.width = '500px';
+  headingBigRef.current.style.height = '500px';
+}
       // Heading Big animation
       // ✅ Control start and end
       // ✅ Start big, animate bigger, stay big
@@ -68,8 +71,7 @@ const Banner = React.memo(() => {
               className="banner-mask-text absolute left-0 lg:left-0 top-0 -z-10 select-none pointer-events-none font-extrabold 
                          text-[160px]  md:text-[250px] lg:text-[280px] xl:text-[339px]
                          leading-none text-red-600  uppercase opacity-60"
-              aria-label="Design"
-            >
+              aria-label="Design">
               D
             </h1>
 
@@ -114,7 +116,7 @@ const Banner = React.memo(() => {
                 className="w-full h-full object-cover object-center rounded-lg shadow-2xl
                            transform translate-z-0 will-change-transform"
                 alt="Tariqul Islam Portfolio"
-                loading="lazy"
+                fetchpriority="high"
               />
             </div>
           </div>
