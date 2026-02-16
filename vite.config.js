@@ -1,80 +1,98 @@
-// vite.config.js - Aggressive Code Splitting
+// vite.config.js - Performance Optimized
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import { visualizer } from 'rollup-plugin-visualizer';
+import viteImagemin from 'vite-plugin-imagemin';
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+
+    // ✅ Bundle analyzer
+    visualizer({
+      open: true,
+      gzipSize: true,
+      brotliSize: true,
+    }),
+
+    // ✅ Image optimization
+    viteImagemin({
+      gifsicle: {
+        optimizationLevel: 7,
+        interlaced: false,
+      },
+      optipng: {
+        optimizationLevel: 7,
+      },
+      mozjpeg: {
+        quality: 80, // Reduce from 100 to 80
+      },
+      pngquant: {
+        quality: [0.8, 0.9],
+        speed: 4,
+      },
+      svgo: {
+        plugins: [
+          {
+            name: 'removeViewBox',
+          },
+          {
+            name: 'removeEmptyAttrs',
+            active: false,
+          },
+        ],
+      },
+    }),
+  ],
 
   build: {
+    // ✅ Target modern browsers
     target: 'es2015',
-    chunkSizeWarningLimit: 500, // Warn at 500 KB instead of 1000 KB
+
+    // ✅ Reduce chunk size warnings
+    chunkSizeWarningLimit: 1000,
 
     rollupOptions: {
       output: {
-        manualChunks(id) {
-          // ✅ Split node_modules into smaller chunks
-          if (id.includes('node_modules')) {
-            // React core (always needed)
-            if (id.includes('react/') || id.includes('react-dom/')) {
-              return 'react-core';
-            }
+        // ✅ Manual chunks for better code splitting
+        manualChunks: {
+          // Vendor chunks
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'gsap-vendor': ['gsap'],
+          'framer-vendor': ['framer-motion'],
 
-            // React Router (only for routing)
-            if (id.includes('react-router')) {
-              return 'react-router';
-            }
+          // Feature chunks
+          icons: ['lucide-react'],
+         
+        },
 
-            // GSAP animations
-            if (id.includes('gsap')) {
-              return 'gsap';
-            }
-
-            // Icons
-            if (id.includes('lucide-react')) {
-              return 'lucide';
-            }
-
-            // Framer Motion (if used)
-            if (id.includes('framer-motion')) {
-              return 'framer';
-            }
-
-            // All other node_modules
-            return 'vendor';
+        // ✅ Better file naming
+        chunkFileNames: 'assets/js/[name]-[hash].js',
+        entryFileNames: 'assets/js/[name]-[hash].js',
+        assetFileNames: ({ name }) => {
+          if (/\.(gif|jpe?g|png|svg|webp)$/.test(name ?? '')) {
+            return 'assets/images/[name]-[hash][extname]';
           }
-
-          // ✅ Split your own code by routes/features
-          if (id.includes('/src/pages/')) {
-            const pageName = id.split('/pages/')[1].split('/')[0];
-            return `page-${pageName}`;
+          if (/\.css$/.test(name ?? '')) {
+            return 'assets/css/[name]-[hash][extname]';
           }
-
-          if (id.includes('/src/Components/')) {
-            const componentName = id.split('/Components/')[1].split('/')[0];
-            return `component-${componentName}`;
-          }
+          return 'assets/[name]-[hash][extname]';
         },
       },
     },
 
-    // ✅ More aggressive minification
+    // ✅ Minification
     minify: 'terser',
     terserOptions: {
       compress: {
-        drop_console: true,
+        drop_console: true, // Remove console.logs in production
         drop_debugger: true,
-        pure_funcs: ['console.log', 'console.info'], // Remove specific console methods
-        passes: 2, // Run compression twice
-      },
-      mangle: {
-        safari10: true,
       },
     },
   },
 
   // ✅ Optimize dependencies
   optimizeDeps: {
-    include: ['react', 'react-dom'],
-    exclude: ['@vite/client', '@vite/env'], // Don't pre-bundle these
+    include: ['react', 'react-dom', 'react-router-dom'],
   },
 });

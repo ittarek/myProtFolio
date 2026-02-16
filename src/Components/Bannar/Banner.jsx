@@ -109,8 +109,8 @@ if (headingBigRef.current) {
                          mx-auto lg:mx-0">
               <img
                 src={myImg}
-                width={150}
-                height={150}
+                width="1920"
+                height="1080"
                 srcSet={`${myImg} 600w, ${myImg} 1200w`}
                 sizes="(max-width: 640px) 300px, (max-width: 768px) 400px, (max-width: 1024px) 500px, 700px"
                 className="w-full h-full object-cover object-center rounded-lg shadow-2xl
