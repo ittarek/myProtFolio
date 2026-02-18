@@ -58,63 +58,61 @@ const Banner = React.memo(() => {
 
   return (
     <Container>
-      <div className="relative overflow-hidden py-12 md:py-20 lg:py-24">
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-center">
-          {/* Text Section */}
-          <div className="relative lg:col-span-6 xl:col-span-5">
-            {/* Large D */}
-            <h1
-              ref={headingBigRef}
-              className="banner-mask-text absolute left-0 top-0 -z-10 select-none pointer-events-none
-                         text-[200px] sm:text-[250px] md:text-[300px] lg:text-[400px] xl:text-[500px]
+      <div className="relative overflow-hidden py-12 md:py-20 lg:py-24 z-10 flex justify-between items-center flex-col lg:flex-row gap-12">
+        {/* Text Section */}
+        <div className="relative ">
+          {/* Large D */}
+          <h1
+            ref={headingBigRef}
+            className="banner-mask-text absolute left-0 top-0 -z-10 select-none pointer-events-none
+                         text-[100px] md:text-[300px] lg:text-[180px] xl:text-[300px]
                          leading-none font-extrabold uppercase opacity-70"
-              style={{
-                width: '500px',
-                height: '500px',
-              }}
-              aria-label="Design">
-              D
-            </h1>
+            style={{
+              width: '500px',
+              height: '500px',
+            }}
+            aria-label="Design">
+            D
+          </h1>
 
-            {/* Main Text */}
-            <div className="relative pt-24 sm:pt-32 md:pt-40 lg:pt-48 overflow-hidden text-center lg:text-left">
-              <h2
-                ref={headingSmallRef}
-                className="relative mb-2 select-none text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl
+          {/* Main Text */}
+          <div className="relative pt-24 sm:pt-32 md:pt-40 lg:pt-48 overflow-hidden text-center lg:text-left">
+            <h2
+              ref={headingSmallRef}
+              className="relative mb-2 select-none text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl
                            leading-tight font-normal text-white">
-                Design a Space <br /> You Love.
-              </h2>
+              Design a Space <br /> You Love.
+            </h2>
 
-              <h3
-                ref={headingTextRef}
-                className="relative text-sm sm:text-base md:text-lg lg:text-xl
+            <h3
+              ref={headingTextRef}
+              className="relative text-sm sm:text-base md:text-lg lg:text-xl
                            leading-relaxed font-normal text-white/70">
-                Let's bring your creative <br /> imagination to reality.
-              </h3>
-            </div>
+              Let's bring your creative <br /> imagination to reality.
+            </h3>
           </div>
+        </div>
 
-          {/* Image Section */}
-          <div className="relative lg:col-span-6 xl:col-span-7 flex justify-center lg:justify-end">
-            <div
-              ref={bannerImgRef}
-              className="relative w-full max-w-[300px] sm:max-w-[400px] md:max-w-[500px] 
+        {/* Image Section */}
+      
+          <div
+            ref={bannerImgRef}
+            className="relative w-full mt-[10re] max-w-[300px] sm:max-w-[400px] md:max-w-[500px] 
                          lg:max-w-[600px] xl:max-w-[700px]
                          h-[300px] sm:h-[400px] md:h-[500px] 
                          lg:h-[550px] xl:h-[600px]
                          mx-auto lg:mx-0">
-              <img
-                src={myImg}
-                width="700"
-                height="600"
-                className="w-full h-full object-cover object-center rounded-lg shadow-2xl"
-                alt="Tariqul Islam Portfolio"
-                decoding="async"
-                fetchpriority="high"
-              />
-            </div>
+            <img
+              src={myImg}
+              width="700"
+              height="600"
+              className="w-full h-full object-cover object-center rounded-lg shadow-2xl"
+              alt="Tariqul Islam Portfolio"
+              decoding="async"
+              fetchpriority="high"
+            />
           </div>
-        </div>
+ 
       </div>
     </Container>
   );
