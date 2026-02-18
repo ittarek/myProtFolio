@@ -1,9 +1,8 @@
-import { useEffect, useRef, lazy, Suspense } from 'react';
+import { useRef, lazy, Suspense } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ExternalLink } from 'lucide-react';
 import Container from '../../Components/Container';
+import { useGSAP } from '../../Hooks/useGSAP';
 import './Portfolio.css';
 
 // ✅ Lazy load components
@@ -29,10 +28,7 @@ const SectionHeader = lazy(() =>
 import ProtFolio1 from '../../../src/assets/protfolio-image/1assignment-1.png';
 import protFolio2 from '../../assets/protfolio-image/2assignment-2.png';
 import protFolio3 from '../../assets/protfolio-image/Capture.jfif';
-// import protFolio3 from '../../assets/protfolio-image/3assignment-3.JPG';
 import protFolioNews from '../../assets/protfolio-image/nextJs.jpg';
-
-gsap.registerPlugin(ScrollTrigger);
 
 // ✅ Data outside component
 const bestProjects = [
@@ -112,7 +108,6 @@ const ActionButton = ({ href, icon: Icon, children, variant = 'primary' }) => {
   );
 };
 
-// ✅ Simple loading component
 const LoadingSkeleton = () => (
   <div className="animate-pulse space-y-8 max-w-7xl mx-auto">
     <div className="h-48 bg-gray-800 rounded-2xl"></div>
@@ -129,81 +124,91 @@ const Portfolio = () => {
   const statsRef = useRef(null);
   const ctaRef = useRef(null);
 
-  useEffect(() => {
-    // ✅ Wait for DOM to be ready
-    const timer = setTimeout(() => {
-      const ctx = gsap.context(() => {
-        // Best projects animation
-        if (bestProjectsRef.current) {
-          gsap.fromTo(
-            '.best_project_wrapper',
-            { y: 100, opacity: 0, scale: 0.95 },
-            {
-              y: 0,
-              opacity: 1,
-              scale: 1,
-              duration: 0.8,
-              stagger: 0.15,
-              ease: 'power3.out',
-              scrollTrigger: {
-                trigger: bestProjectsRef.current,
-                start: 'top 80%',
-                toggleActions: 'play none none none',
-              },
-            }
-          );
-        }
+  // ✅ Use deferred GSAP loading
+  useGSAP((gsap, ScrollTrigger) => {
+    // Best projects animation
+    if (bestProjectsRef.current) {
+      const cards = gsap.utils.toArray('.best_project_wrapper');
 
-        // Regular projects
-        if (projectsGridRef.current) {
-          gsap.fromTo(
-            '.project_card_wrapper',
-            { y: 80, opacity: 0 },
-            {
-              y: 0,
-              opacity: 1,
-              duration: 0.6,
-              stagger: 0.08,
-              scrollTrigger: {
-                trigger: projectsGridRef.current,
-                start: 'top 80%',
-              },
-            }
-          );
-        }
-
-        // Stats
-        if (statsRef.current && statsRef.current.children) {
-          gsap.from(statsRef.current.children, {
-            opacity: 0,
-            y: 30,
-            duration: 0.5,
-            stagger: 0.08,
+      cards.forEach((card, index) => {
+        gsap.fromTo(
+          card,
+          { y: 100, opacity: 0, scale: 0.95 },
+          {
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 0.8,
+            delay: index * 0.15,
+            ease: 'power3.out',
             scrollTrigger: {
-              trigger: statsRef.current,
-              start: 'top 85%',
+              trigger: card,
+              start: 'top 90%',
+              toggleActions: 'play none none none',
+              once: true,
             },
-          });
-        }
-
-        // CTA
-        if (ctaRef.current) {
-          gsap.from(ctaRef.current, {
-            opacity: 0,
-            y: 50,
-            duration: 0.6,
-            scrollTrigger: {
-              trigger: ctaRef.current,
-              start: 'top 85%',
-            },
-          });
-        }
+          }
+        );
       });
+    }
 
-      return () => ctx.revert();
-    }, 100);
+    // Regular projects
+    if (projectsGridRef.current) {
+      const cards = gsap.utils.toArray('.project_card_wrapper');
 
-    return () => clearTimeout(timer);
+      cards.forEach((card, index) => {
+        gsap.fromTo(
+          card,
+          { y: 80, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.6,
+            delay: index * 0.08,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 90%',
+              once: true,
+            },
+          }
+        );
+      });
+    }
+
+    // Stats
+    if (statsRef.current && statsRef.current.children) {
+      gsap.from(statsRef.current.children, {
+        opacity: 0,
+        y: 30,
+        duration: 0.5,
+        stagger: 0.08,
+        scrollTrigger: {
+          trigger: statsRef.current,
+          start: 'top 85%',
+          once: true,
+        },
+      });
+    }
+
+    // CTA
+    if (ctaRef.current) {
+      gsap.from(ctaRef.current, {
+        opacity: 0,
+        y: 50,
+        duration: 0.6,
+        scrollTrigger: {
+          trigger: ctaRef.current,
+          start: 'top 85%',
+          once: true,
+        },
+      });
+    }
+
+    // Cleanup
+    return () => {
+      ScrollTrigger.getAll().forEach(st => st.kill());
+    };
   }, []);
 
   return (
