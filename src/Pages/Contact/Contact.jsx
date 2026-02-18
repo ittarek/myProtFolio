@@ -23,17 +23,18 @@ const Contact = () => {
       .then(
         result => {
           console.log(result.text);
-          alert('Message sent successfully!'); // Success feedback
+          alert('Message sent successfully!');
+          form.reset(); // ✅ Clear form after success
         },
         error => {
           console.log(error.text);
-          alert('Failed to send message, please try again.'); // Error feedback
+          alert('Failed to send message, please try again.');
         }
       );
   };
 
   return (
-    <section className="contact  flex justify-center py-[50px]">
+    <section className="contact flex justify-center py-[50px]">
       {/* Contact me */}
       <div className="box">
         <div className="square" style={{ '--i': 0 }}></div>
@@ -42,51 +43,67 @@ const Contact = () => {
         <div className="square" style={{ '--i': 3 }}></div>
         <div className="square" style={{ '--i': 4 }}></div>
         <div className="square" style={{ '--i': 5 }}></div>
-        <div className="container w-full ">
+
+        <div className="container w-full">
           <h2 className="text-white text-center text-3xl my-6">Contact to Direct</h2>
-          <form onSubmit={sendEmail} className="form  w-full">
+
+          <form onSubmit={sendEmail} className="form w-full">
             {/* name */}
-            <div className="inputBx name   ">
-              <input id="name-input" type="text" name="name" required="required" />
-
+            <div className="inputBx name">
+              <input
+                id="name-input"
+                type="text"
+                name="name"
+                required
+                autoComplete="name"
+              />
               <span className="label-text text-white">Full Name</span>
-
-              {/* <i className="fas fa-key"></i> */}
             </div>
 
             {/* website */}
-            <div className="inputBx password ">
-              <input id="website-input" type="text" name="website" required="required" />
-              <span className="label-text text-white">website</span>
-
-              {/* <i className="fas fa-key"></i> */}
+            <div className="inputBx password">
+              <input
+                id="website-input"
+                type="text"
+                name="website"
+                required
+                autoComplete="url"
+              />
+              <span className="label-text text-white">Website</span>
             </div>
 
             {/* email */}
-            <div className="inputBx password ">
-              <input id="email-input" type="email" name="email" required="required" />{' '}
+            <div className="inputBx password">
+              <input
+                id="email-input"
+                type="email"
+                name="email"
+                required
+                autoComplete="email"
+              />
               <span className="label-text text-white">Email</span>
-              {/* <i className="fas fa-key"></i> */}
             </div>
+
             {/* message */}
             <div>
               <label className="label">
-                <span className="label-text text-white ">Message</span>
+                <span className="label-text text-white">Message</span>
               </label>
-              <input
-                type="text"
-                className="input input-bordered  mb-6 w-full h-44 rounded-lg"
+              <textarea
+                className="input input-bordered mb-6 w-full h-44 rounded-lg p-3"
                 name="message"
+                required
+                placeholder="Your message here..."
               />
             </div>
 
             {/* submit button */}
             <div className="form-control w-60 mb-16 lg:mb-0">
-              <button className="relative items-center justify-start inline-block px-9 py-3 overflow-hidden font-medium transition-all bg-gradient-to-r from-blue-600 to-teal-600 rounded-full group">
-                {/* White border that expands on hover */}
+              <button
+                type="submit"
+                className="relative items-center justify-start inline-block px-9 py-3 overflow-hidden font-medium transition-all bg-gradient-to-r from-blue-600 to-teal-600 rounded-full group">
                 <span className="absolute inset-0 border-0 group-hover:border-[33px] ease-linear duration-100 transition-all border-white rounded-full"></span>
 
-                {/* Arrow icon */}
                 <span className="absolute right-0 flex items-center justify-start w-10 h-10 duration-300 transform translate-x-full group-hover:translate-x-0 ease">
                   <svg
                     className="w-5 h-5 ml-3"
@@ -102,23 +119,24 @@ const Contact = () => {
                   </svg>
                 </span>
 
-                {/* Text with z-index to stay above the white border */}
-                <span className="relative z-10 w-full text-left  transition-colors duration-200 ease-in-out">
+                <span className="relative z-10 w-full text-left transition-colors duration-200 ease-in-out">
                   Send Message
                 </span>
               </button>
             </div>
           </form>
-        </div>{' '}
-        <div className="social-login flex flex-col  items-center">
-          <h3 className="">Connect in via</h3>
+        </div>
+
+        <div className="social-login flex flex-col items-center">
+          <h3>Connect via</h3>
 
           <div className="social-icons space-x-3 mr-11">
             <Link
               to=""
               onClick={() =>
                 window.open('https://www.facebook.com/profile.php?id=61555139918509')
-              }>
+              }
+              aria-label="Facebook">
               <FacebookIcon />
             </Link>
 
@@ -126,18 +144,26 @@ const Contact = () => {
               to=""
               onClick={() =>
                 window.open('https://www.linkedin.com/in/md-tariqul-islam-ab42b61a1/')
-              }>
+              }
+              aria-label="LinkedIn">
               <LinkedInIcon />
             </Link>
-            <Link to="" onClick={() => window.open('https://x.com/mdt423863')}>
+
+            <Link
+              to=""
+              onClick={() => window.open('https://x.com/mdt423863')}
+              aria-label="X (Twitter)">
               <XIcon />
             </Link>
-            <Link to="" onClick={() => window.open('https://github.com/ittarek')}>
+
+            <Link
+              to=""
+              onClick={() => window.open('https://github.com/ittarek')}
+              aria-label="GitHub">
               <GitHubIcon />
             </Link>
 
-            <a href="tel:+8801856838251" title="+8801856838251">
-              {' '}
+            <a href="tel:+8801856838251" title="+8801856838251" aria-label="Phone">
               <LocalPhoneIcon />
             </a>
           </div>
