@@ -1,13 +1,9 @@
-import { Link, ExternalLink } from 'lucide-react';
-import { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ExternalLink } from 'lucide-react';
+import { useRef } from 'react';
+import { useGSAP } from '../../Hooks/useGSAP';
 import salaTech from '../../assets/protfolio-image/saralTech.png';
 import travent from '../../assets/protfolio-image/travent.png';
 import './Experience.css';
-
-// Register GSAP plugin at module level
-gsap.registerPlugin(ScrollTrigger);
 
 const prof_experience = [
   {
@@ -42,39 +38,40 @@ const prof_experience = [
 export const Experiences = () => {
   const containerRef = useRef(null);
 
-  // Add scroll animations
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const cards = gsap.utils.toArray('.exp_card_wrapper');
+  // ✅ Use deferred GSAP loading
+  useGSAP((gsap, ScrollTrigger) => {
+    const cards = gsap.utils.toArray('.exp_card_wrapper');
 
-      cards.forEach((card) => {
-        gsap.fromTo(
-          card,
-          {
-            opacity: 0,
-            y: 50,
+    cards.forEach(card => {
+      gsap.fromTo(
+        card,
+        {
+          opacity: 0,
+          y: 50,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 80%',
+            toggleActions: 'play none none none',
           },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.7,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: card,
-              start: 'top 80%',
-              toggleActions: 'play none none none',
-            },
-          }
-        );
-      });
-    }, containerRef);
+        }
+      );
+    });
 
-    return () => ctx.revert();
+    // Optional cleanup
+    return () => {
+      ScrollTrigger.getAll().forEach(st => st.kill());
+    };
   }, []);
 
   return (
     <div
-      className="text-white flex flex-col items-center justify-center  py-16"
+      className="text-white flex flex-col items-center justify-center py-16"
       ref={containerRef}>
       {/* Section Header */}
       <div className="text-center mb-16">
@@ -85,10 +82,10 @@ export const Experiences = () => {
       </div>
 
       {/* Experience Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 items-center  lg:gap-12 max-w-7xl w-full ">
+      <div className="grid grid-cols-1 md:grid-cols-2 items-center lg:gap-12 max-w-7xl w-full">
         {prof_experience.map(exp => (
-          <div className="exp_card_wrapper relative min-h-[450px] " key={exp.id}>
-            <div className="exp_card md:h-[vh]  group relative bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 p-6 rounded-xl shadow-xl transition-all duration-500 hover:shadow-2xl hover:border-blue-500/50 cursor-pointer overflow-visible">
+          <div className="exp_card_wrapper relative min-h-[450px]" key={exp.id}>
+            <div className="exp_card md:h-[vh] group relative bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 p-6 rounded-xl shadow-xl transition-all duration-500 hover:shadow-2xl hover:border-blue-500/50 cursor-pointer overflow-visible">
               {/* Gradient Overlay on Hover */}
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-purple-500/0 group-hover:from-blue-500/5 group-hover:to-purple-500/5 rounded-xl transition-all duration-500"></div>
 
@@ -179,7 +176,7 @@ export const Experiences = () => {
                         <span className="font-medium">Old Version</span>
                       </a>
 
-                      <p className="text-md text-gray-500 italic pl-6 ">
+                      <p className="text-md text-gray-500 italic pl-6">
                         *New version may not be accessible due to project hold
                       </p>
                     </div>
@@ -187,19 +184,20 @@ export const Experiences = () => {
                 </div>
               </div>
 
-              {/* Hover Image - Only shows when hovering the card */}
+              {/* Hover Image */}
               <div className="hanging_image">
                 <div className="image_container">
-                  {/* Connection Line */}
                   <div className="connection_line"></div>
 
-                  {/* Image Card */}
-                  <div className="image_card ">
+                  <div className="image_card">
                     <img
                       src={exp.image}
                       alt={`${exp.company} project screenshot`}
-                      className="w-full h-full object-cover rounded-lg "
+                      width="300"
+                      height="200"
+                      className="w-full h-full object-cover rounded-lg"
                       loading="lazy"
+                      decoding="async"
                     />
                     <div className="image_overlay">
                       <p className="text-white font-semibold text-lg">{exp.company}</p>
