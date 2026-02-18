@@ -1,10 +1,7 @@
-import React, { useLayoutEffect, useRef, useState, useEffect } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import React, { useRef, useState, useEffect } from 'react';
 import { Linkedin, LucideLinkedin, Quote } from 'lucide-react';
+import { useGSAP } from '../../Hooks/useGSAP';
 import { recommendationsData } from './recommendationsData';
-
-gsap.registerPlugin(ScrollTrigger);
 
 export const LinkedInRecommendations = React.memo(() => {
   const containerRef = useRef(null);
@@ -16,18 +13,19 @@ export const LinkedInRecommendations = React.memo(() => {
     return () => clearTimeout(timer);
   }, []);
 
-  useLayoutEffect(() => {
-    if (!isReady) return;
+  // ✅ Use deferred GSAP loading
+  useGSAP(
+    (gsap, ScrollTrigger) => {
+      if (!isReady) return;
 
-    const ctx = gsap.context(() => {
       const cards = gsap.utils.toArray('.recommendation-card');
       if (cards.length === 0) return;
 
       cardsRef.current = cards;
 
       // Stack effect parameters
-      const stackPosition = 100; // px from top
-      const itemStackDistance = 30; // px between cards
+      const stackPosition = 100;
+      const itemStackDistance = 30;
       const scaleAmount = 0.05;
       const baseScale = 0.85;
 
@@ -38,21 +36,13 @@ export const LinkedInRecommendations = React.memo(() => {
         ScrollTrigger.create({
           trigger: card,
           start: `top-=${itemStackDistance * i} ${stackPosition}px`,
-          // end: `top 50px`,
           end: () => {
-            // .scroll-stack-end element খুঁজবে
             const endElement = document.querySelector('.scroll-stack-end');
-
             if (endElement) {
               const endRect = endElement.getBoundingClientRect();
-
               const endTop = endRect.top + window.scrollY;
-
-              // Cards এর last card unpin হওয়ার আগে একটু space
               return `${endTop - window.innerHeight * 1}px top`;
             }
-
-            // যদি element না পাওয়া যায়
             return '+=3000';
           },
           pin: true,
@@ -66,22 +56,14 @@ export const LinkedInRecommendations = React.memo(() => {
           trigger: card,
           start: `top-=${itemStackDistance * i} ${stackPosition}px`,
           end: () => {
-            // .scroll-stack-end element খুঁজবে
             const endElement = document.querySelector('.scroll-stack-end');
-
             if (endElement) {
               const endRect = endElement.getBoundingClientRect();
-
               const endTop = endRect.top + window.scrollY;
-
-              // Cards এর last card unpin হওয়ার আগে একটু space
               return `${endTop - window.innerHeight * 1}px top`;
             }
-
-            // যদি element না পাওয়া যায়
             return '+=3000';
           },
-          // markers: true,
           scrub: 0.5,
           onUpdate: self => {
             const progress = self.progress;
@@ -98,20 +80,21 @@ export const LinkedInRecommendations = React.memo(() => {
       });
 
       ScrollTrigger.refresh();
-    }, containerRef);
 
-    // Resize handler
-    const handleResize = () => ScrollTrigger.refresh();
-    window.addEventListener('resize', handleResize);
+      // Resize handler
+      const handleResize = () => ScrollTrigger.refresh();
+      window.addEventListener('resize', handleResize);
 
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      ctx.revert();
-    };
-  }, [isReady]);
+      return () => {
+        window.removeEventListener('resize', handleResize);
+        ScrollTrigger.getAll().forEach(st => st.kill());
+      };
+    },
+    [isReady]
+  );
 
   return (
-    <div className=" ">
+    <div>
       {/* Header Section */}
       <div className="text-center px-4 pt-32 pb-16">
         <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/10 rounded-full border border-blue-500/20 mb-6">
@@ -146,7 +129,10 @@ export const LinkedInRecommendations = React.memo(() => {
                   className="w-full h-full object-cover rounded-2xl"
                   src={rec.image}
                   alt={rec.name}
+                  width="300"
+                  height="300"
                   loading="lazy"
+                  decoding="async"
                 />
               </div>
 
@@ -164,7 +150,11 @@ export const LinkedInRecommendations = React.memo(() => {
                     <img
                       src={rec.image}
                       alt={rec.name}
+                      width="56"
+                      height="56"
                       className="w-full h-full object-cover"
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
                   <div className="flex-1 min-w-0">
@@ -183,7 +173,7 @@ export const LinkedInRecommendations = React.memo(() => {
                     rel="noopener noreferrer"
                     className="p-2 md:p-3 bg-blue-600 z-10 hover:bg-blue-700 text-white rounded-full transition-colors flex-shrink-0"
                     aria-label={`View ${rec.name}'s LinkedIn profile`}>
-                    <LucideLinkedin size={16} className="md:w-5 md:h-5" /> 
+                    <LucideLinkedin size={16} className="md:w-5 md:h-5" />
                   </a>
                 </div>
 
