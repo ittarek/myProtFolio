@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import XIcon from '@mui/icons-material/X';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
-
+import "./Contact.css";
 const Contact = () => {
   const sendEmail = e => {
     e.preventDefault();
@@ -24,7 +24,7 @@ const Contact = () => {
         result => {
           console.log(result.text);
           alert('Message sent successfully!');
-          form.reset(); // ✅ Clear form after success
+          form.reset();
         },
         error => {
           console.log(error.text);
@@ -34,9 +34,9 @@ const Contact = () => {
   };
 
   return (
-    <section className="contact flex justify-center py-[50px]">
-      {/* Contact me */}
+    <section className="contact flex justify-center py-16">
       <div className="box">
+        {/* Animated Squares */}
         <div className="square" style={{ '--i': 0 }}></div>
         <div className="square" style={{ '--i': 1 }}></div>
         <div className="square" style={{ '--i': 2 }}></div>
@@ -44,93 +44,125 @@ const Contact = () => {
         <div className="square" style={{ '--i': 4 }}></div>
         <div className="square" style={{ '--i': 5 }}></div>
 
-        <div className="container w-full">
-          <h2 className="text-white text-center text-3xl my-6">Contact to Direct</h2>
+        <div className="container">
+          <h2 className="text-white text-center text-3xl mb-10 tracking-wide">
+            Contact to Direct
+          </h2>
 
-          <form onSubmit={sendEmail} className="form w-full">
-            {/* name */}
-            <div className="inputBx name">
+          <form onSubmit={sendEmail} className="space-y-6">
+            {/* Name */}
+            <div className="relative">
+              <label htmlFor="name-input" className="sr-only">
+                Full Name
+              </label>
+
               <input
                 id="name-input"
                 type="text"
                 name="name"
                 required
                 autoComplete="name"
+                placeholder=" "
+                className="peer w-full bg-white/20 border border-white/20 
+                rounded-xl px-4 py-3 text-white outline-none
+                focus:border-white focus:bg-white/30 transition"
               />
-              <span className="label-text text-white">Full Name</span>
+
+              <span
+                className="absolute left-4 top-3 text-white transition-all duration-300
+              peer-focus:-translate-y-6 peer-focus:text-sm
+              peer-valid:-translate-y-6 peer-valid:text-sm">
+                Full Name
+              </span>
             </div>
 
-            {/* website */}
-            <div className="inputBx password">
+            {/* Website */}
+            <div className="relative">
+              <label htmlFor="website-input" className="sr-only">
+                Website
+              </label>
+
               <input
                 id="website-input"
                 type="text"
                 name="website"
                 required
                 autoComplete="url"
+                placeholder=" "
+                className="peer w-full bg-white/20 border border-white/20 
+                rounded-xl px-4 py-3 text-white outline-none
+                focus:border-white focus:bg-white/30 transition"
               />
-              <span className="label-text text-white">Website</span>
+
+              <span
+                className="absolute left-4 top-3 text-white transition-all duration-300
+              peer-focus:-translate-y-6 peer-focus:text-sm
+              peer-valid:-translate-y-6 peer-valid:text-sm">
+                Website
+              </span>
             </div>
 
-            {/* email */}
-            <div className="inputBx password">
+            {/* Email */}
+            <div className="relative">
+              <label htmlFor="email-input" className="sr-only">
+                Email
+              </label>
+
               <input
                 id="email-input"
                 type="email"
                 name="email"
                 required
                 autoComplete="email"
+                placeholder=" "
+                className="peer w-full bg-white/20 border border-white/20 
+                rounded-xl px-4 py-3 text-white outline-none
+                focus:border-white focus:bg-white/30 transition"
               />
-              <span className="label-text text-white">Email</span>
+
+              <span
+                className="absolute left-4 top-3 text-white transition-all duration-300
+              peer-focus:-translate-y-6 peer-focus:text-sm
+              peer-valid:-translate-y-6 peer-valid:text-sm">
+                Email
+              </span>
             </div>
 
-            {/* message */}
+            {/* Message */}
             <div>
-              <label className="label">
-                <span className="label-text text-white">Message</span>
+              <label htmlFor="message-input" className="sr-only">
+                Message
               </label>
+
               <textarea
-                className="input input-bordered mb-6 w-full h-44 rounded-lg p-3"
+                id="message-input"
                 name="message"
                 required
                 placeholder="Your message here..."
+                className="w-full h-44 bg-white/20 border border-white/20 
+                rounded-xl p-4 text-white outline-none
+                focus:border-white focus:bg-white/30 transition"
               />
             </div>
 
-            {/* submit button */}
-            <div className="form-control w-60 mb-16 lg:mb-0">
+            {/* Submit Button */}
+            <div className="flex justify-center pt-4">
               <button
                 type="submit"
-                className="relative items-center justify-start inline-block px-9 py-3 overflow-hidden font-medium transition-all bg-gradient-to-r from-blue-600 to-teal-600 rounded-full group">
-                <span className="absolute inset-0 border-0 group-hover:border-[33px] ease-linear duration-100 transition-all border-white rounded-full"></span>
-
-                <span className="absolute right-0 flex items-center justify-start w-10 h-10 duration-300 transform translate-x-full group-hover:translate-x-0 ease">
-                  <svg
-                    className="w-5 h-5 ml-3"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                  </svg>
-                </span>
-
-                <span className="relative z-10 w-full text-left transition-colors duration-200 ease-in-out">
-                  Send Message
-                </span>
+                className="px-10 py-3 bg-gradient-to-r from-blue-600 to-teal-600
+                rounded-full text-white font-medium
+                hover:scale-105 transition duration-300 shadow-lg">
+                Send Message
               </button>
             </div>
           </form>
         </div>
 
-        <div className="social-login flex flex-col items-center">
+        {/* Social Section */}
+        <div className="social-login">
           <h3>Connect via</h3>
 
-          <div className="social-icons space-x-3 mr-11">
+          <div className="social-icons space-x-2 text-xl">
             <Link
               to=""
               onClick={() =>
@@ -163,7 +195,7 @@ const Contact = () => {
               <GitHubIcon />
             </Link>
 
-            <a href="tel:+8801856838251" title="+8801856838251" aria-label="Phone">
+            <a href="tel:+8801856838251" aria-label="Phone">
               <LocalPhoneIcon />
             </a>
           </div>
