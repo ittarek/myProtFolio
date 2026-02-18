@@ -1,60 +1,63 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Container from '../../Components/Container';
 import './Services.css';
 import { services } from './ServicesData';
-
-gsap.registerPlugin(ScrollTrigger);
+import { useGSAP } from '../../Hooks/useGSAP';
 
 const Services = React.memo(() => {
   const containerRef = useRef(null);
   const headingRef = useRef(null);
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Animate heading
-      if (headingRef.current) {
-        gsap.from(headingRef.current, {
+  // ✅ FIXED: Both gsap and ScrollTrigger parameters
+  useGSAP((gsap, ScrollTrigger) => {
+    // Animate heading
+    if (headingRef.current) {
+      gsap.from(headingRef.current, {
+        opacity: 0,
+        y: 50,
+        duration: 0.8,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: headingRef.current,
+          start: 'top 80%',
+          toggleActions: 'play none none none',
+        },
+      });
+    }
+
+    // Animate service cards with stagger
+    const cards = gsap.utils.toArray('.service-card');
+    if (cards.length > 0) {
+      gsap.fromTo(
+        cards,
+        {
           opacity: 0,
-          y: 50,
-          duration: 0.8,
+          y: 40,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.1,
           ease: 'power2.out',
           scrollTrigger: {
-            trigger: headingRef.current,
-            start: 'top 80%',
+            trigger: containerRef.current,
+            start: 'top 75%',
             toggleActions: 'play none none none',
           },
-        });
-      }
+        }
+      );
+    }
 
-      // Animate service cards with stagger
-      const cards = gsap.utils.toArray('.service-card');
-      if (cards.length > 0) {
-        gsap.fromTo(
-          cards,
-          {
-            opacity: 0,
-            y: 40,
-          },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            stagger: 0.1,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: containerRef.current,
-              start: 'top 75%',
-              toggleActions: 'play none none none',
-            },
-          }
-        );
-      }
-    }, containerRef);
-
-    return () => ctx.revert();
+    // ✅ Return for cleanup (optional but good practice)
+    return () => {
+      ScrollTrigger.getAll().forEach(st => {
+        if (st.vars.trigger?.classList?.contains('service-card')) {
+          st.kill();
+        }
+      });
+    };
   }, []);
 
   return (
@@ -77,6 +80,7 @@ const Services = React.memo(() => {
         <meta property="og:type" content="website" />
         <link rel="canonical" href="https://tareq.netlify.app/services" />
       </Helmet>
+
       <Container>
         <div ref={containerRef} className="py-16 md:py-24">
           {/* Header */}

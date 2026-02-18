@@ -1,93 +1,88 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Container from '../../Components/Container';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { TOOLS_SKILLS } from './SkillsData';
 import { DEVELOPMENT_SKILLS } from './DEVELOPMENT_SKILLS';
-
-gsap.registerPlugin(ScrollTrigger);
+import { useGSAP } from '../../Hooks/useGSAP';
 
 const Skills = () => {
-  // Animate skill bars on scroll
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Animate header section
-      const headerSection = document.querySelector('.skills-header');
-      if (headerSection) {
-        gsap.from(headerSection, {
-          opacity: 0,
-          y: 40,
-          duration: 0.8,
+  // ✅ Simplified - no gsap.context needed
+  useGSAP((gsap, ScrollTrigger) => {
+    // Animate header section
+    const headerSection = document.querySelector('.skills-header');
+    if (headerSection) {
+      gsap.from(headerSection, {
+        opacity: 0,
+        y: 40,
+        duration: 0.8,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: headerSection,
+          start: 'top 80%',
+          toggleActions: 'play none none none',
+        },
+      });
+    }
+
+    // Animate skills container
+    const skillsContainer = document.querySelector('.skills-container');
+    if (skillsContainer) {
+      gsap.from(skillsContainer, {
+        opacity: 0,
+        scale: 0.98,
+        duration: 0.8,
+        ease: 'back.out',
+        scrollTrigger: {
+          trigger: skillsContainer,
+          start: 'top 85%',
+          toggleActions: 'play none none none',
+        },
+      });
+    }
+
+    // Animate skill items with stagger
+    const skillItems = document.querySelectorAll('.skill-item');
+    if (skillItems.length > 0) {
+      gsap.fromTo(
+        skillItems,
+        { opacity: 0, x: -20 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.6,
+          stagger: 0.05,
           ease: 'power2.out',
           scrollTrigger: {
-            trigger: headerSection,
+            trigger: skillsContainer,
             start: 'top 80%',
             toggleActions: 'play none none none',
           },
-        });
-      }
+        }
+      );
+    }
 
-      // Animate skills container with scale
-      const skillsContainer = document.querySelector('.skills-container');
-      if (skillsContainer) {
-        gsap.from(skillsContainer, {
-          opacity: 0,
-          scale: 0.98,
-          duration: 0.8,
-          ease: 'back.out',
+    // Animate skill bars
+    const skills = document.querySelectorAll('.skill-bar');
+    skills.forEach(skill => {
+      gsap.fromTo(
+        skill,
+        { width: '0%' },
+        {
+          width: skill.dataset.value + '%',
+          duration: 1.2,
+          ease: 'power3.out',
           scrollTrigger: {
-            trigger: skillsContainer,
+            trigger: skill,
             start: 'top 85%',
             toggleActions: 'play none none none',
           },
-        });
-      }
-
-      // Animate individual skill items with stagger
-      const skillItems = document.querySelectorAll('.skill-item');
-      if (skillItems.length > 0) {
-        gsap.fromTo(
-          skillItems,
-          {
-            opacity: 0,
-            x: -20,
-          },
-          {
-            opacity: 1,
-            x: 0,
-            duration: 0.6,
-            stagger: 0.05,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: skillsContainer,
-              start: 'top 80%',
-              toggleActions: 'play none none none',
-            },
-          }
-        );
-      }
-
-      // Animate skill bars with smooth fill
-      const skills = document.querySelectorAll('.skill-bar');
-      skills.forEach(skill => {
-        gsap.fromTo(
-          skill,
-          { width: '0%' },
-          {
-            width: skill.dataset.value + '%',
-            duration: 1.2,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: skill,
-              start: 'top 85%',
-              toggleActions: 'play none none none',
-            },
-          }
-        );
-      });
+        }
+      );
     });
 
-    return () => ctx.revert();
+    // ✅ Optional cleanup
+    return () => {
+      ScrollTrigger.getAll().forEach(st => st.kill());
+    };
   }, []);
 
   const SkillCard = ({ skill, showIcon = false }) => {
@@ -114,11 +109,9 @@ const Skills = () => {
           </span>
         </div>
 
-        {/* Custom Progress Bar Container */}
+        {/* Progress Bar */}
         <div className="relative">
-          {/* Background Track */}
           <div className="w-full h-3 bg-white/5 rounded-full overflow-hidden backdrop-blur-sm border border-white/10">
-            {/* Animated Progress Bar */}
             <div
               className="skill-bar h-full bg-gradient-to-r from-[#10681fcc] via-[#e4a9fe] to-[#580957] rounded-full relative
                          group-hover:shadow-lg group-hover:shadow-purple-500/50 transition-all duration-300"
@@ -137,7 +130,6 @@ const Skills = () => {
             <div className="absolute -top-12 left-1/2 -translate-x-1/2 z-50 animate-fade-in">
               <div className="bg-gray-900/95 backdrop-blur-md text-white text-xs px-3 py-2 rounded-lg shadow-xl border border-white/10 whitespace-nowrap">
                 {skill.message}
-                {/* Arrow */}
                 <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-gray-900/95 border-r border-b border-white/10 rotate-45"></div>
               </div>
             </div>
@@ -147,14 +139,12 @@ const Skills = () => {
     );
   };
 
-  // Skills Card Content
   const SkillsContent = () => (
     <div className="relative border border-white/10 rounded-2xl bg-gradient-to-br from-slate-900/50 via-slate-800/30 to-slate-900/50 backdrop-blur-sm p-6 md:p-8 lg:p-10 shadow-2xl transition-all duration-500 hover:shadow-purple-500/20">
-      {/* Background Gradient Effect */}
       <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-blue-500/5 rounded-2xl pointer-events-none"></div>
 
       <div className="relative z-10 flex flex-col lg:flex-row gap-10 lg:gap-16">
-        {/* Development & Coding Skills */}
+        {/* Development Skills */}
         <div className="w-full lg:w-1/2">
           <div className="mb-8">
             <div className="flex items-center gap-3 mb-2">
@@ -174,7 +164,8 @@ const Skills = () => {
             ))}
           </div>
         </div>
-        {/* Tools & Design Skills */}
+
+        {/* Tools & Design */}
         <div className="w-full lg:w-1/2">
           <div className="mb-8">
             <div className="flex items-center gap-3 mb-2">
@@ -205,10 +196,9 @@ const Skills = () => {
   return (
     <Container>
       <main className="mx-auto flex flex-col w-full py-12 md:py-20">
-        {/* Header Section */}
+        {/* Header */}
         <div className="flex space-x-3 md:space-x-10 mb-12 skills-header">
           <div className="flex flex-col items-center">
-            {/* Icon */}
             <div className="relative group">
               <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full blur-xl opacity-50 group-hover:opacity-75 transition-opacity"></div>
               <div className="relative bg-gradient-to-br from-purple-600 to-blue-600 p-3 rounded-full">
@@ -223,8 +213,6 @@ const Skills = () => {
                 </svg>
               </div>
             </div>
-
-            {/* Vertical Line */}
             <div className="h-full w-[3px] mt-7 rounded-full bg-gradient-to-b from-[#abb4ff] via-[#797ef9] to-transparent"></div>
           </div>
 
@@ -246,7 +234,7 @@ const Skills = () => {
           </div>
         </div>
 
-        {/* Skills Cards - No Tilt Effect */}
+        {/* Skills */}
         <div className="skills-container">
           <SkillsContent />
         </div>
