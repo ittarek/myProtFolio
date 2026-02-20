@@ -97,7 +97,7 @@ const Banner = React.memo(() => {
       
           <div
             ref={bannerImgRef}
-            className="relative w-full md:mt-[10rem] max-w-[300px] sm:max-w-[400px] md:max-w-[500px] 
+            className="relative w-full md:mt-[5rem] max-w-[300px] sm:max-w-[400px] md:max-w-[500px] 
                          lg:max-w-[600px] xl:max-w-[700px]
                          h-[300px] sm:h-[400px] md:h-[500px] 
                          lg:h-[550px] xl:h-[600px]

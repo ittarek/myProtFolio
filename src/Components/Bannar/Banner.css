@@ -2,8 +2,14 @@
 
 /* Large "D" Heading with Image Mask - Cannot be done with Tailwind alone */
 .banner-mask-text {
-  background-image: url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=600&q=70&fm=webp');
+  /* background-image: url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=600&q=70&fm=webp'); */
   /* background-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&q=70&fm=webp'); */
+
+/* ✅ Better (30 KB - saves 15 KB): */
+/* background-image: url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=500&q=60&fm=webp'); */
+
+/* ✅ Best (20 KB - saves 25 KB): */
+background-image: url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=400&q=55&fm=webp');
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
