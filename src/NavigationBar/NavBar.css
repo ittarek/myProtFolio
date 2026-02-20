@@ -1,26 +1,44 @@
+/* ✅ BEST: Pure CSS gradient (No external dependency) */
 .my_name {
-    letter-spacing: 0.3rem;
-    z-index: 5;
-    color: transparent;
-    /* background-position: 0 0; */
-    animation: animated-text 20s linear infinite;
-
-    -webkit-text-stroke: 1px #bfdbfe;
-    /* text-stroke: 1px rgba(16, 104, 31, 0.8); */
-    background: url("https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/e9d06cb6-2844-49ed-9bde-23d3364b9fa4");
-    background-clip: text;
-
+  letter-spacing: 0.3rem;
+  z-index: 5;
+  
+  /* Beautiful animated gradient */
+  background: linear-gradient(
+    90deg,
+    #667eea,
+    #764ba2,
+    #f093fb,
+    #4facfe,
+    #00f2fe,
+    #667eea
+  );
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  
+  /* Stroke effect */
+  -webkit-text-stroke: 1px rgba(191, 219, 254, 0.3);
+  
+  /* Animation */
+  animation: animated-text 3s linear infinite;
 }
 
 @keyframes animated-text {
-    100% {
-        background-position: 200% 0;
-    }
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
 }
 
-@media screen and (max-width:600px) {
-    .logo-box {
-        /* width: 100%; */
-        margin: auto;
-    }
+/* Performance: Reduce motion on low-end devices */
+@media (prefers-reduced-motion: reduce) {
+  .my_name {
+    animation: none;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+  }
 }
