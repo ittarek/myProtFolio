@@ -1,6 +1,6 @@
 // Banner.jsx - Optimized with Deferred GSAP
 import React, { useRef } from 'react';
-import myImg from '../../assets/myImage/myImageAi3.jpg';
+import myImg from '../../assets/myImage/myImageAi3.webp';
 import './Banner.css';
 import Container from '../Container';
 import { useGSAP } from '../../Hooks/useGSAP';
