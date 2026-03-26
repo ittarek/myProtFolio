@@ -3,6 +3,7 @@ import { useEffect, useState, Suspense } from 'react';
 import NavBar from '../NavigationBar/NavBar';
 import { Footer } from '../Components/Footer/Footer';
 import { ScrollToTop } from '../Components/Shared/ScrollToTop';
+import { BackToTop } from '../Components/Shared/BackToTop';
 
 // Simple Scroll Progress Component (CSS only)
 const ScrollProgress = () => {
@@ -38,41 +39,6 @@ const PageLoader = () => (
     </div>
   </div>
 );
-
-// Simple Back to Top Button
-const BackToTop = () => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const toggleVisibility = () => {
-      setIsVisible(window.pageYOffset > 300);
-    };
-
-    window.addEventListener('scroll', toggleVisibility, { passive: true });
-    return () => window.removeEventListener('scroll', toggleVisibility);
-  }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  return isVisible ? (
-    <button
-      onClick={scrollToTop}
-      className="fixed bottom-8 right-8 z-40 p-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300"
-      aria-label="Back to top">
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M5 10l7-7m0 0l7 7m-7-7v18"
-        />
-      </svg>
-    </button>
-  ) : null;
-};
-
 const MainLayout = () => {
   const location = useLocation();
   const [isPageTransitioning, setIsPageTransitioning] = useState(false);
