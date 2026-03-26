@@ -58,9 +58,9 @@ export const BestProjectCard = ({ project, ActionButton, ExternalLink }) => {
           )}
 
           {/* Title */}
-          <h3 className="text-2xl lg:text-3xl font-bold text-white mb-2 group-hover:text-blue-300 transition-colors duration-300">
+          <h2 className="text-2xl lg:text-3xl font-bold text-white mb-2 group-hover:text-blue-300 transition-colors duration-300">
             {project.title}
-          </h3>
+          </h2>
 
           {project.subtitle && (
             <p className="text-blue-400 font-semibold mb-4">{project.subtitle}</p>
