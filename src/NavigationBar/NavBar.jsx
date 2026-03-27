@@ -79,19 +79,19 @@ const NavBar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full md:h-20  h-full z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 w-full min-h-[60px] h-full z-50 transition-transform   duration-300 ${
         isScrolled ? 'bg-slate-900/95 backdrop-blur-sm shadow-lg' : 'bg-transparent'
       } ${showNavbar ? 'translate-y-0' : '-translate-y-full'}`}
       aria-label="Main navigation">
       <Container>
-        <div className="flex justify-between items-center relative z-10 font-bold md:py-5 py-3">
+        <div className="flex justify-between items-center relative z-10 font-bold py-4 md:py-5 h-full min-h-[60px]">
           {/* Mobile Menu Toggle */}
           <div className="lg:hidden">
             <button
               aria-label="Toggle menu"
               aria-expanded={isOpen}
               className="text-white focus:outline-none focus:ring-2 focus:ring-purple-400 rounded">
-              <Hamburger size={20} toggled={isOpen} toggle={setOpen} />
+              <Hamburger size={26} toggled={isOpen} toggle={setOpen} />
             </button>
 
             {/* Mobile Menu */}
