@@ -9,12 +9,11 @@ const RESUME_LINK =
   'https://drive.google.com/file/d/1-fKpAA8b0LoLpb05KTwZaHEVC2ZfECop/view?usp=sharing';
 
 const NavBar = () => {
-  const [isOpen, setOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const location = useLocation();
-  const [showNavbar, setShowNavbar] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
-
+    const [isOpen, setOpen] = useState(false);
+ const [isScrolled, setIsScrolled] = useState(false);
+ const location = useLocation();
+ const [showNavbar, setShowNavbar] = useState(true);
+ const [lastScrollY, setLastScrollY] = useState(0);
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > lastScrollY) {
@@ -33,44 +32,54 @@ const NavBar = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, [lastScrollY]);
-  // Close mobile menu on route change
-  useEffect(() => {
-    setOpen(false);
-  }, [location.pathname]);
 
-  // Handle scroll effect for navbar
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
+ useEffect(() => {
+   const handleScroll = () => {};
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+   window.addEventListener('scroll', handleScroll);
 
-  const handleStateChange = useCallback(state => {
-    setOpen(state.isOpen);
-  }, []);
+   return () => {
+     window.removeEventListener('scroll', handleScroll);
+   };
+ }, [lastScrollY]);
+ // Close mobile menu on route change
+ useEffect(() => {
+   setOpen(false);
+ }, [location.pathname]);
 
-  const closeMenu = useCallback(() => {
-    setOpen(false);
-  }, []);
+ // Handle scroll effect for navbar
+ useEffect(() => {
+   const handleScroll = () => {
+     setIsScrolled(window.scrollY > 20);
+   };
 
-  const handleDownload = useCallback(() => {
-    window.open(RESUME_LINK, '_blank', 'noopener,noreferrer');
-  }, []);
+   window.addEventListener('scroll', handleScroll, { passive: true });
+   return () => window.removeEventListener('scroll', handleScroll);
+ }, []);
 
-  const navLinks = [
-    { to: '/', label: 'Home' },
-    { to: '/about', label: 'About' },
-    { to: '/myProtFolio', label: 'My Portfolio' },
-  ];
+ const handleStateChange = useCallback(state => {
+   setOpen(state.isOpen);
+ }, []);
 
-  const isActiveLink = path => location.pathname === path;
+ const closeMenu = useCallback(() => {
+   setOpen(false);
+ }, []);
+
+ const handleDownload = useCallback(() => {
+   window.open(RESUME_LINK, '_blank', 'noopener,noreferrer');
+ }, []);
+
+ const navLinks = [
+   { to: '/', label: 'Home' },
+   { to: '/about', label: 'About' },
+   { to: '/myProtFolio', label: 'My Portfolio' },
+ ];
+
+ const isActiveLink = path => location.pathname === path;
 
   return (
     <nav
-      className={`sticky top-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 w-full md:h-20  h-full z-50 transition-all duration-300 ${
         isScrolled ? 'bg-slate-900/95 backdrop-blur-sm shadow-lg' : 'bg-transparent'
       } ${showNavbar ? 'translate-y-0' : '-translate-y-full'}`}
       aria-label="Main navigation">
@@ -156,7 +165,7 @@ const NavBar = () => {
                 <button
                   onClick={handleDownload}
                   role="menuitem"
-                  className="px-4 py-2 rounded bg-purple-600 hover:bg-purple-700 text-white transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-slate-900">
+                  className="px-4  rounded bg-purple-600 hover:bg-purple-700 text-white transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-slate-900">
                   Resume
                 </button>
               </li>
@@ -166,6 +175,6 @@ const NavBar = () => {
       </Container>
     </nav>
   );
-};
+};;
 
 export default NavBar;
