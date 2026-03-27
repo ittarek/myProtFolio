@@ -12,7 +12,27 @@ const NavBar = () => {
   const [isOpen, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+  const [showNavbar, setShowNavbar] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > lastScrollY) {
+        // scroll down
+        setShowNavbar(false);
+      } else {
+        // scroll up
+        setShowNavbar(true);
+      }
+      setLastScrollY(window.scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [lastScrollY]);
   // Close mobile menu on route change
   useEffect(() => {
     setOpen(false);
@@ -52,7 +72,7 @@ const NavBar = () => {
     <nav
       className={`sticky top-0 z-50 transition-all duration-300 ${
         isScrolled ? 'bg-slate-900/95 backdrop-blur-sm shadow-lg' : 'bg-transparent'
-      }`}
+      } ${showNavbar ? 'translate-y-0' : '-translate-y-full'}`}
       aria-label="Main navigation">
       <Container>
         <div className="flex justify-between items-center relative z-10 font-bold md:py-5 py-3">
@@ -70,7 +90,6 @@ const NavBar = () => {
               isOpen={isOpen}
               onStateChange={handleStateChange}
               customBurgerIcon={false}
-
               className="bg-slate-800/95 backdrop-blur-md"
               overlayClassName="fixed inset-0 bg-black/50">
               <nav className="text-white p-4" aria-label="Mobile navigation">
