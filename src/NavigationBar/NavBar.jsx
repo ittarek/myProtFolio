@@ -9,11 +9,11 @@ const RESUME_LINK =
   'https://drive.google.com/file/d/1-fKpAA8b0LoLpb05KTwZaHEVC2ZfECop/view?usp=sharing';
 
 const NavBar = () => {
-    const [isOpen, setOpen] = useState(false);
- const [isScrolled, setIsScrolled] = useState(false);
- const location = useLocation();
- const [showNavbar, setShowNavbar] = useState(true);
- const [lastScrollY, setLastScrollY] = useState(0);
+  const [isOpen, setOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
+  const [showNavbar, setShowNavbar] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > lastScrollY) {
@@ -33,60 +33,60 @@ const NavBar = () => {
     };
   }, [lastScrollY]);
 
- useEffect(() => {
-   const handleScroll = () => {};
+  useEffect(() => {
+    const handleScroll = () => {};
 
-   window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll);
 
-   return () => {
-     window.removeEventListener('scroll', handleScroll);
-   };
- }, [lastScrollY]);
- // Close mobile menu on route change
- useEffect(() => {
-   setOpen(false);
- }, [location.pathname]);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [lastScrollY]);
+  // Close mobile menu on route change
+  useEffect(() => {
+    setOpen(false);
+  }, [location.pathname]);
 
- // Handle scroll effect for navbar
- useEffect(() => {
-   const handleScroll = () => {
-     setIsScrolled(window.scrollY > 20);
-   };
+  // Handle scroll effect for navbar
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
 
-   window.addEventListener('scroll', handleScroll, { passive: true });
-   return () => window.removeEventListener('scroll', handleScroll);
- }, []);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
- const handleStateChange = useCallback(state => {
-   setOpen(state.isOpen);
- }, []);
+  const handleStateChange = useCallback(state => {
+    setOpen(state.isOpen);
+  }, []);
 
- const closeMenu = useCallback(() => {
-   setOpen(false);
- }, []);
+  const closeMenu = useCallback(() => {
+    setOpen(false);
+  }, []);
 
- const handleDownload = useCallback(() => {
-   window.open(RESUME_LINK, '_blank', 'noopener,noreferrer');
- }, []);
+  const handleDownload = useCallback(() => {
+    window.open(RESUME_LINK, '_blank', 'noopener,noreferrer');
+  }, []);
 
- const navLinks = [
-   { to: '/', label: 'Home' },
-   { to: '/about', label: 'About' },
-   { to: '/myProtFolio', label: 'My Portfolio' },
- ];
+  const navLinks = [
+    { to: '/', label: 'Home' },
+    { to: '/about', label: 'About' },
+    { to: '/myProtFolio', label: 'My Portfolio' },
+  ];
 
- const isActiveLink = path => location.pathname === path;
+  const isActiveLink = path => location.pathname === path;
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full min-h-[60px] h-full z-50 transition-transform   duration-300 ${
-        isScrolled ? 'bg-slate-900/95 backdrop-blur-sm shadow-lg' : 'bg-transparent'
+      className={`fixed top-0 left-0 w-full  z-50 transition-transform   duration-300 ${
+        isScrolled ? 'bg-slate-900/95 backdrop-blur-[2px] shadow-lg' : 'bg-transparent'
       } ${showNavbar ? 'translate-y-0' : '-translate-y-full'}`}
       aria-label="Main navigation">
       <Container>
-        <div className="flex justify-between items-center relative z-10 font-bold py-4 md:py-5 h-full min-h-[60px]">
+        <div className="flex justify-between items-center relative z-10 font-bold py-4 md:py-5">
           {/* Mobile Menu Toggle */}
-          <div className="lg:hidden">
+          <div className="lg:hidden h-full ">
             <button
               aria-label="Toggle menu"
               aria-expanded={isOpen}
@@ -99,10 +99,10 @@ const NavBar = () => {
               isOpen={isOpen}
               onStateChange={handleStateChange}
               customBurgerIcon={false}
-              className="bg-slate-800/95 backdrop-blur-md"
-              overlayClassName="fixed inset-0 bg-black/50">
+              className="bg-slate-800/95 backdrop-blur-sm"
+              overlayClassName="fixed inset-0 bg-black/50 ">
               <nav className="text-white p-4" aria-label="Mobile navigation">
-                <ul className="space-y-4">
+                <ul className="space-y-4 flex flex-col items-start overflow-auto h-full">
                   {navLinks.map(({ to, label }) => (
                     <li key={to}>
                       <Link
@@ -175,6 +175,6 @@ const NavBar = () => {
       </Container>
     </nav>
   );
-};;
+};
 
 export default NavBar;
