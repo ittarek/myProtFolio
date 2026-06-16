@@ -45,19 +45,7 @@ const bestProjects = [
     rating: 5,
     category: 'Education',
   },
-  {
-    id: 2,
-    title: 'News Website',
-    subtitle: 'Real-time News Portal',
-    description:
-      'A modern news aggregation platform built with Next.js, featuring real-time updates and optimized performance.',
-    image: protFolioNews,
-    tags: ['Next.js', 'React', 'TypeScript', 'Vercel'],
-    live_link: 'https://news-app-one-fawn.vercel.app/',
-    github_client: 'https://github.com/ittarek/boot-camp-next.js-task',
-    rating: 4,
-    category: 'Media',
-  },
+
 ];
 
 const projectData = [
@@ -82,6 +70,19 @@ const projectData = [
     tags: ['React', 'Node.js', 'MongoDB', 'Stripe'],
     live_link: 'https://tech-toy.netlify.app/',
     github_client: 'https://github.com/ittarek/teach-toy-client',
+  },
+  {
+    id: 3,
+    title: 'News Website',
+    subtitle: 'Real-time News Portal',
+    description:
+      'A modern news aggregation platform built with Next.js, featuring real-time updates and optimized performance.',
+    image: protFolioNews,
+    tags: ['Next.js', 'React', 'TypeScript', 'Vercel'],
+    live_link: 'https://news-app-one-fawn.vercel.app/',
+    github_client: 'https://github.com/ittarek/boot-camp-next.js-task',
+    rating: 4,
+    category: 'Media',
   },
 ];
 
@@ -223,8 +224,8 @@ const Portfolio = () => {
           <Suspense fallback={<LoadingSkeleton />}>
             <SectionHeader header="My Projects" subTitle="Explore my latest projects" />
 
-            <section ref={bestProjectsRef} className="mb-24">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
+            <section ref={bestProjectsRef} className="mb-24 mx-auto w-full flex justify-center items-center">
+              <div className=" max-w-7xl mx-auto items-center">
                 {bestProjects.map(project => (
                   <BestProjectCard
                     key={project.id}

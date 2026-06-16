@@ -3,7 +3,7 @@ import './Portfolio.css';
 
 export const BestProjectCard = ({ project, ActionButton, ExternalLink }) => {
   return (
-    <div className="best_project_wrapper">
+    <div className="best_project_wrapper flex justify-center items-center mx-auto w-full">
       <div className="best_project_card group relative bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 rounded-2xl shadow-2xl overflow-hidden">
         {/* Gradient Overlay on Hover */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-purple-500/0 group-hover:from-blue-500/10 group-hover:to-purple-500/10 transition-all duration-500 z-10 pointer-events-none"></div>
