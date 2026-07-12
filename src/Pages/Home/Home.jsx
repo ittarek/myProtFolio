@@ -69,9 +69,9 @@ const Home = () => {
         <Portfolio />
       </Suspense>
 
-      <Suspense fallback={<SectionLoader height="h-[600px]" />}>
+      {/* <Suspense fallback={<SectionLoader height="h-[600px]" />}>
         <TechStack />
-      </Suspense>
+      </Suspense> */}
 
       <Suspense fallback={<SectionLoader height="h-[700px]" />}>
         <Certificate />
