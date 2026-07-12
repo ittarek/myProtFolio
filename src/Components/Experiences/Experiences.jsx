@@ -29,6 +29,8 @@ const prof_experience = [
     description:
       'Developed and maintained web applications using React, improving user experience and performance using TailwindCSS. Collaborated with cross-functional teams to design and implement new features, resulting in a 20% increase in user engagement. Mainly focused on front-end development, ensuring responsive design and cross-browser compatibility.',
     technologies: ['React', 'TailwindCSS', 'JavaScript', 'CSS'],
+    certificate_link:
+      'https://drive.google.com/file/d/1FkEL_dYW2Yt4kDtDxK17T86LH3xyRZQo/view?usp=sharing',
     image: travent,
     websiteLink: 'https://travent.me/',
     old_websiteLink: 'https://www.travent.ae/',
@@ -84,8 +86,8 @@ export const Experiences = () => {
       {/* Experience Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 items-center lg:gap-12 max-w-7xl w-full">
         {prof_experience.map(exp => (
-          <div className="exp_card_wrapper relative min-h-[450px]" key={exp.id}>
-            <div className="exp_card md:h-[vh] group relative bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 p-6 rounded-xl shadow-xl transition-all duration-500 hover:shadow-2xl hover:border-blue-500/50 cursor-pointer overflow-visible">
+          <div className="exp_card_wrapper relative min-h-[500px]" key={exp.id}>
+            <div className="exp_card md:h-[600px] group relative bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 p-6 rounded-xl shadow-xl transition-all duration-500 hover:shadow-2xl hover:border-blue-500/50 cursor-pointer overflow-visible">
               {/* Gradient Overlay on Hover */}
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-purple-500/0 group-hover:from-blue-500/5 group-hover:to-purple-500/5 rounded-xl transition-all duration-500"></div>
 
