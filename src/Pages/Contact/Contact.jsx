@@ -34,7 +34,7 @@ const Contact = () => {
   };
 
   return (
-    <section className="contact flex justify-center py-16">
+    <section className="contact flex justify-center py-16 ">
       <div className="box">
         {/* Animated Squares */}
         <div className="square" style={{ '--i': 0 }}></div>
